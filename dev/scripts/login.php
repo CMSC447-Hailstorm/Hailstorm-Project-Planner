@@ -18,6 +18,10 @@
 			
 			//Validate Results
 			
+		} else {
+			
+			//Display error message
+			
 		}
 	}
 ?>
@@ -25,24 +29,24 @@
 <html>
 	<head>
 		<meta charset=utf-8 />
-		<link href ="css/style.css" rel="stylesheet">
+		<link href ="style.css" rel="stylesheet">
 	</head>
 	<body>
 		
-		<div class="login_box">
-			<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-				
+		<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+			<div class="login_box">
+			
 				User ID: </br>
-				<input type="text" name="User_ID"></br>
+				<input type="text" placeholder="Enter ID" name="User_ID"></br>
 				
 				Password: </br>
-				<input type="text" name="User_Password"></br>
+				<input type="password" placeholder="Enter Password" name="User_Password"></br>
 				
 				</br>
-				<input type="submit" value="Submit">
+				<button type="submit">Login</button>
 				
-			</form>
-		</div>
+			</div>
+		</form>
 
 	</body>
 	<footer>

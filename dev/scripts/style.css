@@ -1,0 +1,36 @@
+/*Login Page*/
+
+.login_box {
+	width: 20%;
+	padding: 10px;
+	border: 3px solid;
+	border-radius: 10px;
+	
+	position: absolute;
+	top: 35%;
+	left: 40%;
+	
+	text-align: center;
+}
+
+input[type=text], input[type=password] {
+	width: 80%;
+	padding: 5px 15px;
+	margin: 10px 0;
+	text-align: center;
+	border-radius: 3px;
+}
+
+button {
+	width: 30%;
+	padding: 5px 15px;
+	margin: 10px;
+	border-radius: 5px;
+	
+	background-color: green;
+	cursor: pointer;
+}
+
+button:hover {
+	opacity: 0.8;
+}
