@@ -1,27 +1,21 @@
 <?php
-	session_start();
+	require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/Session.class.php");
+	require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/User.class.php");
+	Session::start();
 	
-	if(isset($_POST['submit'])) {
-		
+	if(isset($_POST['submit']) && !empty($_POST)) 
+	{
 		$User_ID = $_POST['User_ID'];
 		$User_Password = $_POST['User_Password'];
-		
-		if($User_ID != '' && $User_Password != '') {
 
-			$sql = "SELECT * FROM Users WHERE User_ID ='".$User_ID."' AND User_Password ='".$User_Password."'";
-			$conn = mysql_connect(host, user, password);
-			if(!$conn) {
-				die('Unable to connect: ' . mysql_error());
-			}
-			
-			$Result = mysql_query($sql, $conn);
-			
-			//Validate Results
-			
-		} else {
-			
-			//Display error message
-			
+		$_SESSION['CURRENT_USER'] = new User();
+		if ($_SESSION['CURRENT_USER']::Login($User_ID, $User_Password))
+		{
+			header("Location: /Project/View.php");
+		}
+		else
+		{
+			echo "<script type='text/Javascript'>alert('Error: Username or Password invalid.');</script>";
 		}
 	}
 ?>
@@ -43,7 +37,7 @@
 				<input type="password" placeholder="Enter Password" name="User_Password"></br>
 				
 				</br>
-				<button type="submit">Login</button>
+				<button type="submit" name="submit">Login</button>
 				
 			</div>
 		</form>
