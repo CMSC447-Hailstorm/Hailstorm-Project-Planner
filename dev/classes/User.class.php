@@ -11,30 +11,37 @@
 
         public static function Login($userid, $password)
         {
-            if ($username != '' && $password != '')
+            if ($userid != '' && $password != '')
             {
                 ///*
                 $SERVER = 'localhost';
                 $DBUSER = 'root';
                 $DBPASS = 'z';
-                $DATABASE = 'managemeng_planner';
+                $DATABASE = 'management_planner';
                 //*/
                 $conn = mysqli_connect($SERVER, $DBUSER, $DBPASS, $DATABASE);
                 if (!$conn)
                 {
                     die('Unable to connect' . mysqli_error());
                 }
-                $sql = "SELECT * FROM Users WHERE User_ID ='$userid' AND User_Password ='$password' ";
+                //$sql = "SELECT * FROM Users WHERE User_ID ='$userid' AND User_Password ='$password' ";
+				$sql = "SELECT * FROM Users WHERE User_ID ='$userid' ";
                 $Result = mysqli_query($conn, $sql);
-                
-                if ($Result != NULL && password_verify($password, $Result['User_Password']))
-                {
-                    Session:SetUserID($Result['User_ID']);
-                    $firstname = $Result['First_name'];
-                    $lastname = $Result['Last_name'];
-                    $username = $Result['User_ID'];
-                    $email = $Result['Email'];
-                    $role = $Result['User_Role'];
+				
+				//checking if there is only one row with user_id ONLY
+				$count = mysqli_num_rows($Result);
+				
+				$Row = mysqli_fetch_array($Result, MYSQLI_ASSOC);
+				
+                if ($count == 1 && password_verify($password, $Row['User_Password']))
+                { 
+                    Session::SetUserID($Row['User_ID']);
+                    $firstname = $Row['User_Firstname'];
+                    $lastname = $Row['User_Lastname'];
+                    $username = $Row['User_ID'];
+                    $email = $Row['User_Email'];
+                    $role = $Row['User_Role'];
+					
                     return true;
                 }
                 else return false;
