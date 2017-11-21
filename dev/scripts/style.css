@@ -13,6 +13,10 @@
 	text-align: center;
 }
 
+.title_bar {
+	display: inline;
+}
+
 input[type=text], input[type=password] {
 	width: 80%;
 	padding: 5px 15px;
@@ -33,4 +37,24 @@ button {
 
 button:hover {
 	opacity: 0.8;
+}
+
+table {
+	font-family: "Courier New", Courier, monospace;
+	border-collapse: collapse;
+	width: 80%;
+}
+
+th {
+	background-color: teal;
+}
+
+td, th {
+	border: 1px solid gray;
+	text-align: left;
+	padding: 4px;
+}
+
+tr:nth-child(even) {
+	background-color: gray;
 }
