@@ -3,29 +3,24 @@
 
     class User
     {
+        private $id = "";
         private $firstname = "";
         private $lastname = "";
         private $username = "";
         private $email = "";
         private $role = "";
 
-        public static function Login($userid, $password)
+        public function Login($userid, $password)
         {
             if ($userid != '' && $password != '')
             {
-                ///*
-                $SERVER = 'localhost';
-                $DBUSER = 'root';
-                $DBPASS = 'z';
-                $DATABASE = 'management_planner';
-                //*/
-                $conn = mysqli_connect($SERVER, $DBUSER, $DBPASS, $DATABASE);
+                $conn = mysqli_connect($_SESSION["SERVER"], $_SESSION["DBUSER"], $_SESSION["DBPASS"], $_SESSION["DATABASE"]);
                 if (!$conn)
                 {
-                    die('Unable to connect' . mysqli_error());
+                    die('Unable to connect.  Error: ' . mysqli_error($conn));
                 }
                 //$sql = "SELECT * FROM Users WHERE User_ID ='$userid' AND User_Password ='$password' ";
-				$sql = "SELECT * FROM Users WHERE User_ID ='$userid' ";
+				$sql = "SELECT * FROM Users WHERE User_Name = '$userid' ";
                 $Result = mysqli_query($conn, $sql);
 				
 				//checking if there is only one row with user_id ONLY
@@ -36,39 +31,45 @@
                 if ($count == 1 && password_verify($password, $Row['User_Password']))
                 { 
                     Session::SetUserID($Row['User_ID']);
-                    $firstname = $Row['User_Firstname'];
-                    $lastname = $Row['User_Lastname'];
-                    $username = $Row['User_ID'];
-                    $email = $Row['User_Email'];
-                    $role = $Row['User_Role'];
-					
+                    $this->id = $Row['User_ID'];
+                    $this->firstname = $Row['User_Firstname'];
+                    $this->lastname = $Row['User_Lastname'];
+                    $this->username = $Row['User_Name'];
+                    $this->email = $Row['User_Email'];
+                    $this->role = $Row['User_Role'];
+                    
+                    mysqli_close($conn);
                     return true;
                 }
-                else return false;
+                else 
+                {
+                    mysqli_close($conn);
+                    return false;
+                }
             }
         }
         
-        public static function getFirstName()
+        public function getFirstName()
         {
-            return $firstname;
+            return $this->firstname;
         }
 
-        public static function getLastName()
+        public function getLastName()
         {
-            return $lastname;
+            return $this->lastname;
         }
 
-        public static function getUsername()
+        public function getUsername()
         {
-            return $username;
+            return $this->username;
         }
 
-        public static function getEmail()
+        public function getEmail()
         {
-            return $email;
+            return $this->email;
         }
 
-        public static function LogOut()
+        public static function Logout()
         {
             Session::CloseSession();
             header('Location: /login.php');
