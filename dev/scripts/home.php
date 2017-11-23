@@ -1,52 +1,69 @@
 <?php
+	require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/Session.class.php");
+	require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/User.class.php");
+	Session::Start();
+	if(!Session::UserLoggedIn())
+	{
+		header("Location: /login.php");
+	}
+	$conn = mysqli_connect($_SESSION["SERVER"], $_SESSION["DBUSER"], $_SESSION["DBPASS"], $_SESSION["DATABASE"]);
+	if (!$conn)
+	{
+		die('Unable to connect.  Error: ' . mysqli_error($conn));
+	}
 ?>
 <html>
 	<head>
 		<meta charset=utf-8 />
 		<link href ="style.css" rel="stylesheet">
+		<script type="text/JavaScript">
+			function viewProject(projectid)
+			{
+				window.location.href="/Project/view.php?proj=" + projectid;
+			}
+		</script>
 	</head>
 	<body>
 	
 		<div class="title_bar">
 			<img src="">
 			<h1>Project Planer</h1>
-			<button>Sign Out</button>
+			<p>Logged in as <?php echo $_SESSION['CURRENT_USER']->GetUsername();?></p>
+			<a href="logout.php"><button>Sign Out</button></a>
 		</div>
 		<div class="project_menu">
-			<button>Create New Project</button>
-			<table>
-				<tr>
-					<th>Project Name</th>
-					<th>Next Milestone</th>
-					<th>Estimated Hours</th>
-					<th>Remaining Budget</th>
-					<th>View/Delete</th>
-				</tr>
-				<tr>
-					<td>Project 1</td>
-					<td>Milestone 2</td>
-					<td>50 hours</td>
-					<td>$5000</td>
-					<td>View/Delete</td>
-				</tr>
-				<tr>
-					<td>Project 2</td>
-					<td>Milestone 1</td>
-					<td>20 hours</td>
-					<td>$400</td>
-					<td>View/Delete</td>
-				</tr>
-				<tr>
-					<td>Project 3</td>
-					<td>Milestone 3</td>
-					<td>36 hours</td>
-					<td>$1</td>
-					<td>View/Delete</td>
-				</tr>
-			</table>
+			<a href="Project/Create.php"><button>Create New Project</button></a>
+			<?php
+				echo "<table>";
+				echo "<tr>
+						<th>Project ID</th>
+						<th>Project Name</th>
+						<th>Estimated Hours</th>
+						<th>Remaining Budget</th>
+						<th>View/Delete</th>
+					</tr>";
+					
+				$sql = "SELECT * FROM PROJECTS";
+				if($Result = mysqli_query($conn, $sql))
+				{
+					while ($row = mysqli_fetch_array($Result))
+					{
+						echo "<tr class='project_link' onclick='viewProject(" . $row['Project_ID'] . ")'>";
+						echo "<td>" . $row['Project_ID'] . "</td>";
+						echo "<td>" . $row['Project_Name'] . "</td>";
+						echo "<td>" . $row['Project_TotalHours'] . "</td>";
+						echo "<td>" . $row['Project_RemainedBudget'] . "</td>";
+						echo "<td>View/Delete</td>";
+						echo "</tr>";
+					}
+				}
+				echo "</table>";
+			?>
 		</div>	
 	
 	</body>
 	<footer>
 	</footer>
 </html>
+
+<?php mysqli_close($conn); ?>

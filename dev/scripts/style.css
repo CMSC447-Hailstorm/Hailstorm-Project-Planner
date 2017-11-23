@@ -58,3 +58,9 @@ td, th {
 tr:nth-child(even) {
 	background-color: gray;
 }
+
+.project_link:hover {
+	cursor: pointer;
+	background-color: navy;
+	color: white;
+}

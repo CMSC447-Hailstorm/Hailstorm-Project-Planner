@@ -3,6 +3,10 @@
 	require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/User.class.php");
 	Session::Start();
 
+	if(Session::UserLoggedIn())
+	{
+		header("Location: /home.php");
+	}
 	if(isset($_POST['submit']) && !empty($_POST)) 
 	{
 		$User_ID = $_POST['User_ID'];
@@ -12,11 +16,12 @@
 		
 		if ($_SESSION['CURRENT_USER']->Login($User_ID, $User_Password))
 		{
-			header("Location: Project/View.php");
+			header("Location: /home.php");
 		}
 		else
 		{
 			echo "<script type='text/Javascript'>alert('Error: Username or Password invalid.');</script>";
+			//echo password_hash($User_Password, PASSWORD_BCRYPT);
 		}
 	}
 ?>

@@ -3,13 +3,22 @@
     {
         public static function Start()
         {
-            return session_start();
+            session_start();
+            //$_SESSION["SERVER"] = "studentdb-maria.gl.umbc.edu";
+            //$_SESSION["DBUSER"] = "jlutz1";
+            //$_SESSION["DBPASS"] = "jlutz1";
+            //$_SESSION["DATABASE"] = "jlutz1";
+            $_SESSION['SERVER'] = "localhost";
+            $_SESSION['DBUSER'] = "jlutz1";
+            $_SESSION['DBPASS'] = "gmbvOv6o4j79fLLO";
+            $_SESSION['DATABASE'] = "projectplanner";
+            return;
         }
 
-        public static function UserLoggedIn($userid)
+        public static function UserLoggedIn()
         {
-            return ( $_SESSION['user_id'] == $userid );
-        }
+            return (Session::GetUserID() != NULL);
+        }   
 
         public static function GetUserID()
         {
