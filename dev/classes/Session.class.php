@@ -4,14 +4,12 @@
         public static function Start()
         {
             session_start();
-            //$_SESSION["SERVER"] = "studentdb-maria.gl.umbc.edu";
-            //$_SESSION["DBUSER"] = "jlutz1";
-            //$_SESSION["DBPASS"] = "jlutz1";
-            //$_SESSION["DATABASE"] = "jlutz1";
-            $_SESSION['SERVER'] = "localhost";
-            $_SESSION['DBUSER'] = "jlutz1";
-            $_SESSION['DBPASS'] = "gmbvOv6o4j79fLLO";
-            $_SESSION['DATABASE'] = "projectplanner";
+
+            // replace with your DB info here
+            $_SESSION["SERVER"] = "studentdb-maria.gl.umbc.edu";
+            $_SESSION["DBUSER"] = "";
+            $_SESSION["DBPASS"] = "";
+            $_SESSION["DATABASE"] = "";
             return;
         }
 
