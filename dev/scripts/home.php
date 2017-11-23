@@ -40,7 +40,6 @@
 						<th>Project Name</th>
 						<th>Estimated Hours</th>
 						<th>Remaining Budget</th>
-						<th>View/Delete</th>
 					</tr>";
 					
 				$sql = "SELECT * FROM PROJECTS";
@@ -53,7 +52,6 @@
 						echo "<td>" . $row['Project_Name'] . "</td>";
 						echo "<td>" . $row['Project_TotalHours'] . "</td>";
 						echo "<td>" . $row['Project_RemainedBudget'] . "</td>";
-						echo "<td>View/Delete</td>";
 						echo "</tr>";
 					}
 				}

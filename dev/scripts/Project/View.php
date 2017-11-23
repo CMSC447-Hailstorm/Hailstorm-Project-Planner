@@ -16,6 +16,15 @@
 	<head>
 		<meta charset=utf-8 />
 		<link href ="Style.css" rel="stylesheet">
+		<script type="text/JavaScript">
+			function confirm_delete(pid)
+			{
+				if (confirm("Once you delete this project, it cannot be recovered.  Are you absolutely sure?"))
+				{
+					window.location.href="/Project/Delete.php?p=" + pid + "&d=" + "<?php echo password_hash($_GET['proj'] . "delete" . $_GET['proj'], PASSWORD_BCRYPT); ?>";
+				}
+			}
+		</script>
 	</head>
 	<body>
 	
@@ -57,15 +66,9 @@
 					}
 				}
 			?>
-			<!--<h1>Project Name: <a id="Project_Name">Project 1</a></h1></br>
-			Project ID#: <a id="Project_ID">12345</a></p>
-			Next Milestone: <a id="Next_Milestone"></a></p>
-			Estimated Hours: <a id="Hours"></a></p>
-			Total Budget: <a id="Total_Budget"></a></br>
-			Remaining Budget: <a id="Remaining_Budget"></a><p>
-			Description: <a id="Description"></a></p>-->
 			
 			<button>Edit Project</button>
+			<button onclick="confirm_delete(<?php echo $proj['Project_ID']; ?>)">Delete Project</button>
 		</div>
 		
 		
