@@ -7,12 +7,10 @@
 	</head>
 	<body>
 	
-		<h2>Edit Task</h2>
+		<h2>Edit Phase</h2>
 		
 		<form method="post" action="">
 			Name: <input type="text" name="Name" required></br>
-			Estimated Hours: <input type="text" name="Hours" required></br>
-			Estimated Budget: <input type="text" name="Budget" required></br>
 			Description: <input type="text" name="Description" required></br>
 			
 			<button type="submit" name="submit">Save</button>

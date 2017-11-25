@@ -13,7 +13,6 @@
 			Name: <input type="text" name="Name" required></br>
 			Estimated Hours: <input type="text" name="Hours" required></br>
 			Estimated Budget: <input type="text" name="Budget" required></br>
-			Requirements: <button id="Add_Requirement">Add Phase</button></br>
 			Description: <input type="text" name="Description" required></br>
 			
 			<button type="submit" name="submit">Save</button>
