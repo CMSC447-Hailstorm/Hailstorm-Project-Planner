@@ -3,7 +3,7 @@
 # Variable declaration
 prefix='/home/jacob/Desktop/php'
 datarootdir='/home/jacob/Desktop/php/php'
-exec_prefix="`eval echo ${prefix}`"
+exec_prefix="`eval echo /home/jacob/Desktop/php`"
 phpdir="`eval echo ${exec_prefix}/lib/php`/build"
 includedir="`eval echo ${prefix}/include`/php"
 builddir="`pwd`"

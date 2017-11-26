@@ -2208,7 +2208,7 @@
 #define PHPDBG_DEBUG 0
 
 /* PHP build date */
-#define PHP_BUILD_DATE "2017-11-25"
+#define PHP_BUILD_DATE "2017-11-26"
 
 /* Define if your system has fork/vfork/CreateProcess */
 #define PHP_CAN_SUPPORT_PROC_OPEN 1
@@ -2283,7 +2283,7 @@
 #define PHP_SIGCHILD 0
 
 /* uname -a output */
-#define PHP_UNAME "Linux jacob-pc 4.9.61-3-MANJARO #1 SMP PREEMPT Thu Nov 9 01:18:52 UTC 2017 x86_64 GNU/Linux"
+#define PHP_UNAME "Linux jacob-pc 4.9.65-1-MANJARO #1 SMP PREEMPT Fri Nov 24 10:42:19 UTC 2017 x86_64 GNU/Linux"
 
 /* Whether PHP has to use its own crypt_r for blowfish, des and ext des */
 #define PHP_USE_PHP_CRYPT_R 1

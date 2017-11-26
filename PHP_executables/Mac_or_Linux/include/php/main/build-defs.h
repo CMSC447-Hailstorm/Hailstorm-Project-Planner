@@ -18,7 +18,7 @@
 
 /* $Id$ */
 
-#define CONFIGURE_COMMAND " './configure'  '--prefix' '/home/jacob/Desktop/php/' '--with-mysqli'"
+#define CONFIGURE_COMMAND " './configure'  '--prefix=/home/jacob/Desktop/php/' '--exec-prefix=/home/jacob/Desktop/php/' '--with-mysqli'"
 #define PHP_ADA_INCLUDE		""
 #define PHP_ADA_LFLAGS		""
 #define PHP_ADA_LIBS		""

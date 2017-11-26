@@ -3,7 +3,7 @@
 SED="/usr/bin/sed"
 prefix="/home/jacob/Desktop/php"
 datarootdir="/home/jacob/Desktop/php/php"
-exec_prefix="${prefix}"
+exec_prefix="/home/jacob/Desktop/php"
 version="7.1.12"
 vernum="70112"
 include_dir="${prefix}/include/php"
@@ -17,7 +17,7 @@ program_suffix=""
 exe_extension=""
 php_cli_binary=NONE
 php_cgi_binary=NONE
-configure_options=" '--prefix' '/home/jacob/Desktop/php/' '--with-mysqli'"
+configure_options=" '--prefix=/home/jacob/Desktop/php/' '--exec-prefix=/home/jacob/Desktop/php/' '--with-mysqli'"
 php_sapis=" cli phpdbg cgi"
 
 # Set php_cli_binary and php_cgi_binary if available
