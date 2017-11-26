@@ -1,5 +1,5 @@
 /*Login Page*/
-
+/*
 .login_box {
 	width: 20%;
 	padding: 10px;
@@ -16,7 +16,7 @@
 .title_bar {
 	display: inline;
 }
-/*
+
 input[type=text], input[type=password] {
 	width: 80%;
 	padding: 5px 15px;
@@ -38,7 +38,7 @@ button {
 button:hover {
 	opacity: 0.8;
 }
-*/
+
 table {
 	font-family: "Courier New", Courier, monospace;
 	border-collapse: collapse;
@@ -58,7 +58,7 @@ td, th {
 tr:nth-child(even) {
 	background-color: gray;
 }
-
+*/
 .project_link:hover {
 	cursor: pointer;
 	background-color: navy;
