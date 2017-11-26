@@ -38,7 +38,7 @@
             }
         }
 
-        public static function CLoseSession()
+        public static function CloseSession()
         {
             $_SESSION = NULL;
             return session_destroy();

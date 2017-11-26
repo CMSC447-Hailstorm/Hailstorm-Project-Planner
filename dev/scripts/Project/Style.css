@@ -25,3 +25,25 @@ body {
 	right: 0;
 	background-color: white;
 }
+
+input[type=text] {
+	
+}
+
+input[type=number] {
+
+}
+
+input[type=date] {
+	
+}
+
+button {
+	width: 30%;
+	padding: 5px 15px;
+	margin: 10px;
+	border-radius: 5px;
+	
+	background-color: green;
+	cursor: pointer;
+}
