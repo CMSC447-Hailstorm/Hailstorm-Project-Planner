@@ -7,9 +7,9 @@
 
             // replace with your DB info here
             $_SESSION["SERVER"] = "studentdb-maria.gl.umbc.edu";
-            $_SESSION["DBUSER"] = "";
-            $_SESSION["DBPASS"] = "";
-            $_SESSION["DATABASE"] = "";
+            $_SESSION["DBUSER"] = "chensel1";
+            $_SESSION["DBPASS"] = "chensel1";
+            $_SESSION["DATABASE"] = "chensel1";
             return;
         }
 
