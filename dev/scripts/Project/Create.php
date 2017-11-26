@@ -31,12 +31,14 @@
 			die('Unable to connect' . mysqli_connect_error());
 		}
 		
+
 		$sql2 = "SELECT Client_ID FROM Clients where Client_CompanyName = '$Company_Name'";
 		$Result2 = mysqli_query($conn, $sql2);
 		$Row2 = mysqli_fetch_array($Result2, MYSQLI_ASSOC);
 		//print_r($Row2);
 		/////
 	
+		
 		$Client_ID_FK = $Row2['Client_ID'];
 		$Project_Name = $_POST['Project_Name'];
 		$Project_Status = $_POST['Project_Status'];			//Dead, On Hold, Completed, Requested, Approved, Rejected
@@ -53,16 +55,27 @@
 		
 		$Project_StartDate = $date;
 		$Project_Description = $_POST['Project_Description'];
+	
+		echo $Client_ID_FK . "hot";
+		if($Client_ID_FK == ''){
+			$sql3 = "INSERT INTO Projects (Project_Name, Project_Description,
+								Project_Status, Project_StartDate, Project_EstimatedBudget,
+								Project_RemainedBudget, Project_TotalHours)
+								VALUES
+								('$Project_Name', '$Project_Description',
+								'$Project_Status', '$Project_StartDate', '$Project_EstimatedBudget',
+								'$Project_RemainedBudget', '$Project_TotalHours')";
+}
+		else{
+			$sql3 = "INSERT INTO Projects (Client_ID_FK, Project_Name, Project_Description,
+											Project_Status, Project_StartDate, Project_EstimatedBudget,
+											Project_RemainedBudget, Project_TotalHours)
+											VALUES
+											('$Client_ID_FK', '$Project_Name', '$Project_Description',
+											'$Project_Status', '$Project_StartDate', '$Project_EstimatedBudget',
+											'$Project_RemainedBudget', '$Project_TotalHours')";
 		
-		$sql3 = "INSERT INTO Projects (Client_ID_FK, Project_Name, Project_Description,
-										Project_Status, Project_StartDate, Project_EstimatedBudget,
-										Project_RemainedBudget, Project_TotalHours)
-										VALUES
-										('$Client_ID_FK', '$Project_Name', '$Project_Description',
-										'$Project_Status', '$Project_StartDate', '$Project_EstimatedBudget',
-										'$Project_RemainedBudget', '$Project_TotalHours')";
-		
-									 
+		}							 
 		if (mysqli_query($conn, $sql3)) {
 			header("Location: ../home.php");
 		} else {

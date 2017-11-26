@@ -54,7 +54,7 @@
 							$phaseCount = mysqli_num_rows($result);
 							while ($phase = mysqli_fetch_array($result))
 							{
-								echo "<li>" . $phase['Phase_Name'];
+								echo "<li><a href='/Project/Phases/View.php?prid=" . $project['Project_ID'] . "&phid=" . $phase['Phase_ID'] . "'>" . $phase['Phase_Name'];
 								$taskSql = "SELECT * FROM Tasks WHERE Phase_ID_FK = " . $phase['Phase_ID'] 
 								. " AND Project_ID_FK = '$proj'";
 								if ($taskResult = mysqli_query($conn, $taskSql))
@@ -62,13 +62,13 @@
 									echo "<ul id='tasks_phase_" . $phase['Phase_ID'] . "'>";
 									while($task = mysqli_fetch_array($taskResult))
 									{
-										echo "<li>" . $task['Task_Name'] . "</li>";
+										echo "<li><a href='/Project/Tasks/View.php?prid=" . $project['Project_ID'] . "&tid=" . $task['Task_ID'] . "'>" . $task['Task_Name'] . "</a></li>";
 									}
 									echo "<li><a href='/Project/Tasks/Create.php?prid=" . $project['Project_ID'] 
 											. "&phid=" . $phase['Phase_ID'] . "'><button>Create Task</button></a></li>";
 									echo "</ul>";
 								}
-								echo "</li>";
+								echo "</a></li>";
 							}
 						}
 						echo "<li><a href='/Project/Phases/Create.php?prid=" . $project['Project_ID'] 

@@ -18,6 +18,26 @@
     }
     $p = $_GET['p'];
     $delkey = $_GET['d'];
+
+    $sql = "SELECT * FROM Tasks WHERE Project_ID_FK = '$p'";
+    if($Result = mysqli_query($conn, $sql))
+    {
+        while ($task = mysqli_fetch_array($Result))
+        {
+            $delSql = "DELETE FROM Tasks WHERE Task_ID = " . $task['Task_ID'];
+            mysqli_query($conn, $delSql);
+        }
+    }
+
+    $sql = "SELECT * FROM Phases WHERE Project_ID_FK = '$p'";
+    if($Result = mysqli_query($conn, $sql))
+    {
+        while ($phase = mysqli_fetch_array($Result))
+        {
+            $delSql = "DELETE FROM Phases WHERE Phase_ID = " . $phase['Phase_ID'];
+            mysqli_query($conn, $delSql);
+        }
+    }
     
     $sql = "SELECT * FROM Projects WHERE Project_ID = '$p'";
     if($Result = mysqli_query($conn, $sql))
@@ -30,8 +50,9 @@
         {
             $sql = "DELETE FROM PROJECTS WHERE Project_ID = '$p'";
             mysqli_query($conn, $sql);
-            mysqli_close($conn);
         }
     }
+
+    mysqli_close($conn);
     header("Location: ../home.php");
 ?>
