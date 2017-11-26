@@ -64,6 +64,11 @@
             return $this->username;
         }
 
+        public function getUserID()
+        {
+            return $this->id;
+        }
+
         public function getEmail()
         {
             return $this->email;

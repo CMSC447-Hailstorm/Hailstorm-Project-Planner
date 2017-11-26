@@ -11,6 +11,12 @@
 	{
 		die('Unable to connect.  Error: ' . mysqli_error($conn));
 	}
+	if(empty($_GET))
+	{
+		header("Location: ../home.php");
+	}
+	$proj = $_GET['proj'];
+	$sql = "SELECT * FROM PROJECTS WHERE PROJECT_ID = '$proj'";
 ?>
 <html>
 	<head>
@@ -21,7 +27,8 @@
 			{
 				if (confirm("Once you delete this project, it cannot be recovered.  Are you absolutely sure?"))
 				{
-					window.location.href="/Project/Delete.php?p=" + pid + "&d=" + "<?php echo password_hash($_GET['proj'] . "delete" . $_GET['proj'], PASSWORD_BCRYPT); ?>";
+					window.location.href="/Project/Delete.php?p=" + pid + "&d=" 
+											+ "<?php echo password_hash($_GET['proj'] . "delete" . $_GET['proj'], PASSWORD_BCRYPT); ?>";
 				}
 			}
 		</script>
@@ -32,43 +39,61 @@
 		<div class="nav_bar">
 			
 			<!--List of Projects, Phases, and Tasks displays here-->
-			<ul id="project_list">
-				<li>Project 1</li>
-				<li>Project 2</li>
-				<li>Project 3</li>
-			</ul>
-		
-			<div class="nav_buttons">
-			
-				<button>Create Task</button>
-				<button>Create Phase</button>
-				
-			</div>
+			<?php
+				if($result = mysqli_query($conn, $sql))
+				{
+					$count = mysqli_num_rows($result);
+					$project = mysqli_fetch_array($result);
+					if ($count == 1)
+					{
+						echo "<h3>" . $project['Project_Name'] . "</h3>";
+						echo "<ul id='project_list'>";
+						$phaseSql = "SELECT * FROM Phases WHERE Project_ID_FK = '$proj'";
+						if($result = mysqli_query($conn, $phaseSql))
+						{
+							$phaseCount = mysqli_num_rows($result);
+							while ($phase = mysqli_fetch_array($result))
+							{
+								echo "<li>" . $phase['Phase_Name'];
+								$taskSql = "SELECT * FROM Tasks WHERE Phase_ID_FK = " . $phase['Phase_ID'] 
+								. " AND Project_ID_FK = '$proj'";
+								if ($taskResult = mysqli_query($conn, $taskSql))
+								{
+									echo "<ul id='tasks_phase_" . $phase['Phase_ID'] . "'>";
+									while($task = mysqli_fetch_array($taskResult))
+									{
+										echo "<li>" . $task['Task_Name'] . "</li>";
+									}
+									echo "<li><a href='/Project/Tasks/Create.php?prid=" . $project['Project_ID'] 
+											. "&phid=" . $phase['Phase_ID'] . "'><button>Create Task</button></a></li>";
+									echo "</ul>";
+								}
+								echo "</li>";
+							}
+						}
+						echo "<li><a href='/Project/Phases/Create.php?prid=" . $project['Project_ID'] 
+								. "'><button>Create Phase</button></a></li>";
+						echo "</ul>";
+					}
+				}
+			?>
 		</div>
 		
 		<div class="display">
 			<?php
-				$proj = $_GET['proj'];
-				$sql = "SELECT * FROM PROJECTS WHERE PROJECT_ID = '$proj'";
-				if($Result = mysqli_query($conn, $sql))
+				if ($count == 1)
 				{
-					$count = mysqli_num_rows($Result);
-					$proj = mysqli_fetch_array($Result);
-
-					if ($count == 1)
-					{
-						echo "<h1>Project Name: " . $proj['Project_Name'] . "</h1></br>";
-						echo "<p>Project ID#: ". $proj['Project_ID'] . "</p>";
-						echo "<p>Estimated Hours " . $proj['Project_TotalHours'] . "</p>";
-						echo "<p>Total Budget: " . $proj['Project_EstimatedBudget'] . "</p>";
-						echo "<p>Remaining Budget: " . $proj['Project_RemainedBudget'] . "<p>";					
-						echo "<p>Description: " . $proj['Project_Description'] . "</p>";
-					}
+					echo "<h1>Project Name: " . $project['Project_Name'] . "</h1></br>";
+					echo "<p>Project ID#: ". $project['Project_ID'] . "</p>";
+					echo "<p>Estimated Hours " . $project['Project_TotalHours'] . "</p>";
+					echo "<p>Total Budget: " . $project['Project_EstimatedBudget'] . "</p>";
+					echo "<p>Remaining Budget: " . $project['Project_RemainedBudget'] . "<p>";					
+					echo "<p>Description: " . $project['Project_Description'] . "</p>";
 				}
 			?>
 			
 			<button>Edit Project</button>
-			<button onclick="confirm_delete(<?php echo $proj['Project_ID']; ?>)">Delete Project</button>
+			<button onclick="confirm_delete(<?php echo $project['Project_ID']; ?>)">Delete Project</button>
 		</div>
 		
 		
