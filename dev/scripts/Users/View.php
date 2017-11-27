@@ -19,52 +19,55 @@
     {
         $sql = "SELECT * FROM Users WHERE User_ID = " . $_SESSION['CURRENT_USER']->getUserID();
     }
+    if($result = mysqli_query($conn, $sql))
+    {
+        $count = mysqli_num_rows($result);
+        $user = mysqli_fetch_array($result);
+    }
 ?>
 
 <html>
     <head>
         <meta charset=utf-8 />
         <link href ="/style.css" rel="stylesheet">
-        <!--<script type="text/JavaScript">
+        <script type="text/JavaScript">
 			function confirm_delete(uid)
 			{
-				if (confirm("Once you delete this task, it cannot be recovered.  Are you absolutely sure?"))
+				if (confirm("Are you sure you want to delete this user?"))
 				{
-					window.location.href="/Project/Tasks/Delete.php?prid=<?php //echo $_GET['prid']; ?>&t=" + tid + "&d=" 
-											+ "<?php //echo password_hash($_GET['tid'] . "delete" . $_GET['tid'], PASSWORD_BCRYPT); ?>";
+                    if(confirm("This will seriously delete all this user's information.  This cannot be undone.  Are you absolutely sure?"))
+                    {
+					    window.location.href="/Users/Delete.php?uid=<?php echo $user['User_ID']; ?>&d=" 
+											    + "<?php echo password_hash($user['User_ID'] . "delete" . $user['User_ID'], PASSWORD_BCRYPT); ?>";
+                    }
 				}
 			}
-		</script>-->
+		</script>
     </head>
     <body>
         <div class="User_Details">
             <?php
-                if($result = mysqli_query($conn, $sql))
+                if($count == 1)
                 {
-                    $count = mysqli_num_rows($result);
-                    $user = mysqli_fetch_array($result);
-                    if($count == 1)
-                    {
-                        echo "<h2>User: " . $user['User_Firstname'] . " " . $user['User_Lastname'] . "</h2>";
-                        echo "<p>Username: " . $user["User_Name"] . "</p>";
-                        echo "<p>Role: " . ($user['User_Role'] == 1 ? "Manager" : "Employee") . "</p></br>";
-                        
-                        echo "<p>User ID#: " . $user['User_ID'] . "</p>";
-                        echo "<p>Password: *********</p></br>";
+                    echo "<h2>User: " . $user['User_Firstname'] . " " . $user['User_Lastname'] . "</h2>";
+                    echo "<p>Username: " . $user["User_Name"] . "</p>";
+                    echo "<p>Role: " . ($user['User_Role'] == 1 ? "Manager" : "Employee") . "</p></br>";
+                    
+                    echo "<p>User ID#: " . $user['User_ID'] . "</p>";
+                    echo "<p>Password: *********</p></br>";
 
-                        //Date of birth
-                        echo "<p>Date of Birth: " . $user['User_Birthdate'] . "</p>";
-                        //address
-                        echo "<p>Address: " . $user['User_Street'] . ", " . $user['User_City'] . ", " . $user['User_State'] . " " . $user['User_Zipcode'] . "</p>";
-                        //email
-                        echo "<p>Email Address: " . $user['User_Email'] . "</p>";
-                        //phone
-                        echo "<p>Phone Number: " . $user['User_Phone'] . "</p>";
-                    }
+                    //Date of birth
+                    echo "<p>Date of Birth: " . $user['User_Birthdate'] . "</p>";
+                    //address
+                    echo "<p>Address: " . $user['User_Street'] . ", " . $user['User_City'] . ", " . $user['User_State'] . " " . $user['User_Zipcode'] . "</p>";
+                    //email
+                    echo "<p>Email Address: " . $user['User_Email'] . "</p>";
+                    //phone
+                    echo "<p>Phone Number: " . $user['User_Phone'] . "</p>";
                 }
             ?>
             <a href="/Users/Edit.php<?php echo (isset($_GET['uid']) ? "?uid=" . $_GET['uid'] : ""); ?>"><button>Edit User Account</button></a>
-            <!--<button onclick="confirm_delete(<?php //echo $_GET['tid']; ?>)">Delete User Task</button>-->
+            <button onclick="confirm_delete(<?php echo $user['User_ID']; ?>)">Delete User</button>
             <a href="/home.php"><button>Return to Home</button></a>
         </div>
 
@@ -81,7 +84,10 @@
                 {
                     while($user = mysqli_fetch_array($result))
                     {
-                        echo "<li><a href='/Users/View.php?uid=" . $user['User_ID'] . "'>" . $user['User_Firstname'] . " " . $user['User_Lastname'] . " (" . $user['User_Name'] . ")</a></li>";
+                        if ($user['User_ID'] != 0)
+                        {
+                            echo "<li><a href='/Users/View.php?uid=" . $user['User_ID'] . "'>" . $user['User_Firstname'] . " " . $user['User_Lastname'] . " (" . $user['User_Name'] . ")</a></li>";
+                        }
                     }
                 }
                 echo "</ul></nav>";
