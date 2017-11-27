@@ -60,7 +60,7 @@
 			Description: <input type="text" name="Description" required></br>
 			
 			<button type="submit" name="TaskSubmit">Save</button>
-			<button name="cancel">Cancel</button>
+			<a href="<?php echo '../View.php?proj='.$_GET['prid'] .'&'. $_GET['phid']; ?>"><button name="cancel">Cancel</button>
 		</form>
 	
 	</body>
