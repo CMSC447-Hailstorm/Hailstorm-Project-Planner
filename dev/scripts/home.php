@@ -33,8 +33,7 @@
 		</div>
 		<div class="project_menu">
 			<?php 
-				$Role = $_SESSION['CURRENT_USER']->getUserRole();
-				if($Role == 1){
+				if($_SESSION['CURRENT_USER']->getUserRole() == 1){
 					echo '<a href="Project/Create.php"><button>Create New Project</button></a>';
 				}
 			?>
