@@ -22,6 +22,16 @@
 <html>
     <head>
         <meta charset=utf-8 />
+        <script type="text/JavaScript">
+			function confirm_delete(pid)
+			{
+				if (confirm("Once you delete this phase, it cannot be recovered.  Additionally, all associated tasks will be deleted.  Are you absolutely sure?"))
+				{
+					window.location.href="/Project/Phases/Delete.php?prid=<?php echo $_GET['prid']; ?>&p=" + pid + "&d=" 
+											+ "<?php echo password_hash($_GET['phid'] . "delete" . $_GET['phid'], PASSWORD_BCRYPT); ?>";
+				}
+			}
+		</script>
     </head>
     <body>
         <div class="Phase_Details">
@@ -50,6 +60,7 @@
                 }
             ?>
             <a href="/Project/Phases/Edit.php?prid=<?php echo $_GET['prid'] ?>&phid=<?php echo $_GET['phid'] ?>"><button>Edit Phase</button></a>
+            <button onclick="confirm_delete(<?php echo $_GET['phid']; ?>)">Delete Phase</button>
             <a href="/Project/View.php?proj=<?php echo $_GET['prid'] ?>"><button>Return to Project</button></a>
         </div>
     </body>

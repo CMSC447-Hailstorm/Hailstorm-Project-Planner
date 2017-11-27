@@ -25,7 +25,7 @@
 		<script type="text/JavaScript">
 			function confirm_delete(pid)
 			{
-				if (confirm("Once you delete this project, it cannot be recovered.  Are you absolutely sure?"))
+				if (confirm("Once you delete this project, it cannot be recovered.  Additionally, all associated phases and tasks will be deleted.  Are you absolutely sure?"))
 				{
 					window.location.href="/Project/Delete.php?p=" + pid + "&d=" 
 											+ "<?php echo password_hash($_GET['proj'] . "delete" . $_GET['proj'], PASSWORD_BCRYPT); ?>";
@@ -108,12 +108,8 @@
 			
 			<a href="/Project/Edit.php?proj= <?php echo $project['Project_ID']; ?>"><button>Edit Project</button></a>
 			<button onclick="confirm_delete(<?php echo $project['Project_ID']; ?>)">Delete Project</button>
+			<a href="/home.php"><button>Return to Home</button></a>
 		</div>
-		
-		
-		<script>
-			<!--Scripts for updating the display-->
-		</script>
 	</body>
 	<footer>
 	</footer>

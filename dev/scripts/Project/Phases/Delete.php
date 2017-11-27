@@ -21,7 +21,7 @@
 
     if (password_verify($p . "delete" . $p, $delkey))
     {
-        $sql = "SELECT * FROM Tasks WHERE Project_ID_FK = '$p'";
+        $sql = "SELECT * FROM Tasks WHERE Phase_ID_FK = '$p'";
         if($Result = mysqli_query($conn, $sql))
         {
             while ($task = mysqli_fetch_array($Result))
@@ -31,28 +31,18 @@
             }
         }
     
-        $sql = "SELECT * FROM Phases WHERE Project_ID_FK = '$p'";
-        if($Result = mysqli_query($conn, $sql))
-        {
-            while ($phase = mysqli_fetch_array($Result))
-            {
-                $delSql = "DELETE FROM Phases WHERE Phase_ID = " . $phase['Phase_ID'];
-                mysqli_query($conn, $delSql);
-            }
-        }
-        
-        $sql = "SELECT * FROM Projects WHERE Project_ID = '$p'";
+        $sql = "SELECT * FROM Phases WHERE Phase_ID = '$p'";
         if($Result = mysqli_query($conn, $sql))
         {
             $count = mysqli_num_rows($Result);
             if ($count == 1)
             {
-                $sql = "DELETE FROM PROJECTS WHERE Project_ID = '$p'";
+                $sql = "DELETE FROM Phases WHERE Phase_ID = '$p'";
                 mysqli_query($conn, $sql);
             }
         }
     }
 
     mysqli_close($conn);
-    header("Location: ../home.php");
+    header("Location: ../View.php?proj=" . $_GET['prid']);
 ?>

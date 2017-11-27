@@ -22,6 +22,16 @@
 <html>
     <head>
         <meta charset=utf-8 />
+        <script type="text/JavaScript">
+			function confirm_delete(tid)
+			{
+				if (confirm("Once you delete this task, it cannot be recovered.  Are you absolutely sure?"))
+				{
+					window.location.href="/Project/Tasks/Delete.php?prid=<?php echo $_GET['prid']; ?>&t=" + tid + "&d=" 
+											+ "<?php echo password_hash($_GET['tid'] . "delete" . $_GET['tid'], PASSWORD_BCRYPT); ?>";
+				}
+			}
+		</script>
     </head>
     <body>
         <div class="Task_Details">
@@ -52,6 +62,7 @@
                 }
             ?>
             <a href="/Project/Tasks/Edit.php?prid=<?php echo $_GET['prid'] ?>&tid=<?php echo $_GET['tid'] ?>"><button>Edit Task</button></a>
+            <button onclick="confirm_delete(<?php echo $_GET['tid']; ?>)">Delete Task</button>
             <a href="/Project/View.php?proj=<?php echo $_GET['prid'] ?>"><button>Return to Project</button></a>
         </div>
     </body>
