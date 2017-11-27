@@ -55,8 +55,8 @@
 		<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] 
 									. "?prid=" . $_GET['prid'] . "&phid=" . $_GET['phid']); ?>" autocomplete="off">
 			Name: <input type="text" name="Name" required></br>
-			Estimated Hours: <input type="text" name="Hours" required></br>
-			Estimated Budget: <input type="text" name="Budget" required></br>
+			Estimated Hours: <input type="number" name="Hours" required></br>
+			Estimated Budget: <input type="number" name="Budget" required></br>
 			Description: <input type="text" name="Description" required></br>
 			
 			<button type="submit" name="TaskSubmit">Save</button>

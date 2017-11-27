@@ -83,16 +83,30 @@
 			<?php
 				if ($count == 1)
 				{
-					echo "<h1>Project Name: " . $project['Project_Name'] . "</h1></br>";
+					echo "<h2>Project Name: " . $project['Project_Name'] . "</h2></br>";
 					echo "<p>Project ID#: ". $project['Project_ID'] . "</p>";
-					echo "<p>Estimated Hours " . $project['Project_TotalHours'] . "</p>";
+
+					$clientSql = "SELECT * FROM Clients WHERE Client_ID = " . $project['Client_ID_FK'];
+					if ($result = mysqli_query($conn, $clientSql))
+					{
+						if (mysqli_num_rows($result) == 1)
+						{
+							$client = mysqli_fetch_array($result);
+							echo "<p>Client: " . $client['Client_Firstname'] . " " . $client['Client_Lastname'] . "</p>";
+							echo "<p>Client Company: " . $client['Client_CompanyName'] . "</p>";
+						}
+					}
+
+					echo "<p>Project Status: " . $project['Project_Status'] . "</p>";
+					echo "<p>Start Date: " . $project['Project_StartDate'] . "</p>";
+					echo "<p>Estimated Hours to complete: " . $project['Project_TotalHours'] . "</p>";
 					echo "<p>Total Budget: " . $project['Project_EstimatedBudget'] . "</p>";
 					echo "<p>Remaining Budget: " . $project['Project_RemainedBudget'] . "<p>";					
 					echo "<p>Description: " . $project['Project_Description'] . "</p>";
 				}
 			?>
 			
-			<button>Edit Project</button>
+			<a href="/Project/Edit.php?proj= <?php echo $project['Project_ID']; ?>"><button>Edit Project</button></a>
 			<button onclick="confirm_delete(<?php echo $project['Project_ID']; ?>)">Delete Project</button>
 		</div>
 		

@@ -98,7 +98,7 @@
 				<a href="Add_Client.php"><button>Add Client</button></a>
 				<p>Project Name: <input type="text" placeholder="Project Name" name="Project_Name" required>
 					<select name="Client_CompanyName">
-						<option value="" selected="selected">Select Client</option>
+						<option value="" disabled selected hidden>Select Client</option>
 							<?php 
 								foreach($Client_CompanyName as $Client_CompanyName)
 								{ 
@@ -109,7 +109,7 @@
 							?>
 					</select>
 					<select name="Project_Status" required>
-						<option value="" selected="selected">Project Status</option>	
+						<option value="" disabled selected hidden>Project Status</option>	
 							<option value="Requested">Requested</option>
 							<option value="Approved">Approved</option>
 							<option value="On Hold">On Hold</option>

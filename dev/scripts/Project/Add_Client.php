@@ -36,8 +36,15 @@
 									'$Client_Street', '$Client_City', '$Client_State', 
 									'$Client_Zipcode', '$Client_Country') ";
 									
-		if (mysqli_query($conn, $sql)) {				
-			header("Location: Create.php");
+		if (mysqli_query($conn, $sql)) {
+			if(isset($_GET))
+			{
+				header("Location: ./Edit.php?proj=" . $_GET['ret']);
+			}
+			else
+			{
+				header("Location: Create.php");
+			}
 		} else {
 			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 		}
@@ -54,7 +61,7 @@
 	</head>
 	<body>
 		
-		<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
+		<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . (isset($_GET) ? "?ret=" . $_GET['ret'] : ""); ?>" autocomplete="off">
 			<div class="AddClient">
 			
 				Company Name: </br>
