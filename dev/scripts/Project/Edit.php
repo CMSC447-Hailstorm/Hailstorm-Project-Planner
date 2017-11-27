@@ -162,9 +162,9 @@
                     }
                 ?>
                 
-			    <button type="submit" name="ProjectSubmit">Save</button>    
+			    <button type="submit" name="ProjectSubmit">Save</button>   
             </form>
-			<a href="/Project/View.php"><button type="cancel" name="cancel">Cancel</button></a>
+			<a href="<?php echo '/Project/View.php?proj=' . $_GET['proj'] ?>"><button type="cancel" name="cancel">Cancel</button></a>
 		</div>
 	</body>
 	<footer>
