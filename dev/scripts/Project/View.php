@@ -71,9 +71,12 @@
 								echo "</a></li>";
 							}
 						}
-						echo "<li><a href='/Project/Phases/Create.php?prid=" . $project['Project_ID'] 
-								. "'><button>Create Phase</button></a></li>";
-						echo "</ul>";
+						if($_SESSION['CURRENT_USER']->GetUserRole() == 1)
+						{
+							echo "<li><a href='/Project/Phases/Create.php?prid=" . $project['Project_ID'] 
+									. "'><button>Create Phase</button></a></li>";
+							echo "</ul>";
+						}
 					}
 				}
 			?>
@@ -105,9 +108,12 @@
 					echo "<p>Description: " . $project['Project_Description'] . "</p>";
 				}
 			?>
-			
-			<a href="/Project/Edit.php?proj= <?php echo $project['Project_ID']; ?>"><button>Edit Project</button></a>
-			<button onclick="confirm_delete(<?php echo $project['Project_ID']; ?>)">Delete Project</button>
+			<?php
+				if($_SESSION['CURRENT_USER']->getUserRole() == 1){
+					echo '<a href="/Project/Edit.php?proj= <?php echo $project["Project_ID"]; ?>"><button>Edit Project</button></a>';
+					echo '<button onclick="confirm_delete(<?php echo $project["Project_ID"]; ?>)">Delete Project</button>';
+				}
+			?>
 			<a href="/home.php"><button>Return to Home</button></a>
 		</div>
 	</body>
