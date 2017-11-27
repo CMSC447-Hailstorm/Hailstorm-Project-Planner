@@ -56,8 +56,8 @@
 			?>
 			
 			<button type="submit" name="PhaseSubmit">Save</button>
-			<button type="cancel" name="cancel">Cancel</button>
 		</form>
+		<a href="View.php?prid=<?php echo $_GET['prid'] . '&phid=' . $_GET['phid'] ?>"><button type="cancel" name="cancel">Cancel</button>
 	</body>
 	<footer>
 	</footer>
