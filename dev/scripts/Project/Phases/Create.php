@@ -43,21 +43,34 @@
 <html>
 	<head>
 		<meta charset=utf-8 />
-		<link href ="Style.css" rel="stylesheet">
+		<link href ="../../style.css" rel="stylesheet">
 	</head>
 	<body>
 	
-		<h2>Create New Phase</h2>
+		<!--Title Bar-->
+		<div class="w3-top w3-card">
+			<div class="w3-bar w3-padding">
+				<a class="w3-bar-item" ><h1>Project Planner</h1></a>
+			</div>
+		</div>	
 		
+		<div class="w3-container">
 		<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] 
 									. "?prid=" . $_GET['prid']); ?>" autocomplete="off">
-			Name: <input type="text" name="Name" required></br>
-			Description: <input type="text" name="Description" required></br>
+			<div class="w3-panel w3-display-middle w3-border w3-padding">
 			
+			<label>Name:</label>
+			<input class="w3-input w3-border" type="text" name="Name" required></br>
 			
-			<button type="submit" name="PhaseSubmit">Save</button>
-			<button name="cancel">Cancel</button>
+			<label>Description:</label>
+			<input class="w3-input w3-border" type="text" name="Description" required></br>
+			
+			<button class="w3-button w3-green" type="submit" name="PhaseSubmit">Save</button>
+			<button class="w3-button w3-red" name="cancel">Cancel</button>
+			
+			</div>
 		</form>
+		</div>
 	
 	</body>
 	<footer>
