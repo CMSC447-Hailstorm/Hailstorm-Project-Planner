@@ -108,12 +108,9 @@
 					echo "<p>Description: " . $project['Project_Description'] . "</p>";
 				}
 			?>
-			<?php
-				if($_SESSION['CURRENT_USER']->getUserRole() == 1){
-					echo "<a href='/Project/Edit.php?proj=" . $project["Project_ID"] . "'><button>Edit Project</button></a>";
-					echo " <button onclick='confirm_delete(" . $project["Project_ID"] . ")'>Delete Project</button>";
-				}
-			?>
+
+			<a href="/Project/Edit.php?proj= <?php echo $project["Project_ID"]; ?>"><button>Edit Project</button></a>
+			<button onclick="confirm_delete(<?php echo $project["Project_ID"]; ?>)">Delete Project</button>
 			<a href="/home.php"><button>Return to Home</button></a>
 		</div>
 	</body>
