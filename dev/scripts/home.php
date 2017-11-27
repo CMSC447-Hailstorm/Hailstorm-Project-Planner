@@ -43,6 +43,7 @@
 						<th>Project ID</th>
 						<th>Project Name</th>
 						<th>Estimated Hours</th>
+						<th>Total Budget</th>
 						<th>Remaining Budget</th>
 					</tr>";
 					
@@ -55,6 +56,7 @@
 						echo "<td>" . $row['Project_ID'] . "</td>";
 						echo "<td>" . $row['Project_Name'] . "</td>";
 						echo "<td>" . $row['Project_TotalHours'] . "</td>";
+						echo "<td>" . $row['Project_EstimatedBudget'] . "</td>";
 						echo "<td>" . $row['Project_RemainedBudget'] . "</td>";
 						echo "</tr>";
 					}

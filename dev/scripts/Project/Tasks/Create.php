@@ -33,14 +33,12 @@
 									('$project', '$phase', '$creator', '$taskName', 
 									'$description', '$hours', '$budget')";
 
-		if(mysqli_query($conn, $sql))
-		{
-			header("Location: ../View.php?proj=" . $project);
-		}
-		else
-		{
-			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-		}
+		mysqli_query($conn, $sql);
+
+		$sql = "UPDATE Projects SET Project_RemainedBudget = Project_RemainedBudget - '$budget' WHERE Project_ID = '$project'";
+		mysqli_query($conn, $sql);
+
+		header("Location: ../View.php?proj=" . $project);
 	}
 ?>
 <html>
