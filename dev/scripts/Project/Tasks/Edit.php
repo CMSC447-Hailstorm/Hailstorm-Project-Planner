@@ -60,8 +60,8 @@
 			?>
 			
 			<button type="submit" name="TaskSubmit">Save</button>
-			<button type="cancel" name="cancel">Cancel</button>
 		</form>
+		<a href="View.php?prid=<?php echo $_GET['prid'] . '&tid=' . $_GET['tid'] ?>"><button type="cancel" name="cancel">Cancel</button>
 	</body>
 	<footer>
 	</footer>
