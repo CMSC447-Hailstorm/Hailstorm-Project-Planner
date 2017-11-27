@@ -6,10 +6,10 @@
             session_start();
 
             // replace with your DB info here
-            $_SESSION["SERVER"] = "localhost";
-            $_SESSION["DBUSER"] = "jlutz1";
-            $_SESSION["DBPASS"] = "7ZhtDXDUjCVG23Ft";
-            $_SESSION["DATABASE"] = "projectplanner";
+            $_SESSION["SERVER"] = "studentdb-maria.gl.umbc.edu";
+            $_SESSION["DBUSER"] = "";
+            $_SESSION["DBPASS"] = "";
+            $_SESSION["DATABASE"] = "";
             return;
         }
 

@@ -59,7 +59,7 @@
                                     document.getElementById("AssignResults").innerHTML += "<nav><ul>";
                                     for (var u = 0; u < users.length; u += 2)
                                     {
-                                        document.getElementById("AssignResults").innerHTML += "<li onclick='AssignUser(" + users[u+1] + ", 1)'>" + users[u] + "</li>";
+                                        document.getElementById("AssignResults").innerHTML += "<li onclick='AssignUser(" + users[u+1] + ")'>" + users[u] + "</li>";
                                     }
                                     document.getElementById("AssignResults").innerHTML += "</ul></nav>";
                                 }
@@ -70,17 +70,9 @@
                     handler.send();
                 }
 			}
-			function AssignUser(uid, com)
+			function AssignUser(uid)
 			{
-				if (com == 1)
-				{
-					var message = "Are you sure you want to assign this user to this phase?  Your other changes to the phase will not be saved.";
-				}
-				else
-				{
-					var message = "Are you sure you want to remove this user from this phase?  Your other changes to the phase will not be saved.";
-				}
-				if(confirm(message))
+				if(confirm("Are you sure you want to assign this user to this phase?  Your changes to the phase will not be saved."))
                 {
                     var handler = new XMLHttpRequest();
                     handler.onreadystatechange = function()
@@ -97,14 +89,7 @@
                             }
                         }
                     }
-					if (com == 1)
-					{
-                    	handler.open("GET", "Edit_User_Assignment.php?uid=" + uid + "&phid=<?php echo $_GET['phid']; ?>&prid=<?php echo $_GET['prid']; ?>&com=1", false);
-					}
-					else
-					{
-						handler.open("GET", "Edit_User_Assignment.php?uid=" + uid + "&phid=<?php echo $_GET['phid']; ?>&prid=<?php echo $_GET['prid']; ?>&com=0", false);
-					}
+                    handler.open("GET", "Assign_User.php?uid=" + uid + "&phid=<?php echo $_GET['phid']; ?>&prid=<?php echo $_GET['prid']; ?>", false);
                     handler.send();
                 }
 			}
@@ -139,7 +124,7 @@
 						if ($userResult = mysqli_query($conn, $userSql))
 						{
 							$user = mysqli_fetch_array($userResult);
-							echo "<li onclick='AssignUser(" . $user['User_ID'] . ", 0)'>" . $user['User_Firstname'] . " " . $user['User_Lastname'] . " (" . $user['User_Name'] . ")</li>";
+							echo "<li>" . $user['User_Firstname'] . " " . $user['User_Lastname'] . " (" . $user['User_Name'] . ")</li>";
 						}
 					}
 				}
