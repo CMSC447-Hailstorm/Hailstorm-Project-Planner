@@ -94,15 +94,19 @@
 	<body>
 		
 		<!--Title Bar-->
-		<div class="w3-top w3-card">
+		<div class="w3-top w3-card w3-white">
 			<div class="w3-bar w3-padding">
 				<a class="w3-bar-item" ><h1>Project Planner</h1></a>
+				<div class="w3-right">
+					<a class="w3-bar-item">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetUsername();?></a>
+					<a href="/logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
+				</div>
 			</div>
 		</div>
 		
 		<div class="w3-container">
-		<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
-			<div class="w3-panel w3-display-middle w3-border w3-padding CreateProject" style="width:80%">
+			<div class="w3-display-middle">
+			<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
 			
 				<a href="Add_Client.php"><button>Add Client</button></a>
 				
@@ -140,14 +144,13 @@
 				<label>Start Date:</label>
 				<input class="w3-input w3-border" type="date" placeholder="dd/mm/yyyy" name="Project_StartDate" required></br></br>
 				
-				<label>Project Description:</label>
+				<label>Project Description:</label></p>
 				<textarea rows="10" cols="50" maxlength="2000" placeholder="Type here" name="Project_Description"></textarea>
 				</br>
 				<button type="submit" name="ProjectSubmit">Submit</button>
 				
+			</form>
 			</div>
-	
-		</form>
 		</div>
 
 

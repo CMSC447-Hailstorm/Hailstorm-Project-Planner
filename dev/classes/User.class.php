@@ -21,12 +21,19 @@
                 }
                 //$sql = "SELECT * FROM Users WHERE User_ID ='$userid' AND User_Password ='$password' ";
 				$sql = "SELECT * FROM Users WHERE User_Name = '$userid' ";
-                $Result = mysqli_query($conn, $sql);
+                if ($Result = mysqli_query($conn, $sql))
+				{
+					$count = mysqli_num_rows($Result);
+				
+					$Row = mysqli_fetch_array($Result, MYSQLI_ASSOC);
+				}
+				else
+				{
+					echo mysqli_error($conn);
+				}
 				
 				//checking if there is only one row with user_id ONLY
-				$count = mysqli_num_rows($Result);
 				
-				$Row = mysqli_fetch_array($Result, MYSQLI_ASSOC);
 				
                 if ($count == 1 && password_verify($password, $Row['User_Password']))
                 { 

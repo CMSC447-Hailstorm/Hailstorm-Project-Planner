@@ -16,7 +16,7 @@
 		header("Location: ../home.php");
 	}
 	$proj = $_GET['proj'];
-	$sql = "SELECT * FROM PROJECTS WHERE PROJECT_ID = '$proj'";
+	$sql = "SELECT * FROM Projects WHERE PROJECT_ID = '$proj'";
 ?>
 <html>
 	<head>
@@ -36,7 +36,7 @@
 	<body>
 	
 
-		<div class="nav_bar">
+		<div class="w3-sidebar w3-bar-block" style="width:30%">
 			
 			<!--List of Projects, Phases, and Tasks displays here-->
 			<?php
@@ -79,7 +79,7 @@
 			?>
 		</div>
 		
-		<div class="display">
+		<div class="w3-container" style="margin-left:25%">
 			<?php
 				if ($count == 1)
 				{
