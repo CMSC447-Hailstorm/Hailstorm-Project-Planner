@@ -35,18 +35,6 @@
 				}
 			}
 		</script>-->
-
-        <?php
-            if ($_SESSION['CURRENT_USER']->GetUserRole() == 1)
-            {
-                echo "<script type='text/JavaScript'>
-                    function viewProject(uid)
-                    {
-                        window.location.href='/Users/View.php?uid=' + uid;
-                    }
-                </script>";
-            }
-        ?>
     </head>
     <body>
         <div class="User_Details">
@@ -75,7 +63,7 @@
                     }
                 }
             ?>
-            <a href="/Users/Edit.php"><button>Edit User Account</button></a>
+            <a href="/Users/Edit.php<?php echo (isset($_GET['uid']) ? "?uid=" . $_GET['uid'] : ""); ?>"><button>Edit User Account</button></a>
             <!--<button onclick="confirm_delete(<?php //echo $_GET['tid']; ?>)">Delete User Task</button>-->
             <a href="/home.php"><button>Return to Home</button></a>
         </div>

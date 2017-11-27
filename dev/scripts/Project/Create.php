@@ -90,12 +90,21 @@
 	<head>
 		<meta charset=utf-8 />
 		<link href ="Style.css" rel="stylesheet">
+		<script type="text/JavaScript">
+			function AddClient()
+			{
+				if(confirm("Your changes to the project will not be saved.  Continue?"))
+				{
+					window.location.href="/Project/Add_Client.php";
+				}
+			}
+		</script>
 	</head>
 	<body>
 		
 		<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
 			<div class="CreateProject">
-				<a href="Add_Client.php"><button>Add Client</button></a>
+				<button onclick="AddClient()">Add Client</button>
 				<p>Project Name: <input type="text" placeholder="Project Name" name="Project_Name" required>
 					<select name="Client_CompanyName">
 						<option value="" disabled selected hidden>Select Client</option>

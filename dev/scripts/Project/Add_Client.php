@@ -61,7 +61,7 @@
 	</head>
 	<body>
 		
-		<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . (isset($_GET) ? "?ret=" . $_GET['ret'] : ""); ?>" autocomplete="off">
+		<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . (isset($_GET['ret']) ? "?ret=" . $_GET['ret'] : ""); ?>" autocomplete="off">
 			<div class="AddClient">
 			
 				Company Name: </br>

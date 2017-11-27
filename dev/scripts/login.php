@@ -37,10 +37,10 @@
 			<div class="login_box">
 			
 				User ID: </br>
-				<input type="text" placeholder="Enter ID" name="User_ID" required></br>
+				<input class="login" type="text" placeholder="Enter ID" name="User_ID" required></br>
 				
 				Password: </br>
-				<input type="password" placeholder="Enter Password" name="User_Password" required></br>
+				<input class="login" type="password" placeholder="Enter Password" name="User_Password" required></br>
 				
 				</br>
 				<button type="submit" name="submit">Login</button>

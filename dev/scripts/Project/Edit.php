@@ -54,12 +54,11 @@
 		<meta charset=utf-8 />
 		<link href ="Style.css" rel="stylesheet">
 		<script type="text/JavaScript">
-			function confirm_delete(pid)
+			function AddClient()
 			{
-				if (confirm("Once you delete this project, it cannot be recovered.  Are you absolutely sure?"))
+				if(confirm("Your changes to the project will not be saved.  Continue?"))
 				{
-					window.location.href="/Project/Delete.php?p=" + pid + "&d=" 
-											+ "<?php echo password_hash($_GET['proj'] . "delete" . $_GET['proj'], PASSWORD_BCRYPT); ?>";
+					window.location.href="/Project/Add_Client.php?ret=<?php echo $_GET['proj']; ?>";
 				}
 			}
 		</script>
@@ -110,7 +109,7 @@
 		
 		<div class="display">
             <h2>Edit Project</h2>
-            <a href="Add_Client.php?ret=<?php echo $project['Project_ID']; ?>"><button>Add Client</button></a>
+            <button onclick="AddClient()">Add Client</button>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] 
 									. "?proj=" . $_GET['proj']); ?>" autocomplete="off">
                 <?php

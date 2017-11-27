@@ -17,7 +17,7 @@
 	display: inline;
 }
 
-input[type=text], input[type=password] {
+.login {
 	width: 80%;
 	padding: 5px 15px;
 	margin: 10px 0;
