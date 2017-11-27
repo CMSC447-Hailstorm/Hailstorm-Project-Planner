@@ -162,9 +162,9 @@
                     }
                 ?>
                 
-			    <button type="submit" name="ProjectSubmit">Save</button>
-                <button type="cancel" name="cancel">Cancel</button>
+			    <button type="submit" name="ProjectSubmit">Save</button>    
             </form>
+			<a href="/Project/View.php"><button type="cancel" name="cancel">Cancel</button></a>
 		</div>
 	</body>
 	<footer>
