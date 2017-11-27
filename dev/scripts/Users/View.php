@@ -85,6 +85,7 @@
                     }
                 }
                 echo "</ul></nav>";
+                echo "<a href='/Users/Create.php" . (isset($_GET['uid']) ? "?ret=" . $_GET['uid'] : "") . "'><button>Create New User</button></a>";
                 echo "</div>";
             }
         ?>

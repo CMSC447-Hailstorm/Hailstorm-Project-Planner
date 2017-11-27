@@ -44,7 +44,7 @@
 				
 				</br>
 				<button type="submit" name="submit">Login</button>
-				
+				<a href="/Users/Create.php"><button type="button">Create New User</button></a>
 			</div>
 		</form>
 
