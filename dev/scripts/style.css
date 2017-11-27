@@ -64,3 +64,11 @@ tr:nth-child(even) {
 	background-color: navy;
 	color: white;
 }
+
+nav ul {
+	min-height:400px;
+	max-height:auto;
+	width:26%;
+	overflow:hidden; 
+	overflow-y:scroll;
+}

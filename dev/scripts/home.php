@@ -28,7 +28,7 @@
 		<div class="title_bar">
 			<img src="">
 			<h1>Project Planer</h1>
-			<p>Logged in as <?php echo $_SESSION['CURRENT_USER']->GetUsername();?></p>
+			<p>Logged in as <a href="/Users/View.php"><?php echo $_SESSION['CURRENT_USER']->GetFullName();?></a></p>
 			<a href="logout.php"><button>Sign Out</button></a>
 		</div>
 		<div class="project_menu">

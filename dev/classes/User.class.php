@@ -64,6 +64,11 @@
             return $this->username;
         }
 
+        public function getFullName()
+        {
+            return $this->firstname . " " . $this->lastname . " (" . $this->username . ")";
+        }
+
         public function getUserID()
         {
             return $this->id;
@@ -72,6 +77,11 @@
         public function getEmail()
         {
             return $this->email;
+        }
+
+        public function getUserRole()
+        {
+            return $this->role;
         }
 
         public static function Logout()
