@@ -59,8 +59,12 @@
                     }
                 }
             ?>
-            <a href="/Project/Phases/Edit.php?prid=<?php echo $_GET['prid'] ?>&phid=<?php echo $_GET['phid'] ?>"><button>Edit Phase</button></a>
-            <button onclick="confirm_delete(<?php echo $_GET['phid']; ?>)">Delete Phase</button>
+			<?php
+			if($_SESSION['CURRENT_USER']->getUserRole() == 1){
+				echo '<a href="/Project/Phases/Edit.php?prid=<?php echo $_GET["prid"] ?>&phid=<?php echo $_GET["phid"] ?>"><button>Edit Phase</button></a>';
+				echo '<button onclick="confirm_delete(<?php echo $_GET["phid"]; ?>)">Delete Phase</button>';
+			}
+			?>
             <a href="/Project/View.php?proj=<?php echo $_GET['prid'] ?>"><button>Return to Project</button></a>
         </div>
     </body>
