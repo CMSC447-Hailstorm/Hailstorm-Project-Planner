@@ -25,7 +25,7 @@
 	</head>
 	<body>
 		<!--Title Bar-->
-		<div class="w3-top w3-card w3-white">
+		<div class="w3-top w3-card w3-white" style="height:10%">
 			<div class="w3-bar w3-padding">
 				<a class="w3-bar-item"><h1>Project Planner</h1></a>
 				<div class="w3-right">
@@ -36,7 +36,7 @@
 		</div>
 		
 		<!--Project Menu-->
-		<div class="w3-container">
+		<div class="w3-container" style="margin-top:20%">
 			<div class="w3-panel w3-display-middle w3-padding">
 				<div>
 					<a href="Project/Create.php"><button class="w3-button w3-green">Create New Project</button></a>

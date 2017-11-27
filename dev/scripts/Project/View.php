@@ -21,7 +21,7 @@
 <html>
 	<head>
 		<meta charset=utf-8 />
-		<link href ="Style.css" rel="stylesheet">
+		<link href ="/style.css" rel="stylesheet">
 		<script type="text/JavaScript">
 			function confirm_delete(pid)
 			{
@@ -35,8 +35,20 @@
 	</head>
 	<body>
 	
-
-		<div class="w3-sidebar w3-bar-block" style="width:30%">
+		<!--Title Bar-->
+		<div class="w3-top w3-card w3-white" style="height:10%">
+			<div class="w3-bar w3-padding">
+				<a class="w3-bar-item"><h1>Project Planner</h1></a>
+				<div class="w3-right">
+					<a class="w3-bar-item">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetUsername();?></a>
+					<a href="/logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
+				</div>
+			</div>
+		</div>
+		
+		<div class="w3-container" style="margin-top:10%">
+		<div class="w3-sidebar w3-bar-block w3-white w3-border-right" style="width:25%">
+			<div class="w3-panel w3-padding">
 			
 			<!--List of Projects, Phases, and Tasks displays here-->
 			<?php
@@ -77,6 +89,8 @@
 					}
 				}
 			?>
+			
+			</div>
 		</div>
 		
 		<div class="w3-container" style="margin-left:25%">
@@ -95,7 +109,7 @@
 			<button>Edit Project</button>
 			<button onclick="confirm_delete(<?php echo $project['Project_ID']; ?>)">Delete Project</button>
 		</div>
-		
+		</div>
 		
 		<script>
 			<!--Scripts for updating the display-->
