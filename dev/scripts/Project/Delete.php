@@ -30,6 +30,16 @@
                 mysqli_query($conn, $delSql);
             }
         }
+
+        $sql = "SELECT * FROM User_Assignments WHERE Project_ID_FK = '$p'";
+        if($Result = mysqli_query($conn, $sql))
+        {
+            while ($assign = mysqli_fetch_array($Result))
+            {
+                $delSql = "DELETE FROM User_Assignments WHERE Assignment_ID = " . $assign['Assignment_ID'];
+                mysqli_query($conn, $delSql);
+            }
+        }
     
         $sql = "SELECT * FROM Phases WHERE Project_ID_FK = '$p'";
         if($Result = mysqli_query($conn, $sql))

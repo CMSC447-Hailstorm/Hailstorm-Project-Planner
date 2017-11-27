@@ -9,7 +9,7 @@
 	$conn = mysqli_connect($_SESSION["SERVER"], $_SESSION["DBUSER"], $_SESSION["DBPASS"], $_SESSION["DATABASE"]);
 	if (!$conn)
 	{
-	    return "Unable to connect.  Error: " . mysqli_error($conn);
+	    echo "Unable to connect.  Error: " . mysqli_error($conn);
     }
 
     $command = $_REQUEST['com'];

@@ -23,7 +23,7 @@
     <head>
         <meta charset=utf-8 />
         <script type="text/JavaScript">
-			function confirm_delete(pid)
+			function ConfirmDelete(pid)
 			{
 				if (confirm("Once you delete this phase, it cannot be recovered.  Additionally, all associated tasks will be deleted.  Are you absolutely sure?"))
 				{
@@ -56,15 +56,31 @@
                         }
 
                         echo "<p>Phase Description: " . $phase['Phase_Description'] . "</p>";
+
+                        if($_SESSION['CURRENT_USER']->getUserRole() == 1){
+                            echo "<a href='/Project/Phases/Edit.php?prid=" . $_GET["prid"] . "&phid=" . $_GET["phid"] . "'><button>Edit Phase</button></a>";
+                            echo " <button onclick='ConfirmDelete(" . $_GET["phid"] . ")'>Delete Phase</button>";
+                        }
+                        
+                        echo "<h3>Assigned Users: </h3>";
+                        echo "<nav><ul>";
+                        $sql = "SELECT * FROM User_Assignments WHERE Phase_ID_FK = " . $phase['Phase_ID'];
+                        if($result = mysqli_query($conn, $sql))
+                        {
+                            while($assign = mysqli_fetch_array($result))
+                            {
+                                $userSql = "SELECT * FROM Users WHERE User_ID = " . $assign['User_ID_FK'];
+                                if ($userResult = mysqli_query($conn, $userSql))
+                                {
+                                    $user = mysqli_fetch_array($userResult);
+                                    echo "<li>" . $user['User_Firstname'] . " " . $user['User_Lastname'] . " (" . $user['User_Name'] . ")</li>";
+                                }
+                            }
+                        }
+                        echo "</ul></nav>";
                     }
                 }
             ?>
-			<?php
-			if($_SESSION['CURRENT_USER']->getUserRole() == 1){
-				echo "<a href='/Project/Phases/Edit.php?prid=" . $_GET["prid"] . "&phid=" . $_GET["phid"] . "'><button>Edit Phase</button></a>";
-				echo " <button onclick='confirm_delete(" . $_GET["phid"] . ")'>Delete Phase</button>";
-			}
-			?>
             <a href="/Project/View.php?proj=<?php echo $_GET['prid'] ?>"><button>Return to Project</button></a>
         </div>
     </body>

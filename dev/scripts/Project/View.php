@@ -66,8 +66,8 @@
 									}
 									echo "<li><a href='/Project/Tasks/Create.php?prid=" . $project['Project_ID'] 
 											. "&phid=" . $phase['Phase_ID'] . "'><button>Create Task</button></a></li>";
-									echo "</ul>";
 								}
+								echo "</ul>";
 								echo "</a></li>";
 							}
 						}

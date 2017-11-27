@@ -51,8 +51,10 @@
 		
 		<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] 
 									. "?prid=" . $_GET['prid']); ?>" autocomplete="off">
-			Name: <input type="text" name="Name" required></br>
-			Description: <input type="text" name="Description" required></br>
+			<p>Name: <input type="text" name="Name" required></p></br>
+			<p>Description: <input type="text" name="Description" required><p></br>
+
+			</br><p>Users can be assigned by editing this phase once is has been created.</p>
 			
 			
 			<button type="submit" name="PhaseSubmit">Save</button>

@@ -35,6 +35,65 @@
 	<head>
 		<meta charset=utf-8 />
 		<link href ="Style.css" rel="stylesheet">
+		<script type="text/JavaScript">
+			function GetSearchResults()
+            {
+                var searchText = document.getElementById("SearchBar").value;
+                if (searchText != "")
+                {
+                    var handler = new XMLHttpRequest();
+                    handler.onreadystatechange = function()
+                    {
+                        if(this.readyState == 4 && this.status == 200)
+                        {
+                            var users = JSON.parse(this.responseText);
+                            if(users.length > 0)
+                            {
+                                if(users[0] == "No results found!")
+                                {
+                                    document.getElementById("AssignResults").innerHTML = users[0];
+                                }
+                                else
+                                {
+                                    document.getElementById("AssignResults").innerHTML = "";
+                                    document.getElementById("AssignResults").innerHTML += "<nav><ul>";
+                                    for (var u = 0; u < users.length; u += 2)
+                                    {
+                                        document.getElementById("AssignResults").innerHTML += "<li onclick='AssignUser(" + users[u+1] + ")'>" + users[u] + "</li>";
+                                    }
+                                    document.getElementById("AssignResults").innerHTML += "</ul></nav>";
+                                }
+                            }
+                        }
+                    }
+                    handler.open("GET", "User_Search.php?u=" + searchText, false);
+                    handler.send();
+                }
+			}
+			function AssignUser(uid)
+			{
+				if(confirm("Are you sure you want to assign this user to this phase?  Your changes to the phase will not be saved."))
+                {
+                    var handler = new XMLHttpRequest();
+                    handler.onreadystatechange = function()
+                    {
+                        if(this.readyState == 4 && this.status == 200)
+                        {
+                            if(String(this.responseText).length > 0)
+                            {
+                                alert(this.responseText);
+                            }
+                            else
+                            {
+                                location.reload();
+                            }
+                        }
+                    }
+                    handler.open("GET", "Assign_User.php?uid=" + uid + "&phid=<?php echo $_GET['phid']; ?>&prid=<?php echo $_GET['prid']; ?>", false);
+                    handler.send();
+                }
+			}
+		</script>
 	</head>
 	<body>
 	
@@ -53,6 +112,26 @@
 						echo "<p>Description: <input type='text' name='Description' value='" . $phase['Phase_Description'] . "' required /></p>";
 					}
 				}
+
+				echo "<h3>Assigned Users: </h3>";
+				echo "<nav><ul>";
+				$sql = "SELECT * FROM User_Assignments WHERE Phase_ID_FK = " . $phase['Phase_ID'];
+				if($result = mysqli_query($conn, $sql))
+				{
+					while($assign = mysqli_fetch_array($result))
+					{
+						$userSql = "SELECT * FROM Users WHERE User_ID = " . $assign['User_ID_FK'];
+						if ($userResult = mysqli_query($conn, $userSql))
+						{
+							$user = mysqli_fetch_array($userResult);
+							echo "<li>" . $user['User_Firstname'] . " " . $user['User_Lastname'] . " (" . $user['User_Name'] . ")</li>";
+						}
+					}
+				}
+				echo "</ul></nav>";
+
+				echo "<p>Assign User: <input type='search' id='SearchBar' placeholder='Search for User...' onkeydown='if (event.keyCode == 13) return false;'/> <button type='button' onclick='GetSearchResults()'>Search</button></p>";
+				echo "<div id='AssignResults'></div>";
 			?>
 			
 			<button type="submit" name="PhaseSubmit">Save</button>
