@@ -32,7 +32,12 @@
 			<a href="logout.php"><button>Sign Out</button></a>
 		</div>
 		<div class="project_menu">
-			<a href="Project/Create.php"><button>Create New Project</button></a>
+			<?php 
+				$Role = $_SESSION['CURRENT_USER']->getUserRole();
+				if($Role == 1){
+					echo '<a href="Project/Create.php"><button>Create New Project</button></a>';
+				}
+			?>
 			<?php
 				echo "<table>";
 				echo "<tr>
