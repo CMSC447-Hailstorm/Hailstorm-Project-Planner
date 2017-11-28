@@ -37,7 +37,7 @@
 									'$Client_Zipcode', '$Client_Country') ";
 									
 		if (mysqli_query($conn, $sql)) {
-			if(isset($_GET))
+			if(isset($_GET['ret']))
 			{
 				header("Location: ./Edit.php?proj=" . $_GET['ret']);
 			}

@@ -5,11 +5,12 @@
         {
             session_start();
 
-            // replace with your DB info here
-            $_SESSION["SERVER"] = "studentdb-maria.gl.umbc.edu";
-            $_SESSION["DBUSER"] = "";
-            $_SESSION["DBPASS"] = "";
-            $_SESSION["DATABASE"] = "";
+            $config = fopen(dirname($_SERVER['DOCUMENT_ROOT']) . "/scripts/dbconfig.ini", "r");
+            $_SESSION['SERVER'] = trim(explode(" ", fgets($config))[2]);
+            $_SESSION['DBUSER'] = trim(explode(" ", fgets($config))[2]);
+            $_SESSION['DBPASS'] = trim(explode(" ", fgets($config))[2]);
+            $_SESSION['DATABASE'] = trim(explode(" ", fgets($config))[2]);
+            fclose($config);
             return;
         }
 
