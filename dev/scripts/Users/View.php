@@ -37,8 +37,20 @@
 				{
                     if(confirm("This will seriously delete all this user's information.  This cannot be undone.  Are you absolutely sure?"))
                     {
-					    window.location.href="/Users/Delete.php?uid=<?php echo $user['User_ID']; ?>&d=" 
-											    + "<?php echo password_hash($user['User_ID'] . "delete" . $user['User_ID'], PASSWORD_BCRYPT); ?>";
+                        <?php
+                            $sql = "SELECT * FROM Users WHERE USER_Role = 1";
+                            if($result = mysqli_query($conn, $sql))
+                            {
+                                if(mysqli_num_rows($result) == 1)
+                                {
+                                    echo "alert('You cannot delete the only existing manager account!');";
+                                }
+                                else
+                                {
+                                    echo "window.location.href='/Users/Delete.php?uid=" . $user['User_ID'] . "&d=" . password_hash($user['User_ID'] . "delete" . $user['User_ID'], PASSWORD_BCRYPT) . "';";
+                                }
+                            }
+                        ?>
                     }
 				}
 			}
