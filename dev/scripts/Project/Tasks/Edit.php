@@ -36,7 +36,7 @@
 <html>
 	<head>
 		<meta charset=utf-8 />
-		<link href ="Style.css" rel="stylesheet">
+		<link href ="/style.css" rel="stylesheet">
 	</head>
 	<body>
 	
