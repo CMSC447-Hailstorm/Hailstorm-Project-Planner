@@ -66,8 +66,8 @@
 									}
 									echo "<li><a href='/Project/Tasks/Create.php?prid=" . $project['Project_ID'] 
 											. "&phid=" . $phase['Phase_ID'] . "'><button>Create Task</button></a></li>";
+									echo "</ul>";
 								}
-								echo "</ul>";
 								echo "</a></li>";
 							}
 						}
@@ -95,8 +95,12 @@
 						if (mysqli_num_rows($result) == 1)
 						{
 							$client = mysqli_fetch_array($result);
-							echo "<p>Client: " . $client['Client_Firstname'] . " " . $client['Client_Lastname'] . "</p>";
-							echo "<p>Client Company: " . $client['Client_CompanyName'] . "</p>";
+							
+							if($client['Client_Firstname'] != 'NA' && $client['Client_Lastname'] != 'NA' && $client['Client_CompanyName'] != 'NA'){
+								echo "<p>Client: " . $client['Client_Firstname'] . " " . $client['Client_Lastname'] . "</p>";
+								echo "<p>Client Company: " . $client['Client_CompanyName'] . "</p>";
+							}
+		
 						}
 					}
 
