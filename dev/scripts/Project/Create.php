@@ -43,8 +43,7 @@
 		$Project_Name = $_POST['Project_Name'];
 		$Project_Status = $_POST['Project_Status'];			//Dead, On Hold, Completed, Requested, Approved, Rejected
 		$Project_EstimatedBudget = $_POST['Project_EstimatedBudget'];
-		$Project_RemainedBudget = $_POST['Project_EstimatedBudget'];
-		$Project_TotalHours= $_POST['Project_TotalHours'];
+		$Project_MaxHours = $_POST['Project_MaxHours'];
 		
 		////
 		$date = $_POST['Project_StartDate'];
@@ -60,20 +59,20 @@
 		if($Client_ID_FK == ''){
 			$sql3 = "INSERT INTO Projects (Project_Name, Project_Description,
 								Project_Status, Project_StartDate, Project_EstimatedBudget,
-								Project_RemainedBudget, Project_TotalHours)
+								Project_RemainedBudget, Project_MaxHours)
 								VALUES
 								('$Project_Name', '$Project_Description',
 								'$Project_Status', '$Project_StartDate', '$Project_EstimatedBudget',
-								'$Project_RemainedBudget', '$Project_TotalHours')";
+								'$Project_EstimatedBudget', '$Project_MaxHours')";
 }
 		else{
 			$sql3 = "INSERT INTO Projects (Client_ID_FK, Project_Name, Project_Description,
 											Project_Status, Project_StartDate, Project_EstimatedBudget,
-											Project_RemainedBudget, Project_TotalHours)
+											Project_RemainedBudget, Project_MaxHours)
 											VALUES
 											('$Client_ID_FK', '$Project_Name', '$Project_Description',
 											'$Project_Status', '$Project_StartDate', '$Project_EstimatedBudget',
-											'$Project_RemainedBudget', '$Project_TotalHours')";
+											'$Project_EstimatedBudget', '$Project_MaxHours')";
 		
 		}							 
 		if (mysqli_query($conn, $sql3)) {
@@ -130,8 +129,8 @@
 				Estimated Budget: 
 				<input type="number" min="0" placeholder="Enter Estimated Budget" name="Project_EstimatedBudget" required></br></br>
 				
-				Estimated Total Hours: 
-				<input type="number" min="0" placeholder="Enter Estimated Total Hours" name="Project_TotalHours" required></br></br>
+				Estimated Maximum Hours: 
+				<input type="number" min="0" placeholder="Enter Estimated Max Hours" name="Project_MaxHours" required></br></br>
 				
 				Start Date: 
 				<input type="date" placeholder="dd/mm/yyyy" name="Project_StartDate" required></br></br>

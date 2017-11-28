@@ -26,6 +26,9 @@
         {
             while ($task = mysqli_fetch_array($Result))
             {
+                $sql = "UPDATE Projects SET Project_TotalHours = Project_TotalHours - " . $task['Task_EstimatedHours'] . ", Project_RemainedBudget = Project_RemainedBudget + " . $task['Task_EstimatedCost'] . " WHERE Project_ID = " . $task['Project_ID_FK'];
+                mysqli_query($conn, $sql);
+                
                 $delSql = "DELETE FROM Tasks WHERE Task_ID = " . $task['Task_ID'];
                 mysqli_query($conn, $delSql);
             }

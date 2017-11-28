@@ -47,7 +47,7 @@
 		$projectStatus = $_POST['Project_Status'];
 		
 		$projectBudget = $_POST['Budget'];
-		$remainingBudget = $project['Project_EstimatedBudget'] + ($projectBudget - $project['Project_EstimatedBudget']);
+		$remainingBudget = $project['Project_RemainedBudget'] + ($projectBudget - $project['Project_EstimatedBudget']);
 
         $projectStartDate = $_POST['StartDate'];
         $projectDescription = $_POST['Description'];
@@ -159,7 +159,8 @@
                         echo "</select></p>";
 
                         echo "<p>Start Date: <input type='date' name='StartDate' value='" . $project['Project_StartDate'] . "' required /></p>";
-                        echo "<p>Estimated Hours to complete: " . $project['Project_TotalHours'] . "</p>";
+						echo "<p>Estimated Hours to complete: " . $project['Project_TotalHours'] . "</p>";
+						echo "<p>Maximum Hours: <input type='number' name='MaxHours' value='" . $project['Project_MaxHours'] . "' required /></p>";
                         echo "<p>Total Budget: <input type='number' name='Budget' value='" . $project['Project_EstimatedBudget'] . "' required /></p>";
                         echo "<p>Remaining Budget: " . $project['Project_RemainedBudget'] . "<p>";					
                         echo "<p>Description: <input type='text' name='Description' value='" . $project['Project_Description'] . "' required /></p>";

@@ -35,7 +35,7 @@
 
 		mysqli_query($conn, $sql);
 
-		$sql = "UPDATE Projects SET Project_RemainedBudget = Project_RemainedBudget - '$budget' WHERE Project_ID = '$project'";
+		$sql = "UPDATE Projects SET Project_TotalHours = Project_TotalHours + '$hours', Project_RemainedBudget = Project_RemainedBudget - '$budget' WHERE Project_ID = '$project'";
 		mysqli_query($conn, $sql);
 
 		header("Location: ../View.php?proj=" . $project);
