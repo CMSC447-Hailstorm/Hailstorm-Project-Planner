@@ -27,34 +27,41 @@
 	}
 
 	$proj = $_GET['proj'];
-	$sql = "SELECT * FROM PROJECTS WHERE PROJECT_ID = '$proj'";
-	
-	if($result = mysqli_query($conn, $sql))
-	{
-		$count = mysqli_num_rows($result);
-		$project = mysqli_fetch_array($result);
-	}
+    $sql = "SELECT * FROM Projects WHERE Project_ID = '$proj'";
     
     if(isset($_POST['ProjectSubmit']) && !empty($_POST))
     {
-        $Company_Name = $_POST['Client_CompanyName'];
+		$Company_Name = $_POST['Client_CompanyName'];
         $sql2 = "SELECT Client_ID FROM Clients where Client_CompanyName = '$Company_Name'";
 		$Result2 = mysqli_query($conn, $sql2);
         $Row2 = mysqli_fetch_array($Result2, MYSQLI_ASSOC);
-        $clientID = $Row2['Client_ID'];
-
-        $projectName = $_POST['Name'];
-		$projectStatus = $_POST['Project_Status'];
+        
 		
-		$projectBudget = $_POST['Budget'];
-		$remainingBudget = $project['Project_RemainedBudget'] + ($projectBudget - $project['Project_EstimatedBudget']);
-
-        $projectStartDate = $_POST['StartDate'];
+        $projectName = $_POST['Name'];
+        $projectStatus = $_POST['Project_Status'];
+        $projectBudget = $_POST['Budget'];
+		
+				////
+		$date = $_POST['StartDate'];
+		if($date != ''){
+			$newDate = date("Y-m-d", strtotime($date));
+		}
+		////	echo $newDate;
+		
+		$projectStartDate = $date;
         $projectDescription = $_POST['Description'];
-
-        $sql = "UPDATE Projects SET Client_ID_FK = '$clientID', Project_Name = '$projectName', Project_Status = '$projectStatus', Project_EstimatedBudget = '$projectBudget', Project_RemainedBudget = '$remainingBudget', Project_StartDate = '$projectStartDate', Project_Description = '$projectDescription' WHERE Project_ID = '$proj'";
+		
+		
+		if($Company_Name == ''){
+			$clientID = -1;
+		}
+		else{
+			$clientID = $Row2['Client_ID'];
+		}
+		
+		$sql = "UPDATE Projects SET Client_ID_FK = '$clientID', Project_Name = '$projectName', Project_Status = '$projectStatus', Project_EstimatedBudget = '$projectBudget', Project_StartDate = '$projectStartDate', Project_Description = '$projectDescription' WHERE Project_ID = '$proj'";
+		
         mysqli_query($conn, $sql);
-        mysqli_close($conn);
         header("Location: ./View.php?proj=" . $proj);
     }
 ?>
@@ -79,34 +86,41 @@
 			
 			<!--List of Projects, Phases, and Tasks displays here-->
 			<?php
-				if ($count == 1)
+				$sql = "SELECT * FROM Projects WHERE Project_ID = '$proj'";
+				$result = mysqli_query($conn, $sql);
+				$count = mysqli_num_rows($result);
+				if($result)
 				{
-					echo "<h3>" . $project['Project_Name'] . "</h3>";
-					echo "<ul id='project_list'>";
-					$phaseSql = "SELECT * FROM Phases WHERE Project_ID_FK = '$proj'";
-					if($result = mysqli_query($conn, $phaseSql))
+					$project = mysqli_fetch_array($result);
+					if ($count == 1)
 					{
-						$phaseCount = mysqli_num_rows($result);
-						while ($phase = mysqli_fetch_array($result))
+						echo "<h3>" . $project['Project_Name'] . "</h3>";
+						echo "<ul id='project_list'>";
+						$phaseSql = "SELECT * FROM Phases WHERE Project_ID_FK = '$proj'";
+						if($result = mysqli_query($conn, $phaseSql))
 						{
-							echo "<li>" . $phase['Phase_Name'];
-							$taskSql = "SELECT * FROM Tasks WHERE Phase_ID_FK = " . $phase['Phase_ID'] 
-							. " AND Project_ID_FK = '$proj'";
-							if ($taskResult = mysqli_query($conn, $taskSql))
+							$phaseCount = mysqli_num_rows($result);
+							while ($phase = mysqli_fetch_array($result))
 							{
-								echo "<ul id='tasks_phase_" . $phase['Phase_ID'] . "'>";
-								while($task = mysqli_fetch_array($taskResult))
+								echo "<li>" . $phase['Phase_Name'];
+								$taskSql = "SELECT * FROM Tasks WHERE Phase_ID_FK = " . $phase['Phase_ID'] 
+								. " AND Project_ID_FK = '$proj'";
+								if ($taskResult = mysqli_query($conn, $taskSql))
 								{
-									echo "<li>" . $task['Task_Name'] . "</li>";
+									echo "<ul id='tasks_phase_" . $phase['Phase_ID'] . "'>";
+									while($task = mysqli_fetch_array($taskResult))
+									{
+										echo "<li>" . $task['Task_Name'] . "</li>";
+									}
+									echo "<li></li>";
+									echo "</ul>";
 								}
-								echo "<li></li>";
-								echo "</ul>";
+								echo "</li>";
 							}
-							echo "</li>";
 						}
+						echo "<li></li>";
+						echo "</ul>";
 					}
-					echo "<li></li>";
-					echo "</ul>";
 				}
 			?>
 		</div>
@@ -128,23 +142,29 @@
                             if (mysqli_num_rows($result) == 1)
                             {
                                 $client = mysqli_fetch_array($result);
-                                echo "<p>Client: " . $client['Client_Firstname'] . " " . $client['Client_Lastname'] . "</p>";
+								if($client['Client_Firstname'] != 'NA' && $client['Client_Lastname'] != 'NA'){
+									echo "<p>Client: " . $client['Client_Firstname'] . " " . $client['Client_Lastname'] . "</p>";
+								}
                             }
                         }
 
                         echo "<p>Client Company: ";
-                        echo "<select name='Client_CompanyName' required>";
+
+
+						echo "<select name='Client_CompanyName' >";
+					
 						foreach($comps as $comps)
 						{ 
-                            echo "<option value='" . $comps['Client_CompanyName'] . "'";
-                            if ($client['Client_CompanyName'] == $comps['Client_CompanyName']) 
-                            {
-                                echo "selected";
-                            }
-                            echo ">" . $comps['Client_CompanyName'] . "</option>";
-                        }
-                        echo "</select></p>";
-
+							echo "<option value='" . $comps['Client_CompanyName'] . "'";
+							if ($client['Client_CompanyName'] == $comps['Client_CompanyName']) 
+							{
+								echo "selected";
+							}
+							echo ">" . $comps['Client_CompanyName'] . "</option>";
+						}
+						echo "</select></p>";	
+						
+	
                         echo "<p>Project Status: ";
                         echo "<select name='Project_Status' required>";
                         foreach (array("Requested", "Approved", "On Hold", "Rejected", "Dead", "Completed") as $status)
@@ -159,8 +179,7 @@
                         echo "</select></p>";
 
                         echo "<p>Start Date: <input type='date' name='StartDate' value='" . $project['Project_StartDate'] . "' required /></p>";
-						echo "<p>Estimated Hours to complete: " . $project['Project_TotalHours'] . "</p>";
-						echo "<p>Maximum Hours: <input type='number' name='MaxHours' value='" . $project['Project_MaxHours'] . "' required /></p>";
+                        echo "<p>Estimated Hours to complete: " . $project['Project_TotalHours'] . "</p>";
                         echo "<p>Total Budget: <input type='number' name='Budget' value='" . $project['Project_EstimatedBudget'] . "' required /></p>";
                         echo "<p>Remaining Budget: " . $project['Project_RemainedBudget'] . "<p>";					
                         echo "<p>Description: <input type='text' name='Description' value='" . $project['Project_Description'] . "' required /></p>";
