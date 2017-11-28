@@ -27,7 +27,8 @@
         {
             while ($assign = mysqli_fetch_array($Result))
             {
-                $sql = "UPDATE User_Assignments SET User_ID_FK = 0 WHERE Assignment_ID = " . $assign['Assignment_ID'];
+                $sql = "DELETE FROM User_Assignments WHERE Assignment_ID = " . $assign['Assignment_ID'];
+                mysqli_query($conn, $sql);
             }
         }
         
