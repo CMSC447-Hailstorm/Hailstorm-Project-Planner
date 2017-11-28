@@ -60,9 +60,13 @@
                         echo "<p>Task Description: " . $task['Task_Description'] . "</p>";
                     }
                 }
+            
+                if($user['User_ID'] == $_SESSION['CURRENT_USER']->GetUserID())
+                {
+                    echo "<a href='/Project/Tasks/Edit.php?prid=" . $_GET['prid'] . "&tid=" . $_GET['tid'] . "'><button>Edit Task</button></a>";
+                    echo " <button onclick='confirm_delete(" . $_GET['tid'] . ")'>Delete Task</button>";
+                }
             ?>
-            <a href="/Project/Tasks/Edit.php?prid=<?php echo $_GET['prid'] ?>&tid=<?php echo $_GET['tid'] ?>"><button>Edit Task</button></a>
-            <button onclick="confirm_delete(<?php echo $_GET['tid']; ?>)">Delete Task</button>
             <a href="/Project/View.php?proj=<?php echo $_GET['prid'] ?>"><button>Return to Project</button></a>
         </div>
     </body>

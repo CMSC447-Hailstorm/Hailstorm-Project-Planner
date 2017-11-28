@@ -65,9 +65,16 @@
                     //phone
                     echo "<p>Phone Number: " . $user['User_Phone'] . "</p>";
                 }
+
+                if($_SESSION['CURRENT_USER']->GetUserRole() == 1 || $user['User_ID'] == $_SESSION['CURRENT_USER']->GetUserID())
+                {
+                    echo "<a href='/Users/Edit.php" . (isset($_GET['uid']) ? "?uid=" . $_GET['uid'] : "") . "'><button>Edit User Account</button></a>";
+                }
+                if($user['User_ID'] == $_SESSION['CURRENT_USER']->GetUserID())
+                {
+                    echo "<button onclick='confirm_delete(" . $user['User_ID'] . ")'>Delete User</button>";
+                }
             ?>
-            <a href="/Users/Edit.php<?php echo (isset($_GET['uid']) ? "?uid=" . $_GET['uid'] : ""); ?>"><button>Edit User Account</button></a>
-            <button onclick="confirm_delete(<?php echo $user['User_ID']; ?>)">Delete User</button>
             <a href="/home.php"><button>Return to Home</button></a>
         </div>
 

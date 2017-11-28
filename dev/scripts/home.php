@@ -48,19 +48,40 @@
 						<th>Remaining Budget</th>
 					</tr>";
 					
-				$sql = "SELECT * FROM PROJECTS";
+				$sql = "SELECT * FROM Projects";
 				if($Result = mysqli_query($conn, $sql))
 				{
 					while ($row = mysqli_fetch_array($Result))
 					{
-						echo "<tr class='project_link' onclick='viewProject(" . $row['Project_ID'] . ")'>";
-						echo "<td>" . $row['Project_ID'] . "</td>";
-						echo "<td>" . $row['Project_Name'] . "</td>";
-						echo "<td>" . $row['Project_TotalHours'] . "</td>";
-						echo "<td>" . $row['Project_MaxHours'] . "</td>";
-						echo "<td>" . $row['Project_EstimatedBudget'] . "</td>";
-						echo "<td>" . $row['Project_RemainedBudget'] . "</td>";
-						echo "</tr>";
+						if($_SESSION['CURRENT_USER']->GetUserRole() == 0)
+						{
+							$assignSql = "SELECT * FROM User_Assignments WHERE Project_ID_FK = " . $row['Project_ID'] . " AND User_ID_FK = " . $_SESSION['CURRENT_USER']->GetUserID();
+							if($result = mysqli_query($conn, $assignSql))
+							{
+								if (mysqli_num_rows($result) > 0)
+								{
+									echo "<tr class='project_link' onclick='viewProject(" . $row['Project_ID'] . ")'>";
+									echo "<td>" . $row['Project_ID'] . "</td>";
+									echo "<td>" . $row['Project_Name'] . "</td>";
+									echo "<td>" . $row['Project_TotalHours'] . "</td>";
+									echo "<td>" . $row['Project_MaxHours'] . "</td>";
+									echo "<td>" . $row['Project_EstimatedBudget'] . "</td>";
+									echo "<td>" . $row['Project_RemainedBudget'] . "</td>";
+									echo "</tr>";
+								}
+							}
+						}
+						else
+						{
+							echo "<tr class='project_link' onclick='viewProject(" . $row['Project_ID'] . ")'>";
+							echo "<td>" . $row['Project_ID'] . "</td>";
+							echo "<td>" . $row['Project_Name'] . "</td>";
+							echo "<td>" . $row['Project_TotalHours'] . "</td>";
+							echo "<td>" . $row['Project_MaxHours'] . "</td>";
+							echo "<td>" . $row['Project_EstimatedBudget'] . "</td>";
+							echo "<td>" . $row['Project_RemainedBudget'] . "</td>";
+							echo "</tr>";
+						}
 					}
 				}
 				echo "</table>";

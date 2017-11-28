@@ -25,10 +25,8 @@
         $sql = "INSERT INTO Users (User_Firstname, User_Lastname, User_Name, User_Password, 
                 User_Birthdate, User_Street, User_City, User_State, User_Zipcode, User_Email, User_Phone)
                 VALUES ('$firstName', '$lastName', '$username', '$password', '$birthDate', '$street', '$city', '$state', '$zipCode', '$email', '$phone')";
-
         mysqli_query($conn, $sql);
         
-        echo Session::GetUserID();
         if(Session::UserLoggedIn())
         {
             mysqli_close($conn);
@@ -50,8 +48,17 @@
             <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] . (isset($_GET['ret']) ? "?ret=" . $_GET['ret'] : "")); ?>" autocomplete="off">
                 <p>User: <input type='text' name='Firstname' required />   <input type='text' name='Lastname' required /></p>
                 <p>Username: <input type='text' name='Username' required /></p>
-                <p>Role: If you are a manager, please request to receive manager functions once your account is created.</p></br>
-                
+                <p>Role: <?php 
+                    if(Session::UserLoggedIn())
+                    {
+                        echo "If this account is for a manager, please grant manager functions to this account after it has been created.";
+                    }
+                    else
+                    {
+                        echo "If you are a manager, please request to receive manager functions once your account is created.";
+                    }
+                ?></p></br>
+                    
                 <p>Password: <input type='password' name='Password' placeholder='Input password...' required /></p></br>
 
                 <p>Date of Birth: <input type='date' name='Birthdate' required /></p>
