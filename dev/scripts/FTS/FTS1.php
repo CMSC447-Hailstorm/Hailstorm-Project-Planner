@@ -19,18 +19,20 @@
         }
         else
         {
-            $privs = mysqli_fetch_array(mysqli_query($conn, "SHOW GRANTS FOR CURRENT_USER"));
-            $privs = $privs[0];
-            if(strpos($privs, "ALL") != FALSE || (strpos($privs, "SELECT") != FALSE && strpos($privs, "UPDATE") != FALSE && strpos($privs, "INSERT") != FALSE && strpos($privs, "DELETE") != FALSE && strpos($privs, "CREATE") != FALSE && strpos($privs, "ALTER") != FALSE))
+            $result = mysqli_query($conn, "SHOW GRANTS FOR CURRENT_USER");
+            while ($privs = mysqli_fetch_array($result))
             {
-                $config = fopen(dirname($_SERVER['DOCUMENT_ROOT']) . "/scripts/dbconfig.ini", "w");
-                fwrite($config, "\"SERVER\" = " . $server . PHP_EOL);
-                fwrite($config, "\"DBUSER\" = " . $dbuser . PHP_EOL);
-                fwrite($config, "\"DBPASS\" = " . $dbpass . PHP_EOL);
-                fwrite($config, "\"DATABASE\" = " . $database . PHP_EOL);
-                fclose($config);
-                
-                $sql = "CREATE TABLE IF NOT EXISTS Clients (
+                echo print_r($privs);
+                if(strpos($privs[0], "ALL") != FALSE || (strpos($privs, "SELECT") != FALSE && strpos($privs, "UPDATE") != FALSE && strpos($privs, "INSERT") != FALSE && strpos($privs, "DELETE") != FALSE && strpos($privs, "CREATE") != FALSE && strpos($privs, "ALTER") != FALSE))
+                {    
+                    $config = fopen(dirname($_SERVER['DOCUMENT_ROOT']) . "/scripts/dbconfig.ini", "w");
+                    fwrite($config, "\"SERVER\" = " . $server . PHP_EOL);
+                    fwrite($config, "\"DBUSER\" = " . $dbuser . PHP_EOL);
+                    fwrite($config, "\"DBPASS\" = " . $dbpass . PHP_EOL);
+                    fwrite($config, "\"DATABASE\" = " . $database . PHP_EOL);
+                    fclose($config);
+                    
+                    $sql = "CREATE TABLE IF NOT EXISTS Clients (
                     Client_ID int(100) NOT NULL,
                     Client_CompanyName varchar(100) NOT NULL,
                     Client_Firstname varchar(100) NOT NULL,
@@ -45,7 +47,7 @@
                     Client_Country varchar(100) NOT NULL
                     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
                 $result = mysqli_query($conn, $sql);
-
+                
                 $sql = "CREATE TABLE IF NOT EXISTS Phases (
                     Phase_ID int(100) NOT NULL,
                     User_ID_FK int(100) NOT NULL,
@@ -56,7 +58,7 @@
                     Phase_TotalHours int(100) NOT NULL
                     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
                 mysqli_query($conn, $sql);
-
+                
                 $sql = "CREATE TABLE IF NOT EXISTS Projects (
                     Project_ID int(100) NOT NULL,
                     Client_ID_FK int(100) DEFAULT NULL,
@@ -66,11 +68,10 @@
                     Project_StartDate date NOT NULL,
                     Project_EstimatedBudget float NOT NULL,
                     Project_RemainedBudget float NOT NULL,
-                    Project_TotalHours int(100) NOT NULL,
-                    Project_MaxHours int(100) NOT NULL
+                    Project_TotalHours int(100) NOT NULL
                     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
                 mysqli_query($conn, $sql);
-
+                
                 $sql = "CREATE TABLE IF NOT EXISTS Tasks (
                     Task_ID int(100) NOT NULL,
                     Project_ID_FK int(100) NOT NULL,
@@ -83,7 +84,7 @@
                     Task_WorkedHours int(100) NOT NULL
                     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
                 mysqli_query($conn, $sql);
-
+                
                 $sql = "CREATE TABLE IF NOT EXISTS Users (
                     User_ID int(100) NOT NULL,
                     User_Name varchar(100) NOT NULL,
@@ -100,7 +101,7 @@
                     User_Birthdate date NOT NULL
                     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
                 mysqli_query($conn, $sql);
-
+                
                 $sql = "CREATE TABLE IF NOT EXISTS User_Assignments (
                     Assignment_ID int(100) NOT NULL,
                     Project_ID_FK int(100) NOT NULL,
@@ -108,81 +109,81 @@
                     User_ID_FK int(100) NOT NULL
                     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
                 mysqli_query($conn, $sql);
-
+                
                 $sql = "ALTER TABLE Clients
                             ADD PRIMARY KEY (Client_ID);";
                 mysqli_query($conn, $sql);
-
+                
                 $sql = "ALTER TABLE Phases
                             ADD PRIMARY KEY (Phase_ID),
                             ADD KEY Project_ID (Project_ID_FK),
                             ADD KEY User_ID (User_ID_FK);";
                 mysqli_query($conn, $sql);
-
+                
                 $sql = "ALTER TABLE Projects
                             ADD PRIMARY KEY (Project_ID);";
                 mysqli_query($conn, $sql);
-
+                
                 $sql = "ALTER TABLE Tasks
                             ADD PRIMARY KEY (Task_ID),
                             ADD KEY Phase_ID (Phase_ID_FK),
                             ADD KEY Project_ID (Project_ID_FK),
                             ADD KEY User_ID (User_ID_FK);";
                 mysqli_query($conn, $sql);
-
+                
                 $sql = "ALTER TABLE Users
                             ADD PRIMARY KEY (User_ID),
                             ADD UNIQUE KEY User_Name (User_Name);";
                 mysqli_query($conn, $sql);
-
+                
                 $sql = "ALTER TABLE User_Assignments
                             ADD PRIMARY KEY (Assignment_ID),
                             ADD KEY Phase_ID (Phase_ID_FK),
                             ADD KEY User_ID (User_ID_FK),
                             ADD KEY Project_ID (Project_ID_FK);";
                 mysqli_query($conn, $sql);
-
+                
                 $sql = "ALTER TABLE Clients
                             MODIFY Client_ID int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;";
                 mysqli_query($conn, $sql);
-
+                
                 $sql = "ALTER TABLE Phases
                             MODIFY Phase_ID int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;";
                 mysqli_query($conn, $sql);
-
+                
                 $sql = "ALTER TABLE Projects
                             MODIFY Project_ID int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;";
                 mysqli_query($conn, $sql);
-
+                
                 $sql = "ALTER TABLE Tasks
                             MODIFY Task_ID int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;";
                 mysqli_query($conn, $sql);
-
+                
                 $sql = "ALTER TABLE Users
                             MODIFY User_ID int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;";
                 mysqli_query($conn, $sql);
-
+                
                 $sql = "ALTER TABLE User_Assignments
                             MODIFY Assignment_ID int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;";
                 mysqli_query($conn, $sql);
-
+                
                 $sql = "ALTER TABLE Phases
                             ADD CONSTRAINT Project_ID FOREIGN KEY (Project_ID_FK) REFERENCES Projects (Project_ID),
                             ADD CONSTRAINT User_ID FOREIGN KEY (User_ID_FK) REFERENCES Users (User_ID);";
                 mysqli_query($conn, $sql);
-
+                
                 $sql = "ALTER TABLE Tasks
                             ADD CONSTRAINT Phase_ID FOREIGN KEY (Phase_ID_FK) REFERENCES Phases (Phase_ID),
                             ADD CONSTRAINT Project_ID FOREIGN KEY (Project_ID_FK) REFERENCES Projects (Project_ID),
                             ADD CONSTRAINT User_ID FOREIGN KEY (User_ID_FK) REFERENCES Users (User_ID);";
                 mysqli_query($conn, $sql);
-
+                
                 $sql = "ALTER TABLE User_Assignments
                             ADD CONSTRAINT Phase_ID FOREIGN KEY (Phase_ID_FK) REFERENCES Phases (Phase_ID),
                             ADD CONSTRAINT Project_ID FOREIGN KEY (Project_ID_FK) REFERENCES Projects (Project_ID),
                             ADD CONSTRAINT User_ID FOREIGN KEY (User_ID_FK) REFERENCES Users (User_ID);";
                 mysqli_query($conn, $sql);
-
+                
                 $sql = "INSERT INTO Users (User_Name, User_Password, User_Role) VALUES ('User-Deleted', 'No-Access', 0)";
                 mysqli_query($conn, $sql);
                 $sql = "UPDATE Users SET User_ID = 0 WHERE User_ID = 1";
@@ -191,15 +192,25 @@
                             MODIFY User_ID int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;";
                 mysqli_query($conn, $sql);
 
+                $sql = "INSERT INTO Clients(Client_CompanyName, Client_Firstname, Client_Lastname, 
+                Client_Industry, Client_Email, Client_Phone, 
+                Client_Street, Client_City, Client_State, 
+                Client_Zipcode, Client_Country) 
+                VALUES 
+                ('NA', 'NA', 'NA', 'NA', 'NA', 0, 'NA', 'NA', 'NA', 0, 'NA')";
+                mysqli_query($conn, $sql);
+                $sql = "UPDATE Clients SET Client_ID = -1 WHERE Client_ID = 1";
+                mysqli_query($conn, $sql);
+                $sql = "ALTER TABLE Clients
+                            MODIFY Client_ID int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;";
+                mysqli_query($conn, $sql);
+                                
                 $sql = "COMMIT;";
                 mysqli_query($conn, $sql);
-
                 header("Location: ./FTS2.php");
+                }
             }
-            else
-            {
-                echo "<script type='text/JavaScript'>alert('The specified user account does not have required permissions.  The account requires at least SELECT, UPDATE, INSERT, DELETE, CREATE, ALTER permissions.');";
-            }
+            echo "<script type='text/JavaScript'>alert('The specified user account does not have required permissions.  The account requires at least SELECT, UPDATE, INSERT, DELETE, CREATE, ALTER permissions.');</script>";
         }
     }
 ?>

@@ -61,7 +61,7 @@
                     }
                 }
             
-                if($user['User_ID'] == $_SESSION['CURRENT_USER']->GetUserID())
+                if($user['User_ID'] == $_SESSION['CURRENT_USER']->GetUserID() || $_SESSION['CURRENT_USER']->GetUserRole() == 1)
                 {
                     echo "<a href='/Project/Tasks/Edit.php?prid=" . $_GET['prid'] . "&tid=" . $_GET['tid'] . "'><button>Edit Task</button></a>";
                     echo " <button onclick='confirm_delete(" . $_GET['tid'] . ")'>Delete Task</button>";

@@ -38,10 +38,10 @@
                     if(confirm("This will seriously delete all this user's information.  This cannot be undone.  Are you absolutely sure?"))
                     {
                         <?php
-                            $sql = "SELECT * FROM Users WHERE USER_Role = 1";
+                            $sql = "SELECT * FROM Users WHERE User_Role = 1";
                             if($result = mysqli_query($conn, $sql))
                             {
-                                if(mysqli_num_rows($result) == 1)
+                                if(mysqli_num_rows($result) == 1 && $user['User_ID'] == mysqli_fetch_array($result)['User_ID'])
                                 {
                                     echo "alert('You cannot delete the only existing manager account!');";
                                 }

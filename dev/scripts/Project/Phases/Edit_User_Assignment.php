@@ -38,7 +38,7 @@
     }
     else
     {
-        $sql = "SELECT * FROM User_ASSIGNMENTS WHERE User_ID_FK = '$uid'";
+        $sql = "SELECT * FROM User_Assignments WHERE User_ID_FK = '$uid'";
         if($Result = mysqli_query($conn, $sql))
         {
             $count = mysqli_num_rows($Result);

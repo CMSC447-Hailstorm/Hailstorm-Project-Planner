@@ -27,7 +27,11 @@
 	}
 
 	$proj = $_GET['proj'];
-    $sql = "SELECT * FROM Projects WHERE Project_ID = '$proj'";
+	$sql = "SELECT * FROM Projects WHERE Project_ID = '$proj'";
+	if($result = mysqli_query($conn, $sql))
+	{
+		$project = mysqli_fetch_array($result);
+	}
     
     if(isset($_POST['ProjectSubmit']) && !empty($_POST))
     {
@@ -39,7 +43,9 @@
 		
         $projectName = $_POST['Name'];
         $projectStatus = $_POST['Project_Status'];
-        $projectBudget = $_POST['Budget'];
+		$projectBudget = $_POST['Budget'];
+		
+		$budgetUpdate = $project['Project_RemainedBudget'] + ($projectBudget - $project['Project_EstimatedBudget']);
 		
 				////
 		$date = $_POST['StartDate'];
@@ -59,7 +65,7 @@
 			$clientID = $Row2['Client_ID'];
 		}
 		
-		$sql = "UPDATE Projects SET Client_ID_FK = '$clientID', Project_Name = '$projectName', Project_Status = '$projectStatus', Project_EstimatedBudget = '$projectBudget', Project_StartDate = '$projectStartDate', Project_Description = '$projectDescription' WHERE Project_ID = '$proj'";
+		$sql = "UPDATE Projects SET Client_ID_FK = '$clientID', Project_Name = '$projectName', Project_Status = '$projectStatus', Project_EstimatedBudget = '$projectBudget', Project_RemainedBudget = '$budgetUpdate', Project_StartDate = '$projectStartDate', Project_Description = '$projectDescription' WHERE Project_ID = '$proj'";
 		
         mysqli_query($conn, $sql);
         header("Location: ./View.php?proj=" . $proj);
@@ -179,7 +185,6 @@
                         echo "</select></p>";
 
                         echo "<p>Start Date: <input type='date' name='StartDate' value='" . $project['Project_StartDate'] . "' required /></p>";
-                        echo "<p>Estimated Hours to complete: " . $project['Project_TotalHours'] . "</p>";
                         echo "<p>Total Budget: <input type='number' name='Budget' value='" . $project['Project_EstimatedBudget'] . "' required /></p>";
                         echo "<p>Remaining Budget: " . $project['Project_RemainedBudget'] . "<p>";					
                         echo "<p>Description: <input type='text' name='Description' value='" . $project['Project_Description'] . "' required /></p>";

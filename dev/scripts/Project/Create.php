@@ -68,11 +68,11 @@
 
 		$sql3 = "INSERT INTO Projects (Client_ID_FK, Project_Name, Project_Description,
 										Project_Status, Project_StartDate, Project_EstimatedBudget,
-										Project_RemainedBudget, Project_TotalHours)
+										Project_RemainedBudget)
 										VALUES
 										('$Client_ID_FK', '$Project_Name', '$Project_Description',
 										'$Project_Status', '$Project_StartDate', '$Project_EstimatedBudget',
-										'$Project_RemainedBudget', '$Project_TotalHours')";
+										'$Project_RemainedBudget')";
 		
 
 		if (mysqli_query($conn, $sql3)) {
@@ -128,9 +128,6 @@
 				</p>
 				Estimated Budget: 
 				<input type="number" min="0" placeholder="Enter Estimated Budget" name="Project_EstimatedBudget" required></br></br>
-				
-				Estimated Total Hours: 
-				<input type="number" min="0" placeholder="Enter Estimated Total Hours" name="Project_TotalHours" required></br></br>
 				
 				Start Date: 
 				<input type="date" placeholder="dd/mm/yyyy" name="Project_StartDate" required></br></br>

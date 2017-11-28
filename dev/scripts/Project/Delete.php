@@ -57,7 +57,7 @@
             $count = mysqli_num_rows($Result);
             if ($count == 1)
             {
-                $sql = "DELETE FROM PROJECTS WHERE Project_ID = '$p'";
+                $sql = "DELETE FROM Projects WHERE Project_ID = '$p'";
                 mysqli_query($conn, $sql);
             }
         }
