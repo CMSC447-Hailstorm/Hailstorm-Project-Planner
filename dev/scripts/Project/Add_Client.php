@@ -55,6 +55,7 @@
 	mysqli_close($conn);
 ?>
 
+<!DOCTYPE HTML>
 <html>
 	<head>
 		<meta charset=utf-8 />
@@ -77,7 +78,7 @@
 				<input type="text"  placeholder="Email" name="Client_Email" required></br>
 								
 				Phone: </br>
-				<input type="number" min="0" placeholder="Phone Number" name="Client_Phone" required></br>
+				<input type="number" maxlength="10" placeholder="Phone Number" name="Client_Phone" required></br>
 				
 				Specialized Industry/Field: </br>
 				<input type="text"  placeholder="Industry" name="Client_Industry" required></br>
@@ -92,7 +93,7 @@
 				<input type="text"  maxlength="2" placeholder="State" name="Client_State" required></br>
 				
 				Zipcode: </br>
-				<input type="number" min="0" max="99999" placeholder="Zipcode" name="Client_Zipcode" required></br>
+				<input type="number" min="0" maxlength="5" placeholder="Zipcode" name="Client_Zipcode" required></br>
 				
 				Country: </br>
 				<input type="text"  placeholder="Country" name="Client_Country" required></br>

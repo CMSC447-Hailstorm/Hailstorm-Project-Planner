@@ -37,6 +37,7 @@
     }
 ?>
 
+<!DOCTYPE HTML>
 <html>
     <head>
         <meta charset=utf-8 />
@@ -62,9 +63,9 @@
                 <p>Password: <input type='password' name='Password' placeholder='Input password...' required /></p></br>
 
                 <p>Date of Birth: <input type='date' name='Birthdate' required /></p>
-                <p>Address: <input type='text' name='Street' required />, <input type='text' name='City' required />, <input type='text' name='State' required /> <input type='number' name='Zipcode' required /></p>
+                <p>Address: <input type='text' name='Street' required />, <input type='text' name='City' required />, <input type='text' maxlength = "2" name='State' required /> <input type='number' maxlength = "5" name='Zipcode' required /></p>
                 <p>Email Address: <input type='email' name='Email' required /></p>
-                <p>Phone Number: <input type='tel' name='Phone' required /></p>
+                <p>Phone Number: <input type='number' maxlength="10" name='Phone' required /></p>
 
                 <button type="submit" name="UserSubmit">Save</button>
                 <button type="cancel" name="cancel">Cancel</button>

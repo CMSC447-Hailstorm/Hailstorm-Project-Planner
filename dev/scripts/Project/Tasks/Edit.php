@@ -60,8 +60,8 @@
 				if ($count == 1)
 				{
 					echo "<p>Task Name: <input type='text' name='Name' value='" . $task['Task_Name'] . "' required /></p>";
-					echo "<p>Estimated Hours to complete: <input type='number' name='Hours' value='" . $task['Task_EstimatedHours'] . "' required /></p>";
-					echo "<p>Estimated Cost: <input type='number' name='Cost' value='" . $task['Task_EstimatedCost'] . "' required /></p>";						
+					echo "<p>Estimated Hours to complete: <input type='number' min='0' name='Hours' value='" . $task['Task_EstimatedHours'] . "' required /></p>";
+					echo "<p>Estimated Cost: <input type='number' min='0' name='Cost' value='" . $task['Task_EstimatedCost'] . "' required /></p>";						
 					echo "<p>Task Description: <input type='text' name='Description' value='" . $task['Task_Description'] . "' required/></p>";
 				}
 			?>

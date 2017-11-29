@@ -185,7 +185,7 @@
                         echo "</select></p>";
 
                         echo "<p>Start Date: <input type='date' name='StartDate' value='" . $project['Project_StartDate'] . "' required /></p>";
-                        echo "<p>Total Budget: <input type='number' name='Budget' value='" . $project['Project_EstimatedBudget'] . "' required /></p>";
+                        echo "<p>Total Budget: <input type='number' min='0' name='Budget' value='" . $project['Project_EstimatedBudget'] . "' required /></p>";
                         echo "<p>Remaining Budget: " . $project['Project_RemainedBudget'] . "<p>";					
                         echo "<p>Description: <input type='text' name='Description' value='" . $project['Project_Description'] . "' required /></p>";
                     }

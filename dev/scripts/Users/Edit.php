@@ -33,7 +33,8 @@
 
     if(isset($_POST['UserSubmit']) && !empty($_POST))
     {
-        if($_SESSION['CURRENT_USER']->getUserID() == $user['User_ID'])
+        $passConfirm = $_POST['ConfirmPassword'];
+        if($_SESSION['CURRENT_USER']->getUserID() == $user['User_ID'] && password_verify($passConfirm, $user['User_Password']))
         {
             $firstName = $_POST['Firstname'];
             $lastName = $_POST['Lastname'];
@@ -68,12 +69,15 @@
         
             if($_SESSION['CURRENT_USER']->getUserID() == $user['User_ID'])
             {
-                mysqli_close($conn);
-                $_SESSION['CURRENT_USER']->Logout();
+                $_SESSION['CURRENT_USER']->Login($username, $passConfirm);
             }
+            mysqli_close($conn);
+            header("Location: ./View.php" . (isset($_GET['uid']) ? "?uid=" . $_GET['uid'] : ""));
         }
-        mysqli_close($conn);
-        header("Location: ./View.php" . (isset($_GET['uid']) ? "?uid=" . $_GET['uid'] : ""));
+        else
+        {
+            echo "<script>alert('Your password was incorrect.  Please try again.');</script>";
+        }
     }
     ?>
 
@@ -144,7 +148,6 @@
                     {
                         if($_SESSION['CURRENT_USER']->getUserID() == $user['User_ID'])
                         {
-                            echo "<p><b>Note:</b> Clicking \"Save\" will log you out to update your account information.</p>";
                             echo "<p>User: <input type='text' name='Firstname' value='" . $user['User_Firstname'] . "' required />   <input type='text' name='Lastname' value='" . $user['User_Lastname'] . "' required /></p>";
                             echo "<p>Username: <input type='text' name='Username' value='" . $user["User_Name"] . "' required /></p>";
                         }
@@ -179,9 +182,9 @@
                         {
                             echo "<p>Password: <input type='password' name='Password' placeholder='Change password...' /></p></br>";
                             echo "<p>Date of Birth: <input type='date' name='Birthdate' value='" . $user['User_Birthdate'] . "' required /></p>";
-                            echo "<p>Address: <input type='text' name='Street' value='" . $user['User_Street'] . "' required />, <input type='text' name='City' value='" . $user['User_City'] . "' required />, <input type='text' name='State' value='" . $user['User_State'] . "' required /> <input type='number' name='Zipcode' value='" . $user['User_Zipcode'] . "' required /></p>";
+                            echo "<p>Address: <input type='text' name='Street' value='" . $user['User_Street'] . "' required />, <input type='text' name='City' value='" . $user['User_City'] . "' required />, <input type='text' maxlength='2' name='State' value='" . $user['User_State'] . "' required /> <input type='number' maxlength='5' name='Zipcode' value='" . $user['User_Zipcode'] . "' required /></p>";
                             echo "<p>Email Address: <input type='email' name='Email' value='" . $user['User_Email'] . "' required /></p>";
-                            echo "<p>Phone Number: <input type='tel' name='Phone' value='" . $user['User_Phone'] . "' required /></p>";
+                            echo "<p>Phone Number: <input type='number' maxlength='10' name='Phone' value='" . $user['User_Phone'] . "' required /></p>";
                         }
                         else
                         {
@@ -193,7 +196,8 @@
                         }
                     }
                 ?>
-
+                </br>
+                <p>Current Password: <input type="password" name="ConfirmPassword" placeholder="Confirm password..." required /></p>
                 <button type="submit" name="UserSubmit">Save</button>
                 <button type="cancel" name="cancel">Cancel</button>
             </form>
