@@ -23,7 +23,7 @@
             while ($privs = mysqli_fetch_array($result))
             {
                 echo print_r($privs);
-                if(strpos($privs[0], "ALL") != FALSE || (strpos($privs, "SELECT") != FALSE && strpos($privs, "UPDATE") != FALSE && strpos($privs, "INSERT") != FALSE && strpos($privs, "DELETE") != FALSE && strpos($privs, "CREATE") != FALSE && strpos($privs, "ALTER") != FALSE))
+                if(strpos($privs[0], "ALL") != FALSE || (strpos($privs[0], "SELECT") != FALSE && strpos($privs[0], "UPDATE") != FALSE && strpos($privs[0], "INSERT") != FALSE && strpos($privs[0], "DELETE") != FALSE && strpos($privs[0], "CREATE") != FALSE && strpos($privs[0], "ALTER") != FALSE))
                 {    
                     $config = fopen(dirname($_SERVER['DOCUMENT_ROOT']) . "/scripts/dbconfig.ini", "w");
                     fwrite($config, "\"SERVER\" = " . $server . PHP_EOL);
