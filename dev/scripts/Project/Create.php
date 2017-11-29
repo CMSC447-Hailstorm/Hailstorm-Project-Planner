@@ -133,7 +133,7 @@
 				<input type="date" placeholder="dd/mm/yyyy" name="Project_StartDate" required></br></br>
 				
 				Project Description: </br>
-				<textarea rows="10" cols="50" maxlength="2000" placeholder="Type here" name="Project_Description"></textarea>
+				<textarea rows="10" cols="50" maxlength="2000" placeholder="Type here" name="Project_Description" required></textarea>
 				</br>
 				<button type="submit" name="ProjectSubmit">Submit</button>
 				
