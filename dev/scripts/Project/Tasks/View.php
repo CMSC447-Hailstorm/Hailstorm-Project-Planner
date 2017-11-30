@@ -32,9 +32,23 @@
 				}
 			}
 		</script>
-    </head>
+    </head>	
     <body>
-        <div class="Task_Details">
+	
+		<!--Title Bar-->
+		<div class="w3-top w3-card w3-white" style="height:10%">
+			<div class="w3-bar w3-padding">
+				<a class="w3-bar-item"><h1>Project Planner</h1></a>
+				<div class="w3-right">
+					<a class="w3-bar-item">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetUsername();?></a>
+					<a href="/logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
+				</div>
+			</div>
+		</div>
+	
+        <div class="w3-container">
+			<div class="w3-panel w3-display-middle w3-border w3-padding">
+			
             <?php
                 if($result = mysqli_query($conn, $sql))
                 {
@@ -63,11 +77,14 @@
             
                 if($user['User_ID'] == $_SESSION['CURRENT_USER']->GetUserID() || $_SESSION['CURRENT_USER']->GetUserRole() == 1)
                 {
-                    echo "<a href='/Project/Tasks/Edit.php?prid=" . $_GET['prid'] . "&tid=" . $_GET['tid'] . "'><button>Edit Task</button></a>";
-                    echo " <button onclick='confirm_delete(" . $_GET['tid'] . ")'>Delete Task</button>";
+                    echo "<a href='/Project/Tasks/Edit.php?prid=" . $_GET['prid'] . "&tid=" . $_GET['tid'] . "'><button class='w3-button w3-green'>Edit Task</button></a>";
+                    echo " <button class='w3-button w3-red' onclick='confirm_delete(" . $_GET['tid'] . ")'>Delete Task</button>";
                 }
             ?>
-            <a href="/Project/View.php?proj=<?php echo $_GET['prid'] ?>"><button>Return to Project</button></a>
+			</div>
+			
+            <a href="/Project/View.php?proj=<?php echo $_GET['prid'] ?>"><button class="w3-button w3-green">Return to Project</button></a>
+			
         </div>
     </body>
 </html>

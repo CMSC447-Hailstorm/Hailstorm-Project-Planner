@@ -45,30 +45,48 @@
 		header("Location: ./View.php?prid=" . $prid . "&tid=" . $tid);
 	}
 ?>
+
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset=utf-8 />
-		<link href ="Style.css" rel="stylesheet">
+		<link href ="/style.css" rel="stylesheet">
 	</head>
 	<body>
 	
-		<h2>Edit Task</h2>
+		<!--Title Bar-->
+		<div class="w3-top w3-card w3-white" style="height:10%">
+			<div class="w3-bar w3-padding">
+				<a class="w3-bar-item"><h1>Project Planner</h1></a>
+				<div class="w3-right">
+					<a class="w3-bar-item">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetUsername();?></a>
+					<a href="/logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
+				</div>
+			</div>
+		</div>
 		
-		<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] 
-									. "?prid=" . $_GET['prid'] . "&tid=" . $_GET['tid']); ?>" autocomplete="off">
-			<?php
-				if ($count == 1)
-				{
-					echo "<p>Task Name: <input type='text' name='Name' value='" . $task['Task_Name'] . "' required /></p>";
-					echo "<p>Estimated Hours to complete: <input type='number' min='0' name='Hours' value='" . $task['Task_EstimatedHours'] . "' required /></p>";
-					echo "<p>Estimated Cost: <input type='number' min='0' name='Cost' value='" . $task['Task_EstimatedCost'] . "' required /></p>";						
-					echo "<p>Task Description: <input type='text' name='Description' value='" . $task['Task_Description'] . "' required/></p>";
-				}
-			?>
-			
-			<button type="submit" name="TaskSubmit">Save</button>
-		</form>
-		<a href="View.php?prid=<?php echo $_GET['prid'] . '&tid=' . $_GET['tid'] ?>"><button type="cancel" name="cancel">Cancel</button>
+		<!--Form-->
+		<div class="w3-container">
+			<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] 
+										. "?prid=" . $_GET['prid'] . "&tid=" . $_GET['tid']); ?>" autocomplete="off">
+										
+				<div class="w3-panel w3-display-middle w3-border w3-padding">
+				<?php
+					if ($count == 1)
+					{
+						echo "<label>Task Name:</label> <input class='w3-input w3-border' type='text' name='Name' value='" . $task['Task_Name'] . "' required /></p>";
+						echo "<label>Estimated Hours:</label> <input class='w3-input w3-border' type='number' min='0' name='Hours' value='" . $task['Task_EstimatedHours'] . "' required /></p>";
+						echo "<label>Estimated Cost:</label> <input class='w3-input w3-border' type='number' min='0' name='Cost' value='" . $task['Task_EstimatedCost'] . "' required /></p>";						
+						echo "<label>Task Description:</label> <input class='w3-input w3-border' type='text' name='Description' value='" . $task['Task_Description'] . "' required/></p>";
+					}
+				?>
+				
+				<button class="w3-button w3-green" type="submit" name="TaskSubmit">Save</button>
+			</form>
+			<a href="View.php?prid=<?php echo $_GET['prid'] . '&tid=' . $_GET['tid'] ?>"><button class="w3-button w3-red" type="cancel" name="cancel">Cancel</button>
+			</div>
+		</div>
+		
 	</body>
 	<footer>
 	</footer>

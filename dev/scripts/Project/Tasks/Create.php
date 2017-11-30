@@ -41,25 +41,51 @@
 		header("Location: ../View.php?proj=" . $project);
 	}
 ?>
+
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset=utf-8 />
-		<link href ="Style.css" rel="stylesheet">
+		<link href ="/style.css" rel="stylesheet">
 	</head>
 	<body>
 	
-		<h2>Create New Task</h2>
+		<!--Title Bar-->
+		<div class="w3-top w3-card w3-white" style="height:10%">
+			<div class="w3-bar w3-padding">
+				<a class="w3-bar-item"><h1>Project Planner</h1></a>
+				<div class="w3-right">
+					<a class="w3-bar-item">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetUsername();?></a>
+					<a href="/logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
+				</div>
+			</div>
+		</div>
 		
-		<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] 
-									. "?prid=" . $_GET['prid'] . "&phid=" . $_GET['phid']); ?>" autocomplete="off">
-			Name: <input type="text" name="Name" required></br>
-			Estimated Hours: <input type="number" min="0" name="Hours" required></br>
-			Estimated Budget: <input type="number" min="0" name="Budget" required></br>
-			Description: <input type="text" name="Description" required></br>
-			
-			<button type="submit" name="TaskSubmit">Save</button>
-			<a href="<?php echo '../View.php?proj='.$_GET['prid'] .'&'. $_GET['phid']; ?>"><button name="cancel">Cancel</button>
-		</form>
+		<!--Form-->
+		<div class="w3-container">
+			<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] 
+										. "?prid=" . $_GET['prid'] . "&phid=" . $_GET['phid']); ?>" autocomplete="off">
+										
+				<div class="w3-panel w3-display-middle w3-border w3-padding">	
+										
+				<label>Task Name:</label>
+				<input class="w3-input w3-border" type="text" name="Name" required></br>
+				
+				<label>Estimated Hours:</label>
+				<input class="w3-input w3-border" type="number" min="0" name="Hours" required></br>
+				
+				<label>Estimated Budget:</label>
+				<input class="w3-input w3-border" type="number" min="0" name="Budget" required></br>
+				
+				<label>Description:</label>
+				<input class="w3-input w3-border" type="text" name="Description" required></br>
+				
+				<button class="w3-button w3-green" type="submit" name="TaskSubmit">Save</button>
+				<a href="<?php echo '../View.php?proj='.$_GET['prid'] .'&'. $_GET['phid']; ?>"><button class="w3-button w3-red" name="cancel">Cancel</button>
+				
+				</div>
+			</form>
+		</div>
 	
 	</body>
 	<footer>
