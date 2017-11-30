@@ -15,7 +15,7 @@
 <html>
 	<head>
 		<meta charset=utf-8 />
-		<link href ="style.css" rel="stylesheet">
+		<link href ="/style.css" rel="stylesheet">
 		<script type="text/JavaScript">
 			function viewProject(projectid)
 			{
@@ -25,25 +25,35 @@
 	</head>
 	<body>
 	
-		<div class="title_bar">
-			<img src="">
-			<h1>Project Planner</h1>
-			<p>Logged in as <a href="/Users/View.php"><?php echo $_SESSION['CURRENT_USER']->GetFullName();?></a></p>
-			<a href="logout.php"><button>Sign Out</button></a>
+		<!--Title Bar-->
+		<div class="w3-top w3-card w3-white" style="height:10%">
+			<div class="w3-bar w3-padding">
+				<a class="w3-bar-item"><h1>Project Planner</h1></a>
+				<div class="w3-right">
+					<a class="w3-bar-item">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetUsername();?></a>
+					<a href="/logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
+				</div>
+			</div>
 		</div>
-		<div class="project_menu">
-			<?php 
-				if($_SESSION['CURRENT_USER']->getUserRole() == 1){
-					echo '<a href="Project/Create.php"><button>Create New Project</button></a>';
-				}
-			?>
+		
+		<!--Project Menu-->
+		<div class="w3-container" style="margin-top:20%">
+		<div class="w3-panel w3-display-middle w3-padding">
+			<div>
+				<?php 
+					if($_SESSION['CURRENT_USER']->getUserRole() == 1){
+						echo '<a href="Project/Create.php"><button class="w3-button w3-green">Create New Project</button></a>';
+					}
+				?>
+			</div>
+			<div>
 			<?php
-				echo "<table>";
+				echo "<table class='w3-table-all'>";
 				echo "<tr>
 						<th>Project ID</th>
 						<th>Project Name</th>
-						<th>Estimated Hours</th>
-						<th>Total Budget</th>
+						<th>Total Hours</th>
+						<th>Estimated Budget</th>
 						<th>Remaining Budget</th>
 					</tr>";
 					
@@ -83,6 +93,7 @@
 				}
 				echo "</table>";
 			?>
+			</div>
 		</div>	
 	
 	</body>

@@ -26,6 +26,7 @@
 	}
 ?>
 
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset=utf-8 />
@@ -33,20 +34,30 @@
 	</head>
 	<body>
 		
+		<!--Title Bar-->
+		<div class="w3-top w3-card">
+			<div class="w3-bar w3-padding">
+				<a class="w3-bar-item" ><h1>Project Planner</h1></a>
+			</div>
+		</div>
+		
+		<!--Login Panel-->
+		<div class="w3-container">
 		<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-			<div class="login_box">
+			<div class="w3-panel w3-display-middle w3-border w3-center w3-padding">
 			
-				User ID: </br>
-				<input class="login" type="text" placeholder="Enter ID" name="User_ID" required></br>
+				<label>User ID: </label>
+				<input class="w3-input w3-border w3-center" type="text" placeholder="Enter ID" name="User_ID" required></br>
 				
-				Password: </br>
-				<input class="login" type="password" placeholder="Enter Password" name="User_Password" required></br>
+				<label>Password: </label>
+				<input class="w3-input w3-border w3-center" type="password" placeholder="Enter Password" name="User_Password" required></br>
 				
 				</br>
-				<button type="submit" name="submit">Login</button>
-				<a href="/Users/Create.php"><button type="button">Create New User</button></a>
+				<button class="w3-button w3-green" type="submit" name="submit">Login</button>
+				<a href="/Users/Create.php"><button class="w3-button w3-green" type="button">Create New User</button></a>
 			</div>
 		</form>
+		</div>
 
 	</body>
 	<footer>
