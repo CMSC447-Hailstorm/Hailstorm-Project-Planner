@@ -34,7 +34,19 @@
 		</script>
     </head>
     <body>
-        <div class="Phase_Details">
+	
+		<!--Title Bar-->
+		<div class="w3-top w3-card w3-white">
+			<div class="w3-bar w3-padding">
+				<a class="w3-bar-item"><h1>Project Planner</h1></a>
+				<div class="w3-right">
+					<a class="w3-bar-item">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetUsername();?></a>
+					<a href="/logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
+				</div>
+			</div>
+		</div>
+	
+        <div class="w3-container">
             <?php
                 if($result = mysqli_query($conn, $sql))
                 {
@@ -58,8 +70,8 @@
                         echo "<p>Phase Description: " . $phase['Phase_Description'] . "</p>";
 
                         if($_SESSION['CURRENT_USER']->getUserRole() == 1){
-                            echo "<a href='/Project/Phases/Edit.php?prid=" . $_GET["prid"] . "&phid=" . $_GET["phid"] . "'><button>Edit Phase</button></a>";
-                            echo " <button onclick='ConfirmDelete(" . $_GET["phid"] . ")'>Delete Phase</button>";
+                            echo "<a href='/Project/Phases/Edit.php?prid=" . $_GET["prid"] . "&phid=" . $_GET["phid"] . "'><button 'w3-button w3-green'>Edit Phase</button></a>";
+                            echo " <button class='w3-button w3-red' onclick='ConfirmDelete(" . $_GET["phid"] . ")'>Delete Phase</button>";
                         }
                         
                         echo "<h3>Assigned Users: </h3>";
@@ -81,7 +93,7 @@
                     }
                 }
             ?>
-            <a href="/Project/View.php?proj=<?php echo $_GET['prid'] ?>"><button>Return to Project</button></a>
+            <a href="/Project/View.php?proj=<?php echo $_GET['prid'] ?>"><button class="w3-button w3-green">Return to Project</button></a>
         </div>
     </body>
 </html>

@@ -40,26 +40,43 @@
 		}
 	}
 ?>
+
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset=utf-8 />
-		<link href ="Style.css" rel="stylesheet">
+		<link href ="/style.css" rel="stylesheet">
 	</head>
 	<body>
 	
-		<h2>Create New Phase</h2>
+		<!--Title Bar-->
+		<div class="w3-top w3-card w3-white">
+			<div class="w3-bar w3-padding">
+				<a class="w3-bar-item"><h1>Project Planner</h1></a>
+				<div class="w3-right">
+					<a class="w3-bar-item">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetUsername();?></a>
+					<a href="/logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
+				</div>
+			</div>
+		</div>
 		
-		<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] 
-									. "?prid=" . $_GET['prid']); ?>" autocomplete="off">
-			<p>Name: <input type="text" name="Name" required></p></br>
-			<p>Description: <input type="text" name="Description" required><p></br>
+		<div class="w3-container">
+			<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] 
+										. "?prid=" . $_GET['prid']); ?>" autocomplete="off">
+										
+				<label>Name:</label>
+				<input class="w3-input w3-border" type="text" name="Name" required></br>
+				
+				<label>Description:</label>
+				<input class="w3-input w3-border" type="text" name="Description" required></br>
 
-			</br><p>Users can be assigned by editing this phase once is has been created.</p>
-			
-			
-			<button type="submit" name="PhaseSubmit">Save</button>
-			<a href="<?php echo '../View.php?proj=' . $_GET['prid'] ?>"><button type="cancel" name="cancel">Cancel</button></a>
-		</form>
+				</br><p>Users can be assigned by editing this phase once is has been created.</p>
+				
+				
+				<button class="w3-button w3-green" type="submit" name="PhaseSubmit">Save</button>
+				<a href="<?php echo '../View.php?proj=' . $_GET['prid'] ?>"><button class="w3-button w3-red" type="cancel" name="cancel">Cancel</button></a>
+			</form>
+		</div>
 			
 	</body>
 	<footer>

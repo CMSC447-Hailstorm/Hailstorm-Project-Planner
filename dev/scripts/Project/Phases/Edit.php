@@ -31,10 +31,12 @@
 		header("Location: ./View.php?prid=" . $prid . "&phid=" . $phid);
 	}
 ?>
+
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset=utf-8 />
-		<link href ="Style.css" rel="stylesheet">
+		<link href ="/style.css" rel="stylesheet">
 		<script type="text/JavaScript">
 			function GetSearchResults()
             {
@@ -112,46 +114,58 @@
 	</head>
 	<body>
 	
-		<h2>Edit Phase</h2>
+		<!--Title Bar-->
+		<div class="w3-top w3-card w3-white">
+			<div class="w3-bar w3-padding">
+				<a class="w3-bar-item"><h1>Project Planner</h1></a>
+				<div class="w3-right">
+					<a class="w3-bar-item">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetUsername();?></a>
+					<a href="/logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
+				</div>
+			</div>
+		</div>
 		
-		<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] 
-									. "?prid=" . $_GET['prid'] . "&phid=" . $_GET['phid']); ?>" autocomplete="off">
-			<?php
-				if($result = mysqli_query($conn, $sql))
-				{
-					$count = mysqli_num_rows($result);
-					$phase = mysqli_fetch_array($result);
-					if ($count == 1)
+		<div class="w3-container">
+			<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] 
+										. "?prid=" . $_GET['prid'] . "&phid=" . $_GET['phid']); ?>" autocomplete="off">
+				<?php
+					if($result = mysqli_query($conn, $sql))
 					{
-						echo "<p>Name: <input type='text' name='Name' value='" . $phase['Phase_Name'] . "' required /></p>";
-						echo "<p>Description: <input type='text' name='Description' value='" . $phase['Phase_Description'] . "' required /></p>";
-					}
-				}
-
-				echo "<h3>Assigned Users: </h3>";
-				echo "<nav><ul>";
-				$sql = "SELECT * FROM User_Assignments WHERE Phase_ID_FK = " . $phase['Phase_ID'];
-				if($result = mysqli_query($conn, $sql))
-				{
-					while($assign = mysqli_fetch_array($result))
-					{
-						$userSql = "SELECT * FROM Users WHERE User_ID = " . $assign['User_ID_FK'];
-						if ($userResult = mysqli_query($conn, $userSql))
+						$count = mysqli_num_rows($result);
+						$phase = mysqli_fetch_array($result);
+						if ($count == 1)
 						{
-							$user = mysqli_fetch_array($userResult);
-							echo "<li onclick='AssignUser(" . $user['User_ID'] . ", 0)'>" . $user['User_Firstname'] . " " . $user['User_Lastname'] . " (" . $user['User_Name'] . ")</li>";
+							echo "<label>Name:</label> <input class='w3-input w3-border' type='text' name='Name' value='" . $phase['Phase_Name'] . "' required /></p>";
+							echo "<label>Description:</label> <input class='w3-input w3-border' type='text' name='Description' value='" . $phase['Phase_Description'] . "' required /></p>";
 						}
 					}
-				}
-				echo "</ul></nav>";
 
-				echo "<p>Assign User: <input type='search' id='SearchBar' placeholder='Search for User...' onkeydown='if (event.keyCode == 13) return false;'/> <button type='button' onclick='GetSearchResults()'>Search</button></p>";
-				echo "<div id='AssignResults'></div>";
-			?>
-			
-			<button type="submit" name="PhaseSubmit">Save</button>
-		</form>
-		<a href="View.php?prid=<?php echo $_GET['prid'] . '&phid=' . $_GET['phid'] ?>"><button type="cancel" name="cancel">Cancel</button>
+					echo "<h3>Assigned Users: </h3>";
+					echo "<nav><ul>";
+					$sql = "SELECT * FROM User_Assignments WHERE Phase_ID_FK = " . $phase['Phase_ID'];
+					if($result = mysqli_query($conn, $sql))
+					{
+						while($assign = mysqli_fetch_array($result))
+						{
+							$userSql = "SELECT * FROM Users WHERE User_ID = " . $assign['User_ID_FK'];
+							if ($userResult = mysqli_query($conn, $userSql))
+							{
+								$user = mysqli_fetch_array($userResult);
+								echo "<li onclick='AssignUser(" . $user['User_ID'] . ", 0)'>" . $user['User_Firstname'] . " " . $user['User_Lastname'] . " (" . $user['User_Name'] . ")</li>";
+							}
+						}
+					}
+					echo "</ul></nav>";
+
+					echo "<label>Assign User:</label> <input type='search' id='SearchBar' placeholder='Search for User...' onkeydown='if (event.keyCode == 13) return false;'/> <button class='w3-button w3-green' type='button' onclick='GetSearchResults()'>Search</button></p>";
+					echo "<div id='AssignResults'></div>";
+				?>
+				
+				<button class="w3-button w3-green" type="submit" name="PhaseSubmit">Save</button>
+			</form>
+			<a href="View.php?prid=<?php echo $_GET['prid'] . '&phid=' . $_GET['phid'] ?>"><button class="w3-button w3-red" type="cancel" name="cancel">Cancel</button>
+		</div>
+		
 	</body>
 	<footer>
 	</footer>
