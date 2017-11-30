@@ -85,10 +85,11 @@
 	
 ?>
 
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset=utf-8 />
-		<link href ="Style.css" rel="stylesheet">
+		<link href ="/style.css" rel="stylesheet">
 		<script type="text/JavaScript">
 			function AddClient()
 			{
@@ -100,12 +101,27 @@
 		</script>
 	</head>
 	<body>
+	
+		<div class="w3-top w3-card w3-white" style="height:10%">
+			<div class="w3-bar w3-padding">
+				<a class="w3-bar-item"><h1>Project Planner</h1></a>
+				<div class="w3-right">
+					<a class="w3-bar-item">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetUsername();?></a>
+					<a href="/logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
+				</div>
+			</div>
+		</div>
 		
-		<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
-			<div class="CreateProject">
-				<button onclick="AddClient()">Add Client</button>
-				<p>Project Name: <input type="text" placeholder="Project Name" name="Project_Name" required>
-					<select name="Client_CompanyName">
+		<div class="w3-container">
+			<div class="w3-panel w3-padding w3-border" style="width:50%">
+			<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
+			
+					<button class="w3-button w3-green" onclick="AddClient()">Add Client</button>
+					
+					<label>Project Name:</label>
+					<input type="text" placeholder="Project Name" name="Project_Name" required>
+					
+					<select class="w3-select w3-border" name="Client_CompanyName">
 						<option value="" disabled selected hidden>Select Client</option>
 							<?php 
 								foreach($Client_CompanyName as $Client_CompanyName)
@@ -115,8 +131,9 @@
 							<?php
 								}
 							?>
-					</select>
-					<select name="Project_Status" required>
+					</select></br>
+					
+					<select class="w3-select w3-border" name="Project_Status" required>
 						<option value="" disabled selected hidden>Project Status</option>	
 							<option value="Requested">Requested</option>
 							<option value="Approved">Approved</option>
@@ -124,23 +141,22 @@
 							<option value="Rejected">Rejected</option>
 							<option value="Dead">Dead</option>
 							<option value="Completed">Completed</option>
-					</select>
-				</p>
-				Estimated Budget: 
-				<input type="number" min="0" placeholder="Enter Estimated Budget" name="Project_EstimatedBudget" required></br></br>
-				
-				Start Date: 
-				<input type="date" placeholder="dd/mm/yyyy" name="Project_StartDate" required></br></br>
-				
-				Project Description: </br>
-				<textarea rows="10" cols="50" maxlength="2000" placeholder="Type here" name="Project_Description" required></textarea>
-				</br>
-				<button type="submit" name="ProjectSubmit">Submit</button>
-				
-			</div>
+					</select></br>
+					
+					<label>Estimated Budget:</label> 
+					<input class="w3-input w3-border" type="number" min="0" placeholder="Enter Estimated Budget" name="Project_EstimatedBudget" required></br></br>
+					
+					<label>Start Date: </label>
+					<input class="w3-input w3-border" type="date" placeholder="dd/mm/yyyy" name="Project_StartDate" required></br></br>
+					
+					<label>Project Description:</label></br>
+					<textarea rows="10" cols="50" maxlength="2000" placeholder="Type here" name="Project_Description" required></textarea>
+					</br>
+					<button type="submit" name="ProjectSubmit">Submit</button>
 			
-		</form>
-
+			</form>
+			</div>
+		</div>
 
 	</body>
 	<footer>
