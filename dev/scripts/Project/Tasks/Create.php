@@ -66,27 +66,27 @@
 			<div class="w3-container w3-display-middle" style="width:50%">
 				<a href="<?php echo '../View.php?proj='.$_GET['prid'] .'&'. $_GET['phid']; ?>"><button class="w3-button w3-red" name="cancel">Cancel</button></a>
 				<div class="w3-border w3-padding">
-				<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] 
-											. "?prid=" . $_GET['prid'] . "&phid=" . $_GET['phid']); ?>" autocomplete="off">
+					<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] 
+												. "?prid=" . $_GET['prid'] . "&phid=" . $_GET['phid']); ?>" autocomplete="off">
 											
-					<label>Task Name:</label>
-					<input class="w3-input w3-border" type="text" name="Name" required></br>
+						<label>Task Name:</label>
+						<input class="w3-input w3-border" type="text" name="Name" required></br>
 					
-					<label>Estimated Hours:</label>
-					<input class="w3-input w3-border" type="number" min="0" name="Hours" required></br>
+						<label>Estimated Hours:</label>
+						<input class="w3-input w3-border" type="number" min="0" name="Hours" required></br>
 					
-					<label>Estimated Budget:</label>
-					<input class="w3-input w3-border" type="number" min="0" name="Budget" required></br>
+						<label>Estimated Budget:</label>
+						<input class="w3-input w3-border" type="number" min="0" name="Budget" required></br>
 					
-					<label>Description:</label>
-					<input class="w3-input w3-border" type="text" name="Description" required></br>
+						<label>Description:</label>
+						<input class="w3-input w3-border" type="text" name="Description" required></br>
 					
-					<button class="w3-button w3-green" type="submit" name="TaskSubmit">Save</button>
-					
-				</form>
+						<button class="w3-button w3-green" type="submit" name="TaskSubmit">Save</button>
+				
+					</form>
+				</div>
 			</div>
 		</div>
-	
 	</body>
 	<footer>
 	</footer>

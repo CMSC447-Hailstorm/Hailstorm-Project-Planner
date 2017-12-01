@@ -74,49 +74,51 @@
 			</div>
 		</div>
 		
-		<div class="w3-container">
-		<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . (isset($_GET['ret']) ? "?ret=" . $_GET['ret'] : ""); ?>" autocomplete="off">
-			<div class="w3-panel w3-display-topmiddle w3-border w3-padding-24" style="top:100px">
+
+		<div class="w3-container" style="top:80%">
+			<div class="w3-container w3-display-topmiddle" style="width:50%;top:12%">
+				<a href="<?php echo (isset($_GET['ret']) ? "./Edit.php?proj=" . $_GET['ret'] : "javascript:history.back()"); ?>"><button class="w3-button w3-red" name="cancel">Cancel</button></a>
+				<div class="w3-border w3-padding">
+				<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . (isset($_GET['ret']) ? "?ret=" . $_GET['ret'] : ""); ?>" autocomplete="off">
 			
-				<label>Company Name:</label>
-				<input class="w3-input w3-border" type="text" placeholder="Company Name" name="Client_CompanyName" required></br>
+					<label>Company Name:</label>
+					<input class="w3-input w3-border" type="text" placeholder="Company Name" name="Client_CompanyName" required></br>
 				
-				<label>Contact Firstname: </label>
-				<input class="w3-input w3-border" type="text" placeholder="Firstname" name="Client_Firstname" required></br>
+					<label>Contact Firstname: </label>
+					<input class="w3-input w3-border" type="text" placeholder="Firstname" name="Client_Firstname" required></br>
 				
-				<label>Contact Lastname: </label>
-				<input class="w3-input w3-border" type="text"  placeholder="Lastname" name="Client_Lastname" required></br>
+					<label>Contact Lastname: </label>
+					<input class="w3-input w3-border" type="text"  placeholder="Lastname" name="Client_Lastname" required></br>
 				
-				<label>Contact Email: </label>
-				<input class="w3-input w3-border" type="text"  placeholder="Email" name="Client_Email" required></br>
+					<label>Contact Email: </label>
+					<input class="w3-input w3-border" type="text"  placeholder="Email" name="Client_Email" required></br>
 								
-				<label>Phone: </label>
-				<input class="w3-input w3-border" type="number" maxlength="10" placeholder="Phone Number" name="Client_Phone" required></br>
+					<label>Phone: </label>
+					<input class="w3-input w3-border" type="number" maxlength="10" placeholder="Phone Number" name="Client_Phone" required></br>
 				
-				<label>Specialized Industry/Field: </label>
-				<input class="w3-input w3-border" type="text"  placeholder="Industry" name="Client_Industry" required></br>
+					<label>Specialized Industry/Field: </label>
+					<input class="w3-input w3-border" type="text"  placeholder="Industry" name="Client_Industry" required></br>
 				
-				<label>Street Address: </label>
-				<input class="w3-input w3-border" type="text"  placeholder="Street Address" name="Client_Street" required></br>
+					<label>Street Address: </label>
+					<input class="w3-input w3-border" type="text"  placeholder="Street Address" name="Client_Street" required></br>
 				
-				<label>City: </label>
-				<input class="w3-input w3-border" type="text" placeholder="City" name="Client_City" required></br>
+					<label>City: </label>
+					<input class="w3-input w3-border" type="text" placeholder="City" name="Client_City" required></br>
 				
-				<label>State: </label>
-				<input class="w3-input w3-border" type="text"  maxlength="2" placeholder="State" name="Client_State" required></br>
+					<label>State: </label>
+					<input class="w3-input w3-border" type="text"  maxlength="2" placeholder="State" name="Client_State" required></br>
 				
-				<label>Zipcode: </label>
-				<input class="w3-input w3-border" type="number" min="0" maxlength="5" placeholder="Zipcode" name="Client_Zipcode" required></br>
+					<label>Zipcode: </label>
+					<input class="w3-input w3-border" type="number" min="0" maxlength="5" placeholder="Zipcode" name="Client_Zipcode" required></br>
 				
-				<label>Country: </label>
-				<input class="w3-input w3-border" type="text"  placeholder="Country" name="Client_Country" required></br>
+					<label>Country: </label>
+					<input class="w3-input w3-border" type="text"  placeholder="Country" name="Client_Country" required></br>
 				
-				</br>
-				<button class="w3-button w3-green" type="submit" name="ClientSubmit">Submit</button>
-				
+					</br>
+					<button class="w3-button w3-green" type="submit" name="ClientSubmit">Submit</button>
+				</form>
+				</div>
 			</div>
-			
-		</form>
 		</div>
 
 	</body>

@@ -183,7 +183,7 @@
 									echo ">" . $comps['Client_CompanyName'] . "</option>";
 								}
 								echo "</select></p>";	
-								echo "<button class='w3-button w3-green' onclick='AddClient()'>Add Client</button></p>";
+								echo "<button type='button' class='w3-button w3-green' onclick='AddClient()'>Add Client</button></p>";
 								
 			
 								echo "<label>Project Status:</label>";
@@ -208,8 +208,8 @@
 						
 						<button class="w3-button w3-green" type="submit" name="ProjectSubmit">Save</button>   
 					</form>
-					<a href="<?php echo '/Project/View.php?proj=' . $_GET['proj'] ?>"><button class="w3-button w3-red" type="cancel" name="cancel">Cancel</button></a>
 				</div>
+				<a href="<?php echo '/Project/View.php?proj=' . $_GET['proj'] ?>"><button class="w3-button w3-red" name="cancel">Cancel</button></a>
 			</div>
 		</div>
 	</body>
