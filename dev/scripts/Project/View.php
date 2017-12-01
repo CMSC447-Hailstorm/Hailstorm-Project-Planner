@@ -57,43 +57,43 @@
 			<div class="w3-sidebar w3-bar-block w3-white w3-border-right" style="width:25%">
 				<div class="w3-panel w3-padding">
 				
-				<!--List of Projects, Phases, and Tasks displays here-->
-				<?php
-					if ($count == 1)
-					{
-						echo "<h3>" . $project['Project_Name'] . "</h3>";
-						echo "<ul id='project_list'>";
-						$phaseSql = "SELECT * FROM Phases WHERE Project_ID_FK = '$proj'";
-						if($result = mysqli_query($conn, $phaseSql))
+					<!--List of Projects, Phases, and Tasks displays here-->
+					<?php
+						if ($count == 1)
 						{
-							$phaseCount = mysqli_num_rows($result);
-							while ($phase = mysqli_fetch_array($result))
+							echo "<h3>" . $project['Project_Name'] . "</h3>";
+							echo "<ul id='project_list'>";
+							$phaseSql = "SELECT * FROM Phases WHERE Project_ID_FK = '$proj'";
+							if($result = mysqli_query($conn, $phaseSql))
 							{
-								echo "<li><a href='/Project/Phases/View.php?prid=" . $project['Project_ID'] . "&phid=" . $phase['Phase_ID'] . "'>" . $phase['Phase_Name'];
-								$taskSql = "SELECT * FROM Tasks WHERE Phase_ID_FK = " . $phase['Phase_ID'] 
-								. " AND Project_ID_FK = '$proj'";
-								if ($taskResult = mysqli_query($conn, $taskSql))
+								$phaseCount = mysqli_num_rows($result);
+								while ($phase = mysqli_fetch_array($result))
 								{
-									echo "<ul id='tasks_phase_" . $phase['Phase_ID'] . "'>";
-									while($task = mysqli_fetch_array($taskResult))
+									echo "<li><a href='/Project/Phases/View.php?prid=" . $project['Project_ID'] . "&phid=" . $phase['Phase_ID'] . "'>" . $phase['Phase_Name'];
+									$taskSql = "SELECT * FROM Tasks WHERE Phase_ID_FK = " . $phase['Phase_ID'] 
+									. " AND Project_ID_FK = '$proj'";
+									if ($taskResult = mysqli_query($conn, $taskSql))
 									{
-										echo "<li><a href='/Project/Tasks/View.php?prid=" . $project['Project_ID'] . "&tid=" . $task['Task_ID'] . "'>" . $task['Task_Name'] . "</a></li>";
+										echo "<ul id='tasks_phase_" . $phase['Phase_ID'] . "'>";
+										while($task = mysqli_fetch_array($taskResult))
+										{
+											echo "<li><a href='/Project/Tasks/View.php?prid=" . $project['Project_ID'] . "&tid=" . $task['Task_ID'] . "'>" . $task['Task_Name'] . "</a></li>";
+										}
+										echo "<li><a href='/Project/Tasks/Create.php?prid=" . $project['Project_ID'] 
+												. "&phid=" . $phase['Phase_ID'] . "'><button class='w3-button w3-green'>Create Task</button></a></li>";
+										echo "</ul>";
 									}
-									echo "<li><a href='/Project/Tasks/Create.php?prid=" . $project['Project_ID'] 
-											. "&phid=" . $phase['Phase_ID'] . "'><button class='w3-button w3-green'>Create Task</button></a></li>";
-									echo "</ul>";
+									echo "</a></li>";
 								}
-								echo "</a></li>";
+							}
+							if($_SESSION['CURRENT_USER']->GetUserRole() == 1)
+							{
+								echo "<li><a href='/Project/Phases/Create.php?prid=" . $project['Project_ID'] 
+										. "'><button class='w3-button w3-green'>Create Phase</button></a></li>";
+								echo "</ul>";
 							}
 						}
-						if($_SESSION['CURRENT_USER']->GetUserRole() == 1)
-						{
-							echo "<li><a href='/Project/Phases/Create.php?prid=" . $project['Project_ID'] 
-									. "'><button class='w3-button w3-green'>Create Phase</button></a></li>";
-							echo "</ul>";
-						}
-					}
-				?>
+					?>
 				</div>
 			</div>
 			

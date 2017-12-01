@@ -46,7 +46,8 @@
 				</div>
 			</div>
 		</div>
-	
+
+		<!--Form-->
         <div class="w3-container" style="margin-top:10%">
 			<div class="w3-container w3-display-middle" style="width:50%">
 				<a href="/Project/View.php?proj=<?php echo $_GET['prid'] ?>"><button class="w3-button w3-green">Return to Project</button></a>
