@@ -51,11 +51,11 @@
 	<body>
 	
 		<!--Title Bar-->
-		<div class="w3-top w3-card w3-white">
-			<div class="w3-bar w3-padding" style="height:15%">
+		<div class="w3-top w3-card w3-white" style="height:10%">
+			<div class="w3-bar w3-padding">
 				<a class="w3-bar-item"><h1>Project Planner</h1></a>
 				<div class="w3-right">
-					<a class="w3-bar-item">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetUsername();?></a>
+					<a class="w3-bar-item" href="/Users/View.php">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetUsername();?></a>
 					<a href="/logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
 				</div>
 			</div>
