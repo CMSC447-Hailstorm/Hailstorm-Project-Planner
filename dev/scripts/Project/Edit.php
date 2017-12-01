@@ -101,7 +101,7 @@
 		</div>
 
 		<div class="w3-container" style="margin-top:10%">
-			<div class="w3-sidebar w3-bar-block w3-white w3-border-right" style="width:25%">
+			<div class="w3-sidebar w3-bar-block w3-white w3-border-right" style="width:25%; height:80%">
 				<div class="w3-panel w3-padding">
 			
 					<!--List of Projects, Phases, and Tasks displays here-->

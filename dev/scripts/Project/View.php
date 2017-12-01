@@ -54,36 +54,35 @@
 		</div>
 
 		<div class="w3-container" style="margin-top:10%">
-			<div class="w3-sidebar w3-bar-block w3-white w3-border-right" style="width:25%">
+			<div class="w3-sidebar w3-bar-block w3-white w3-border-right" style="width:25%; height:80%">
 				<div class="w3-panel w3-padding">
 				
 					<!--List of Projects, Phases, and Tasks displays here-->
 					<?php
 						if ($count == 1)
 						{
-							echo "<h3>" . $project['Project_Name'] . "</h3>";
-							echo "<ul id='project_list'>";
+							echo "<h3 class='w3-border-bottom'>" . $project['Project_Name'] . "</h3>";
+							echo "<ul class='w3-ul' id='project_list'>";
 							$phaseSql = "SELECT * FROM Phases WHERE Project_ID_FK = '$proj'";
 							if($result = mysqli_query($conn, $phaseSql))
 							{
 								$phaseCount = mysqli_num_rows($result);
 								while ($phase = mysqli_fetch_array($result))
 								{
-									echo "<li><a href='/Project/Phases/View.php?prid=" . $project['Project_ID'] . "&phid=" . $phase['Phase_ID'] . "'>" . $phase['Phase_Name'];
-									$taskSql = "SELECT * FROM Tasks WHERE Phase_ID_FK = " . $phase['Phase_ID'] 
-									. " AND Project_ID_FK = '$proj'";
+									echo "<li><a href='/Project/Phases/View.php?prid=" . $project['Project_ID'] . "&phid=" . $phase['Phase_ID'] . "'><button class='w3-button w3-blue'>" . $phase['Phase_Name'] . "</button></a>";
+									$taskSql = "SELECT * FROM Tasks WHERE Phase_ID_FK = " . $phase['Phase_ID'] . " AND Project_ID_FK = '$proj'";
 									if ($taskResult = mysqli_query($conn, $taskSql))
 									{
-										echo "<ul id='tasks_phase_" . $phase['Phase_ID'] . "'>";
+										echo "<ul class='w3-ul' id='tasks_phase_" . $phase['Phase_ID'] . "'>";
 										while($task = mysqli_fetch_array($taskResult))
 										{
-											echo "<li><a href='/Project/Tasks/View.php?prid=" . $project['Project_ID'] . "&tid=" . $task['Task_ID'] . "'>" . $task['Task_Name'] . "</a></li>";
+											echo "<li><a href='/Project/Tasks/View.php?prid=" . $project['Project_ID'] . "&tid=" . $task['Task_ID'] . "'><button class='w3-button w3-light-blue'>" . $task['Task_Name'] . "</button></a></li>";
 										}
 										echo "<li><a href='/Project/Tasks/Create.php?prid=" . $project['Project_ID'] 
 												. "&phid=" . $phase['Phase_ID'] . "'><button class='w3-button w3-green'>Create Task</button></a></li>";
 										echo "</ul>";
 									}
-									echo "</a></li>";
+									echo "</li>";
 								}
 							}
 							if($_SESSION['CURRENT_USER']->GetUserRole() == 1)
@@ -98,44 +97,45 @@
 			</div>
 			
 			<div class="w3-container" style="margin-left:25%">
-				<?php
-					if ($count == 1)
-					{
-						echo "<h2>Project Name: " . $project['Project_Name'] . "</h2></br>";
-						echo "<p>Project ID#: ". $project['Project_ID'] . "</p>";
-
-						$clientSql = "SELECT * FROM Clients WHERE Client_ID = " . $project['Client_ID_FK'];
-						if ($result = mysqli_query($conn, $clientSql))
+				<div class="w3-border w3-padding">
+					<?php
+						if ($count == 1)
 						{
-							if (mysqli_num_rows($result) == 1)
+							echo "<h2 class='w3-border-bottom'>Project Name: " . $project['Project_Name'] . "</h2>";
+							echo "<h4>Project ID#: ". $project['Project_ID'] . "</h4>";
+
+							$clientSql = "SELECT * FROM Clients WHERE Client_ID = " . $project['Client_ID_FK'];
+							if ($result = mysqli_query($conn, $clientSql))
 							{
-								$client = mysqli_fetch_array($result);
-								
-								if($client['Client_Firstname'] != 'NA' && $client['Client_Lastname'] != 'NA' && $client['Client_CompanyName'] != 'NA'){
-									echo "<p>Client: " . $client['Client_Firstname'] . " " . $client['Client_Lastname'] . "</p>";
-									echo "<p>Client Company: " . $client['Client_CompanyName'] . "</p>";
+								if (mysqli_num_rows($result) == 1)
+								{
+									$client = mysqli_fetch_array($result);
+									
+									if($client['Client_Firstname'] != 'NA' && $client['Client_Lastname'] != 'NA' && $client['Client_CompanyName'] != 'NA'){
+										echo "<h4>Client: " . $client['Client_Firstname'] . " " . $client['Client_Lastname'] . "</h4>";
+										echo "<h4>Client Company: " . $client['Client_CompanyName'] . "</h4>";
+									}
+				
 								}
-			
 							}
+
+							echo "<h4>Project Status: " . $project['Project_Status'] . "</h4>";
+							echo "<h4>Start Date: " . $project['Project_StartDate'] . "</h4>";
+							echo "<h4>Estimated Hours to complete: " . $project['Project_TotalHours'] . "</h4>";
+							echo "<h4>Total Budget: " . $project['Project_EstimatedBudget'] . "</h4>";
+							echo "<h4>Remaining Budget: " . $project['Project_RemainedBudget'] . "</h4>";					
+							echo "<h4>Description: " . $project['Project_Description'] . "</h4>";
 						}
+					?>
+					<?php
 
-						echo "<p>Project Status: " . $project['Project_Status'] . "</p>";
-						echo "<p>Start Date: " . $project['Project_StartDate'] . "</p>";
-						echo "<p>Estimated Hours to complete: " . $project['Project_TotalHours'] . "</p>";
-						echo "<p>Total Budget: " . $project['Project_EstimatedBudget'] . "</p>";
-						echo "<p>Remaining Budget: " . $project['Project_RemainedBudget'] . "<p>";					
-						echo "<p>Description: " . $project['Project_Description'] . "</p>";
-					}
-				?>
-				<?php
-
-					if($_SESSION['CURRENT_USER']->GetUserRole() == 1)
-					{
-						echo '<a href="/Project/Edit.php?proj='.$project["Project_ID"].'"><button class="w3-button w3-green">Edit Project</button></a>';
-						echo '<button class="w3-button w3-red" onclick="confirm_delete('.$project["Project_ID"].')">Delete Project</button>';
-					}
-				?>
-
+						if($_SESSION['CURRENT_USER']->GetUserRole() == 1)
+						{
+							echo '<a href="/Project/Edit.php?proj='.$project["Project_ID"].'"><button class="w3-button w3-green">Edit Project</button></a>';
+							echo '<button class="w3-margin w3-button w3-red" onclick="confirm_delete('.$project["Project_ID"].')">Delete Project</button>';
+						}
+					?>
+				</div>
 				<a href="/home.php"><button class="w3-button w3-green">Return to Home</button></a>
 			</div>
 		</div>
