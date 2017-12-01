@@ -55,8 +55,8 @@
 	<body>
 	
 		<!--Title Bar-->
-		<div class="w3-top w3-card w3-white" style="height:10%">
-			<div class="w3-bar w3-padding">
+		<div class="w3-top w3-card w3-white">
+			<div class="w3-bar w3-padding" style="height:15%">
 				<a class="w3-bar-item"><h1>Project Planner</h1></a>
 				<div class="w3-right">
 					<a class="w3-bar-item">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetUsername();?></a>
@@ -66,24 +66,26 @@
 		</div>
 		
 		<!--Form-->
-		<div class="w3-container">
-			<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] 
-										. "?prid=" . $_GET['prid'] . "&tid=" . $_GET['tid']); ?>" autocomplete="off">
-										
-				<div class="w3-panel w3-display-middle w3-border w3-padding">
-				<?php
-					if ($count == 1)
-					{
-						echo "<label>Task Name:</label> <input class='w3-input w3-border' type='text' name='Name' value='" . $task['Task_Name'] . "' required /></p>";
-						echo "<label>Estimated Hours:</label> <input class='w3-input w3-border' type='number' min='0' name='Hours' value='" . $task['Task_EstimatedHours'] . "' required /></p>";
-						echo "<label>Estimated Cost:</label> <input class='w3-input w3-border' type='number' min='0' name='Cost' value='" . $task['Task_EstimatedCost'] . "' required /></p>";						
-						echo "<label>Task Description:</label> <input class='w3-input w3-border' type='text' name='Description' value='" . $task['Task_Description'] . "' required/></p>";
-					}
-				?>
-				
-				<button class="w3-button w3-green" type="submit" name="TaskSubmit">Save</button>
-			</form>
-			<a href="View.php?prid=<?php echo $_GET['prid'] . '&tid=' . $_GET['tid'] ?>"><button class="w3-button w3-red" type="cancel" name="cancel">Cancel</button>
+		<div class="w3-container" style="margin-top:10%">
+			<div class="w3-container w3-display-middle" style="width:50%">
+				<a href="View.php?prid=<?php echo $_GET['prid'] . '&tid=' . $_GET['tid'] ?>"><button class="w3-button w3-red" type="cancel" name="cancel">Cancel</button></a>
+				<div class="w3-border w3-padding">
+					<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] 
+												. "?prid=" . $_GET['prid'] . "&tid=" . $_GET['tid']); ?>" autocomplete="off">
+												
+						<?php
+							if ($count == 1)
+							{
+								echo "<label>Task Name:</label> <input class='w3-input w3-border' type='text' name='Name' value='" . $task['Task_Name'] . "' required /></p>";
+								echo "<label>Estimated Hours:</label> <input class='w3-input w3-border' type='number' min='0' name='Hours' value='" . $task['Task_EstimatedHours'] . "' required /></p>";
+								echo "<label>Estimated Cost:</label> <input class='w3-input w3-border' type='number' min='0' name='Cost' value='" . $task['Task_EstimatedCost'] . "' required /></p>";						
+								echo "<label>Task Description:</label> <input class='w3-input w3-border' type='text' name='Description' value='" . $task['Task_Description'] . "' required/></p>";
+							}
+						?>
+						
+						<button class="w3-button w3-green" type="submit" name="TaskSubmit">Save</button>
+					</form>
+				</div>
 			</div>
 		</div>
 		

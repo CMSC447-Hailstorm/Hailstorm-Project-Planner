@@ -51,7 +51,7 @@
 	
 		<!--Title Bar-->
 		<div class="w3-top w3-card w3-white">
-			<div class="w3-bar w3-padding">
+			<div class="w3-bar w3-padding" style="height:15%">
 				<a class="w3-bar-item"><h1>Project Planner</h1></a>
 				<div class="w3-right">
 					<a class="w3-bar-item">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetUsername();?></a>
@@ -60,22 +60,27 @@
 			</div>
 		</div>
 		
-		<div class="w3-container">
-			<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] 
-										. "?prid=" . $_GET['prid']); ?>" autocomplete="off">
-										
-				<label>Name:</label>
-				<input class="w3-input w3-border" type="text" name="Name" required></br>
-				
-				<label>Description:</label>
-				<input class="w3-input w3-border" type="text" name="Description" required></br>
-
-				</br><p>Users can be assigned by editing this phase once is has been created.</p>
-				
-				
-				<button class="w3-button w3-green" type="submit" name="PhaseSubmit">Save</button>
+		<!--Form-->
+		<div class="w3-container" style="margin-top:10%">
+			<div class="w3-container w3-display-middle" style="width:50%">
 				<a href="<?php echo '../View.php?proj=' . $_GET['prid'] ?>"><button class="w3-button w3-red" type="cancel" name="cancel">Cancel</button></a>
-			</form>
+				<div class="w3-border w3-padding">
+				<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] 
+											. "?prid=" . $_GET['prid']); ?>" autocomplete="off">
+											
+					<label>Name:</label>
+					<input class="w3-input w3-border" type="text" name="Name" required></br>
+					
+					<label>Description:</label>
+					<input class="w3-input w3-border" type="text" name="Description" required></br>
+
+					Users can be assigned by editing this phase once it has been created.</p>
+					
+					
+					<button class="w3-button w3-green" type="submit" name="PhaseSubmit">Save</button>
+				</form>
+				</div>
+			</div>
 		</div>
 			
 	</body>
