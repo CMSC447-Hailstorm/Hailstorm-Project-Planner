@@ -75,7 +75,7 @@
 						<label>Estimated Hours:</label>
 						<input class="w3-input w3-border" type="number" min="0" name="Hours" required></br>
 					
-						<label>Estimated Budget:</label>
+						<label>Estimated Cost: $</label>
 						<input class="w3-input w3-border" type="number" min="0" name="Budget" required></br>
 					
 						<label>Description:</label>

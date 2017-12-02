@@ -34,49 +34,56 @@
     if(isset($_POST['UserSubmit']) && !empty($_POST))
     {
         $passConfirm = $_POST['ConfirmPassword'];
-        if($_SESSION['CURRENT_USER']->getUserID() == $user['User_ID'] && password_verify($passConfirm, $user['User_Password']))
+        if($_SESSION['CURRENT_USER']->getUserID() == $user['User_ID'])
         {
-            $firstName = mysqli_real_escape_string($conn, $_POST['Firstname']);
-            $lastName = mysqli_real_escape_string($conn, $_POST['Lastname']);
-            $username = mysqli_real_escape_string($conn, $_POST['Username']);
-            $birthDate = $_POST['Birthdate'];
-            $street = mysqli_real_escape_string($conn, $_POST['Street']);
-            $city = mysqli_real_escape_string($conn, $_POST['City']);
-            $state = mysqli_real_escape_string($conn, $_POST['State']);
-            $zipCode = $_POST['Zipcode'];
-            $email = mysqli_real_escape_string($conn, $_POST['Email']);
-            $phone = mysqli_real_escape_string($conn, $_POST['Phone']);
-            
-            if(!empty($_POST['Password']))
+            if(password_verify($passConfirm, $user['User_Password']))
             {
-                $password = password_hash(mysqli_real_escape_string($conn, $_POST['Password']), PASSWORD_BCRYPT);
-                $sql = "UPDATE Users 
-                SET User_Firstname = '$firstName', User_Lastname = '$lastName', User_Name = '$username', 
-                    User_Password = '$password', User_Birthdate = '$birthDate', User_Street = '$street', 
-                    User_City = '$city', User_State = '$state', User_Zipcode = '$zipCode', User_Email = '$email', User_Phone = '$phone'
-                WHERE User_ID = " . $user['User_ID'];
+                $firstName = mysqli_real_escape_string($conn, $_POST['Firstname']);
+                $lastName = mysqli_real_escape_string($conn, $_POST['Lastname']);
+                $username = mysqli_real_escape_string($conn, $_POST['Username']);
+                $birthDate = $_POST['Birthdate'];
+                $street = mysqli_real_escape_string($conn, $_POST['Street']);
+                $city = mysqli_real_escape_string($conn, $_POST['City']);
+                $state = mysqli_real_escape_string($conn, $_POST['State']);
+                $zipCode = $_POST['Zipcode'];
+                $email = mysqli_real_escape_string($conn, $_POST['Email']);
+                $phone = mysqli_real_escape_string($conn, $_POST['Phone']);
+            
+                if(!empty($_POST['Password']))
+                {
+                    $password = password_hash(mysqli_real_escape_string($conn, $_POST['Password']), PASSWORD_BCRYPT);
+                    $sql = "UPDATE Users 
+                    SET User_Firstname = '$firstName', User_Lastname = '$lastName', User_Name = '$username', 
+                        User_Password = '$password', User_Birthdate = '$birthDate', User_Street = '$street', 
+                        User_City = '$city', User_State = '$state', User_Zipcode = '$zipCode', User_Email = '$email', User_Phone = '$phone'
+                    WHERE User_ID = " . $user['User_ID'];
+                }
+                else
+                {
+                    $sql = "UPDATE Users 
+                    SET User_Firstname = '$firstName', User_Lastname = '$lastName', User_Name = '$username', 
+                        User_Birthdate = '$birthDate', User_Street = '$street', 
+                        User_City = '$city', User_State = '$state', User_Zipcode = '$zipCode', User_Email = '$email', User_Phone = '$phone'
+                    WHERE User_ID = " . $user['User_ID'];
+                }
+        
+                mysqli_query($conn, $sql);
+        
+                if($_SESSION['CURRENT_USER']->getUserID() == $user['User_ID'])
+                {
+                    $_SESSION['CURRENT_USER']->Login($username, $passConfirm);
+                }
+                mysqli_close($conn);
+                header("Location: ./View.php" . (isset($_GET['uid']) ? "?uid=" . $_GET['uid'] : ""));
             }
             else
             {
-                $sql = "UPDATE Users 
-                SET User_Firstname = '$firstName', User_Lastname = '$lastName', User_Name = '$username', 
-                    User_Birthdate = '$birthDate', User_Street = '$street', 
-                    User_City = '$city', User_State = '$state', User_Zipcode = '$zipCode', User_Email = '$email', User_Phone = '$phone'
-                WHERE User_ID = " . $user['User_ID'];
+                echo "<script>alert('Your password was incorrect.  Please try again.');</script>";
             }
-        
-            mysqli_query($conn, $sql);
-        
-            if($_SESSION['CURRENT_USER']->getUserID() == $user['User_ID'])
-            {
-                $_SESSION['CURRENT_USER']->Login($username, $passConfirm);
-            }
-            mysqli_close($conn);
-            header("Location: ./View.php" . (isset($_GET['uid']) ? "?uid=" . $_GET['uid'] : ""));
         }
         else
         {
-            echo "<script>alert('Your password was incorrect.  Please try again.');</script>";
+            header("Location: ./View.php" . (isset($_GET['uid']) ? "?uid=" . $_GET['uid'] : ""));
         }
     }
     ?>
@@ -141,7 +148,21 @@
         ?>
     </head>
     <body>
-        <div class="User_Details">
+        <!--Title Bar-->
+		<div class="w3-top w3-card w3-white" style="height:10%">
+			<div class="w3-bar w3-padding">
+				<a class="w3-bar-item" href="/home.php"><h1>Project Planner</h1></a>
+				<div class="w3-right">
+					<a class="w3-bar-item" href="/Users/View.php">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetUsername();?></a>
+					<a href="/logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
+				</div>
+			</div>
+		</div>
+
+        <div class="w3-container" style="margin-top:10%">
+			<div class="w3-container w3-display-middle" style="width:60%">
+            <a href="/Users/View.php<?php echo (isset($_GET['uid']) ? "?uid=" . $_GET['uid'] : ""); ?>"><button class="w3-button w3-red" type="cancel" name="cancel">Cancel</button></a>
+            <div class="w3-border w3-padding">
             <h2>Edit User Account</h2>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] . (isset($_GET['uid']) ? "?uid=" . $_GET['uid'] : "")); ?>" autocomplete="off">
                 <?php
@@ -164,7 +185,7 @@
                             echo "Employee";
                             if($_SESSION['CURRENT_USER']->GetUserRole() == 1)
                             {
-                                echo "   <button type='button' onclick='promote(" . $_GET['uid'] . ")'>Grant Manager Status</button>";
+                                echo "   <button type='button' class='w3-button w3-green' onclick='promote(" . $_GET['uid'] . ")'>Grant Manager Status</button>";
                             }
                         }
                         else
@@ -172,7 +193,7 @@
                             echo "Manager";
                             if($_SESSION['CURRENT_USER']->GetUserRole() == 1 && $_SESSION['CURRENT_USER']->GetUserID() != $user['User_ID'])
                             {
-                                echo "   <button type='button' onclick='demote(" . $_GET['uid'] . ")'>Revoke Manager Status</button>";
+                                echo "   <button type='button' class='w3-button w3-green' onclick='demote(" . $_GET['uid'] . ")'>Revoke Manager Status</button>";
                             }
                         }
                         echo "</p></br>";
@@ -198,10 +219,16 @@
                     }
                 ?>
                 </br>
-                <p>Current Password: <input type="password" name="ConfirmPassword" placeholder="Confirm password..." required /></p>
-                <button type="submit" name="UserSubmit">Save</button>
-                <button type="cancel" name="cancel">Cancel</button>
+                <?php
+                    if($_SESSION['CURRENT_USER']->GetUserID() == $user['User_ID'])
+                    {
+                        echo "<p>Current Password: <input type='password' name='ConfirmPassword' placeholder='Confirm password...' required /></p>";
+                    }
+                ?>
+                <button class="w3-button w3-green" type="submit" name="UserSubmit">Save</button>
             </form>
+            </div>
+            </div>
         </div>
     </body>
 </html>

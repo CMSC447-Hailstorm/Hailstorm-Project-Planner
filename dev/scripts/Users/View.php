@@ -58,7 +58,20 @@
 		</script>
     </head>
     <body>
-        <div class="User_Details">
+        <!--Title Bar-->
+		<div class="w3-top w3-card w3-white" style="height:10%">
+			<div class="w3-bar w3-padding">
+				<a class="w3-bar-item" href="/home.php"><h1>Project Planner</h1></a>
+				<div class="w3-right">
+					<a class="w3-bar-item" href="/Users/View.php">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetUsername();?></a>
+					<a href="/logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
+				</div>
+			</div>
+		</div>
+        <div class="w3-container" style="top:80%">
+			<div class="w3-container w3-display-topmiddle" style="width:50%;top:12%">
+            <a href="/home.php"><button class="w3-button w3-green">Return to Home</button></a>
+            <div class="w3-border w3-padding">
             <?php
                 if($count == 1)
                 {
@@ -81,23 +94,23 @@
 
                 if($_SESSION['CURRENT_USER']->GetUserRole() == 1 || $user['User_ID'] == $_SESSION['CURRENT_USER']->GetUserID())
                 {
-                    echo "<a href='/Users/Edit.php" . (isset($_GET['uid']) ? "?uid=" . $_GET['uid'] : "") . "'><button>Edit User Account</button></a>";
+                    echo "<a href='/Users/Edit.php" . (isset($_GET['uid']) ? "?uid=" . $_GET['uid'] : "") . "'><button class='w3-button w3-green'>Edit User Account</button></a> ";
                 }
                 if($user['User_ID'] == $_SESSION['CURRENT_USER']->GetUserID())
                 {
-                    echo "<button onclick='confirm_delete(" . $user['User_ID'] . ")'>Delete User</button>";
+                    echo "<button class='w3-button w3-red' onclick='confirm_delete(" . $user['User_ID'] . ")'>Delete User</button>";
                 }
             ?>
-            <a href="/home.php"><button>Return to Home</button></a>
-        </div>
-
+            </div>
+        
+        </br>
+        <div class="w3-border w3-padding">
          <?php
             if($_SESSION['CURRENT_USER']->GetUserRole() == 1)
             {
-                echo "<div class='Manager_Functions'>";
                 echo "<h3>Manage Users</h3>";
 
-                echo "<nav><ul>";
+                echo "<nav><ul class='w3-ul w3-hoverable'>";
                 
                 $sql = "SELECT * FROM Users";
                 if($result = mysqli_query($conn, $sql))
@@ -106,14 +119,16 @@
                     {
                         if ($user['User_ID'] != 0)
                         {
-                            echo "<li><a href='/Users/View.php?uid=" . $user['User_ID'] . "'>" . $user['User_Firstname'] . " " . $user['User_Lastname'] . " (" . $user['User_Name'] . ")</a></li>";
+                            echo "<li style='cursor:pointer' onclick='window.location.href=\"/Users/View.php?uid=" . $user['User_ID'] . "\";'>" . $user['User_Firstname'] . " " . $user['User_Lastname'] . " (" . $user['User_Name'] . ")</a></li>";
                         }
                     }
                 }
                 echo "</ul></nav>";
-                echo "<a href='/Users/Create.php" . (isset($_GET['uid']) ? "?ret=" . $_GET['uid'] : "") . "'><button>Create New User</button></a>";
-                echo "</div>";
+                echo "<a href='/Users/Create.php" . (isset($_GET['uid']) ? "?ret=" . $_GET['uid'] : "") . "'><button class='w3-button w3-green'>Create New User</button></a>";
             }
         ?>
+        </div>
+    </div>
+    </div>
     </body>
 </html>

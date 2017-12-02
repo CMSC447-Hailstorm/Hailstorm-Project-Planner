@@ -87,8 +87,8 @@
 							echo "<td>" . $row['Project_ID'] . "</td>";
 							echo "<td>" . $row['Project_Name'] . "</td>";
 							echo "<td>" . $row['Project_TotalHours'] . "</td>";
-							echo "<td>" . $row['Project_EstimatedBudget'] . "</td>";
-							echo "<td>" . $row['Project_RemainedBudget'] . "</td>";
+							echo "<td>$" . $row['Project_EstimatedBudget'] . "</td>";
+							echo "<td>$" . $row['Project_RemainedBudget'] . "</td>";
 							echo "</tr>";
 						}
 					}
