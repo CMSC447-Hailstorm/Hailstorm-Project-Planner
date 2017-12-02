@@ -41,7 +41,7 @@
         $Row2 = mysqli_fetch_array($Result2, MYSQLI_ASSOC);
         
 		
-        $projectName = $_POST['Name'];
+        $projectName = mysqli_real_escape_string($conn, $_POST['Name']);
         $projectStatus = $_POST['Project_Status'];
 		$projectBudget = $_POST['Budget'];
 		
@@ -55,7 +55,7 @@
 		////	echo $newDate;
 		
 		$projectStartDate = $date;
-        $projectDescription = $_POST['Description'];
+        $projectDescription = mysqli_real_escape_string($conn, $_POST['Description']);
 		
 		
 		if($Company_Name == ''){

@@ -16,9 +16,9 @@
 		header("Location: ../../home.php");
     }
 
-    $uid = $_REQUEST['uid'];
-    $phid = $_REQUEST['phid'];
-    $prid = $_REQUEST['prid'];
+    $uid = mysqli_real_escape_string($conn, $_REQUEST['uid']);
+    $phid = mysqli_real_escape_string($conn, $_REQUEST['phid']);
+    $prid = mysqli_real_escape_string($conn, $_REQUEST['prid']);
 
     $command = $_REQUEST['com'];
 

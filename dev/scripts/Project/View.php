@@ -15,7 +15,7 @@
 	{
 		header("Location: ../home.php");
 	}
-	$proj = $_GET['proj'];
+	$proj = mysqli_real_escape_string($conn, $_GET['proj']);
 	$sql = "SELECT * FROM Projects WHERE Project_ID = '$proj'";
 	if($result = mysqli_query($conn, $sql))
 	{

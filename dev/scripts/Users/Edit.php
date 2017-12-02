@@ -36,20 +36,20 @@
         $passConfirm = $_POST['ConfirmPassword'];
         if($_SESSION['CURRENT_USER']->getUserID() == $user['User_ID'] && password_verify($passConfirm, $user['User_Password']))
         {
-            $firstName = $_POST['Firstname'];
-            $lastName = $_POST['Lastname'];
-            $username = $_POST['Username'];
+            $firstName = mysqli_real_escape_string($conn, $_POST['Firstname']);
+            $lastName = mysqli_real_escape_string($conn, $_POST['Lastname']);
+            $username = mysqli_real_escape_string($conn, $_POST['Username']);
             $birthDate = $_POST['Birthdate'];
-            $street = $_POST['Street'];
-            $city = $_POST['City'];
-            $state = $_POST['State'];
+            $street = mysqli_real_escape_string($conn, $_POST['Street']);
+            $city = mysqli_real_escape_string($conn, $_POST['City']);
+            $state = mysqli_real_escape_string($conn, $_POST['State']);
             $zipCode = $_POST['Zipcode'];
-            $email = $_POST['Email'];
-            $phone = $_POST['Phone'];
+            $email = mysqli_real_escape_string($conn, $_POST['Email']);
+            $phone = mysqli_real_escape_string($conn, $_POST['Phone']);
             
             if(!empty($_POST['Password']))
             {
-                $password = password_hash($_POST['Password'], PASSWORD_BCRYPT);
+                $password = password_hash(mysqli_real_escape_string($conn, $_POST['Password']), PASSWORD_BCRYPT);
                 $sql = "UPDATE Users 
                 SET User_Firstname = '$firstName', User_Lastname = '$lastName', User_Name = '$username', 
                     User_Password = '$password', User_Birthdate = '$birthDate', User_Street = '$street', 

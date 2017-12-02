@@ -16,7 +16,7 @@
     {
         header("Location: ../home.php");
     }
-    $t = $_GET['t'];
+    $t = mysqli_real_escape_string($conn, $_GET['t']);
     $delkey = $_GET['d'];
 
     if (password_verify($t . "delete" . $t, $delkey))

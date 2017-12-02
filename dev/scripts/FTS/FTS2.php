@@ -20,17 +20,17 @@
             die('Unable to connect.  Error: ' . mysqli_error($conn));
         }
 
-        $firstName = $_POST['Firstname'];
-        $lastName = $_POST['Lastname'];
-        $username = $_POST['Username'];
-        $password = password_hash($_POST['Password'], PASSWORD_BCRYPT);
+        $firstName = mysqli_real_escape_string($conn, $_POST['Firstname']);
+        $lastName = mysqli_real_escape_string($conn, $_POST['Lastname']);
+        $username = mysqli_real_escape_string($conn, $_POST['Username']);
+        $password = password_hash(mysqli_real_escape_string($conn, $_POST['Password']), PASSWORD_BCRYPT);
         $birthDate = $_POST['Birthdate'];
-        $street = $_POST['Street'];
-        $city = $_POST['City'];
-        $state = $_POST['State'];
+        $street = mysqli_real_escape_string($conn, $_POST['Street']);
+        $city = mysqli_real_escape_string($conn, $_POST['City']);
+        $state = mysqli_real_escape_string($conn, $_POST['State']);
         $zipCode = $_POST['Zipcode'];
-        $email = $_POST['Email'];
-        $phone = $_POST['Phone'];
+        $email = mysqli_real_escape_string($conn, $_POST['Email']);
+        $phone = mysqli_real_escape_string($conn, $_POST['Phone']);
 
         $sql = "INSERT INTO Users (User_Firstname, User_Lastname, User_Name, User_Role, User_Password, 
                 User_Birthdate, User_Street, User_City, User_State, User_Zipcode, User_Email, User_Phone)

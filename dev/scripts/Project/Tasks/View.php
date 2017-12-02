@@ -15,7 +15,7 @@
 	{
 		header("Location: ../../home.php");
     }
-    $tid = $_GET['tid'];
+    $tid = mysqli_real_escape_string($conn, $_GET['tid']);
     $sql = "SELECT * FROM Tasks WHERE Task_ID = '$tid'";
 ?>
 

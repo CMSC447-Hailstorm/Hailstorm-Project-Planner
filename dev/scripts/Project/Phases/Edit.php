@@ -13,17 +13,17 @@
 	$conn = mysqli_connect($_SESSION["SERVER"], $_SESSION["DBUSER"], $_SESSION["DBPASS"], $_SESSION["DATABASE"]);
 	if (!$conn)
 	{
-		die('Unable to connect' . mysqli_connect_error());
+		die('Unable to connect' . mysqli_connect_error($conn));
 	}
 
-	$prid = $_GET['prid'];
-	$phid = $_GET['phid'];
+	$prid = mysqli_real_escape_string($conn, $_GET['prid']);
+	$phid = mysqli_real_escape_string($conn, $_GET['phid']);
 	$sql = "SELECT * FROM Phases WHERE Phase_ID = '$phid'";
 
 	if(isset($_POST['PhaseSubmit']) && !empty($_POST))
 	{
-		$phaseName = $_POST['Name'];
-		$description = $_POST['Description'];
+		$phaseName = mysqli_real_escape_string($conn, $_POST['Name']);
+		$description = mysqli_real_escape_string($conn, $_POST['Description']);
 
 		$sql = "UPDATE Phases SET Phase_Name = '$phaseName', Phase_Description = '$description' WHERE Phase_ID='$phid'";
 		mysqli_query($conn, $sql);
@@ -58,12 +58,11 @@
                                 else
                                 {
                                     document.getElementById("AssignResults").innerHTML = "";
-                                    document.getElementById("AssignResults").innerHTML += "<nav><ul>";
                                     for (var u = 0; u < users.length; u += 2)
                                     {
-                                        document.getElementById("AssignResults").innerHTML += "<li onclick='AssignUser(" + users[u+1] + ", 1)'>" + users[u] + "</li>";
+                                        document.getElementById("AssignResults").innerHTML += "<li title='Click to add...' style='cursor:pointer' onclick='AssignUser(" + users[u+1] + ", 1)'>" + users[u] + "</li>";
                                     }
-                                    document.getElementById("AssignResults").innerHTML += "</ul></nav>";
+
                                 }
                             }
                         }
@@ -144,7 +143,7 @@
 							}
 
 							echo "<h3>Assigned Users: </h3>";
-							echo "<nav><ul>";
+							echo "<ul class='w3-ul w3-hoverable'>";
 							$sql = "SELECT * FROM User_Assignments WHERE Phase_ID_FK = " . $phase['Phase_ID'];
 							if($result = mysqli_query($conn, $sql))
 							{
@@ -154,16 +153,18 @@
 									if ($userResult = mysqli_query($conn, $userSql))
 									{
 										$user = mysqli_fetch_array($userResult);
-										echo "<li onclick='AssignUser(" . $user['User_ID'] . ", 0)'>" . $user['User_Firstname'] . " " . $user['User_Lastname'] . " (" . $user['User_Name'] . ")</li>";
+										echo "<li title='Click to remove...' style='cursor:pointer' onclick='AssignUser(" . $user['User_ID'] . ", 0)'>" . $user['User_Firstname'] . " " . $user['User_Lastname'] . " (" . $user['User_Name'] . ")</li>";
 									}
 								}
 							}
-							echo "</ul></nav>";
+							echo "</ul>";
 
+							echo "</br>";
 							echo "<label>Assign User:</label> <input type='search' id='SearchBar' placeholder='Search for User...' onkeydown='if (event.keyCode == 13) return false;'/> <button class='w3-button w3-green' type='button' onclick='GetSearchResults()'>Search</button></p>";
-							echo "<div id='AssignResults'></div>";
+							echo "<ul class='w3-ul w3-hoverable' id='AssignResults'></ul>";
 						?>
 						
+						</br>
 						<button class="w3-button w3-green" type="submit" name="PhaseSubmit">Save</button>
 					</form>
 				</div>

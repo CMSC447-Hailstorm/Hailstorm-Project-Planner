@@ -17,18 +17,6 @@
     }
 
     $search = $_REQUEST['u'];
-    $name = explode(" ", $search);
-
-    if(count($name) > 1)
-    {
-        $firstName = $name[0];
-        $lastName = $name[1];
-    }
-    else
-    {
-        $firstName = "";
-        $lastName = "";
-    }
 
     $ret = Array();
     $sql = "SELECT * FROM Users";

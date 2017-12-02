@@ -18,13 +18,13 @@
 
 	if(isset($_POST['TaskSubmit']) && !empty($_POST))
 	{
-		$taskName = $_POST['Name'];
+		$taskName = mysqli_real_escape_string($conn, $_POST['Name']);
 		$hours = $_POST['Hours'];
 		$budget = $_POST['Budget'];
-		$description = $_POST['Description'];
+		$description = mysqli_real_escape_string($conn, $_POST['Description']);
 		$creator = $_SESSION['CURRENT_USER']->getUserID();
-		$project = $_GET['prid'];
-		$phase = $_GET['phid'];
+		$project = mysqli_real_escape_string($conn, $_GET['prid']);
+		$phase = mysqli_real_escape_string($conn, $_GET['phid']);
 
 		$sql = "INSERT INTO Tasks (Project_ID_FK, Phase_ID_FK, User_ID_FK, 
 									Task_Name, Task_Description, Task_EstimatedHours, 

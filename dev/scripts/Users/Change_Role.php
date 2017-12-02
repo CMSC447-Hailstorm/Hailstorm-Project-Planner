@@ -13,7 +13,7 @@
     }
 
     $command = $_REQUEST['com'];
-    $uid = $_REQUEST['uid'];
+    $uid = mysqli_real_escape_string($conn, $_REQUEST['uid']);
     
     if ($command == 1)
     {

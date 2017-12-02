@@ -13,7 +13,7 @@
     }
     if(isset($_GET['uid']) && !empty($_GET) && $_SESSION['CURRENT_USER']->getUserRole() == 1)
     {
-        $sql = "SELECT * FROM Users WHERE User_ID = " . $_GET['uid'];
+        $sql = "SELECT * FROM Users WHERE User_ID = " . mysqli_real_escape_string($conn, $_GET['uid']);
     }
     else
     {

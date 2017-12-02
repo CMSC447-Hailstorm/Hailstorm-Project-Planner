@@ -16,8 +16,8 @@
 		die('Unable to connect' . mysqli_connect_error());
 	}
 
-	$prid = $_GET['prid'];
-	$tid = $_GET['tid'];
+	$prid = mysqli_real_escape_string($conn, $_GET['prid']);
+	$tid = mysqli_real_escape_string($conn, $_GET['tid']);
 	$sql = "SELECT * FROM Tasks WHERE Task_ID = '$tid'";
 	if($result = mysqli_query($conn, $sql))
 	{
@@ -27,10 +27,10 @@
 
 	if(isset($_POST['TaskSubmit']) && !empty($_POST))
 	{
-		$taskName = $_POST['Name'];
+		$taskName = mysqli_real_escape_string($conn, $_POST['Name']);
 		$taskHours = $_POST['Hours'];
 		$taskCost = $_POST['Cost'];
-		$description = $_POST['Description'];
+		$description = mysqli_real_escape_string($conn, $_POST['Description']);
 
 		$budgetUpdate = $taskCost - $task['Task_EstimatedCost'];
 		$hoursUpdate = $taskHours - $task['Task_EstimatedHours'];

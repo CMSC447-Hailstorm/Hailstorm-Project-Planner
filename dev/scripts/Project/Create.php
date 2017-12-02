@@ -31,18 +31,11 @@
 			die('Unable to connect' . mysqli_connect_error());
 		}
 		
-
 		$sql2 = "SELECT Client_ID FROM Clients where Client_CompanyName = '$Company_Name'";
 		$Result2 = mysqli_query($conn, $sql2);
 		$Row2 = mysqli_fetch_array($Result2, MYSQLI_ASSOC);
-		//print_r($Row2);
-		/////
-	
-		
-		
 
-		
-		$Project_Name = $_POST['Project_Name'];
+		$Project_Name = mysqli_real_escape_string($conn, $_POST['Project_Name']);
 		$Project_Status = $_POST['Project_Status'];			//Dead, On Hold, Completed, Requested, Approved, Rejected
 		$Project_EstimatedBudget = $_POST['Project_EstimatedBudget'];
 		$Project_RemainedBudget = $_POST['Project_EstimatedBudget'];
@@ -56,7 +49,7 @@
 		////	echo $newDate;
 		
 		$Project_StartDate = $date;
-		$Project_Description = $_POST['Project_Description'];
+		$Project_Description = mysqli_real_escape_string($conn, $_POST['Project_Description']);
 		
 		if($Company_Name == ''){
 			$Client_ID_FK = -1;

@@ -16,7 +16,7 @@
     {
         header("Location: ../home.php");
     }
-    $uid = $_GET['uid'];
+    $uid = mysqli_real_escape_string($conn, $_GET['uid']);
     $delkey = $_GET['d'];
 
     if (password_verify($uid . "delete" . $uid, $delkey))

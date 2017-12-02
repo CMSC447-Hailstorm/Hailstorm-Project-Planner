@@ -13,17 +13,17 @@
 	}
 	if(isset($_POST['ClientSubmit']) && !empty($_POST)) 
 	{
-		$Client_CompanyName = $_POST['Client_CompanyName'];
-		$Client_Firstname = $_POST['Client_Firstname'];
-		$Client_Lastname = $_POST['Client_Lastname'];
-		$Client_Industry = $_POST['Client_Industry'];
-		$Client_Email = $_POST['Client_Email'];
-		$Client_Phone = $_POST['Client_Phone'];
-		$Client_Street = $_POST['Client_Street'];
-		$Client_City = $_POST['Client_City'];
-		$Client_State = $_POST['Client_State'];
+		$Client_CompanyName = mysqli_real_escape_string($conn, $_POST['Client_CompanyName']);
+		$Client_Firstname = mysqli_real_escape_string($conn, $_POST['Client_Firstname']);
+		$Client_Lastname = mysqli_real_escape_string($conn, $_POST['Client_Lastname']);
+		$Client_Industry = mysqli_real_escape_string($conn, $_POST['Client_Industry']);
+		$Client_Email = mysqli_real_escape_string($conn, $_POST['Client_Email']);
+		$Client_Phone = mysqli_real_escape_string($conn, $_POST['Client_Phone']);
+		$Client_Street = mysqli_real_escape_string($conn, $_POST['Client_Street']);
+		$Client_City = mysqli_real_escape_string($conn, $_POST['Client_City']);
+		$Client_State = mysqli_real_escape_string($conn, $_POST['Client_State']);
 		$Client_Zipcode = $_POST['Client_Zipcode'];
-		$Client_Country = $_POST['Client_Country'];
+		$Client_Country = mysqli_real_escape_string($conn, $_POST['Client_Country']);
 		
 		
 		$sql = "INSERT INTO Clients(Client_CompanyName, Client_Firstname, Client_Lastname, 

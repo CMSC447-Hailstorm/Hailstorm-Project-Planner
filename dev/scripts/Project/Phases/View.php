@@ -15,7 +15,7 @@
 	{
 		header("Location: ../../home.php");
     }
-    $phid = $_GET['phid'];
+    $phid = mysqli_real_escape_string($conn, $_GET['phid']);
     $sql = "SELECT * FROM Phases WHERE Phase_ID = '$phid'";
 ?>
 
@@ -80,7 +80,7 @@
 								}
 								
 								echo "<h3>Assigned Users: </h3>";
-								echo "<nav><ul>";
+								echo "<nav><ul class='w3-ul'>";
 								$sql = "SELECT * FROM User_Assignments WHERE Phase_ID_FK = " . $phase['Phase_ID'];
 								if($result = mysqli_query($conn, $sql))
 								{

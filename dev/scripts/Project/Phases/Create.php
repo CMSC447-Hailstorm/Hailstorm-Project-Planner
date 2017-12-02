@@ -18,10 +18,10 @@
 
 	if(isset($_POST['PhaseSubmit']) && !empty($_POST))
 	{
-		$phaseName = $_POST['Name'];
-		$description = $_POST['Description'];
+		$phaseName = mysqli_real_escape_string($conn, $_POST['Name']);
+		$description = mysqli_real_escape_string($conn, $_POST['Description']);
 		$creator = $_SESSION['CURRENT_USER']->getUserID();
-		$project = $_GET['prid'];
+		$project = mysqli_real_escape_string($conn, $_GET['prid']);
 
 		// get users assigned to phase
 
