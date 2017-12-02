@@ -12,6 +12,8 @@
 		die('Unable to connect.  Error: ' . mysqli_error($conn));
 	}
 ?>
+
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset=utf-8 />

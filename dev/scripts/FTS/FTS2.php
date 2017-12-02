@@ -42,13 +42,23 @@
     }
 ?>
 
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset=utf-8 />
         <link href ="/style.css" rel="stylesheet">
     </head>
     <body>
+        <!--Title Bar-->
+		<div class="w3-top w3-card w3-white" style="height:10%">
+			<div class="w3-bar w3-padding">
+				<a class="w3-bar-item"><h1>Project Planner</h1></a>
+			</div>
+		</div>
+        <div class="w3-container" style="margin-top:10%">
+			<div class="w3-container w3-display-middle" style="width:75%">
         <h1>First-time Setup: Create Initial Manager Account</h1>
+        <div class="w3-border w3-padding">
         <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
             <p>User: <input type='text' name='Firstname' required />   <input type='text' name='Lastname' required /></p>
             <p>Username: <input type='text' name='Username' required /></p>
@@ -60,7 +70,10 @@
             <p>Email Address: <input type='email' name='Email' required /></p>
             <p>Phone Number: <input type='tel' name='Phone' required /></p>
             
-            <button type="submit" name="Submit">Save</button>
+            <button class="w3-button w3-green" type="submit" name="Submit">Save</button>
         </form>
+        </div>
+            </div>
+        </div>
     </body>
 </html>

@@ -215,19 +215,33 @@
     }
 ?>
 
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
     <head>
+        <meta charset=utf-8 />
+        <link href="/style.css" rel="stylesheet">
     </head>
     <body>
-        <h1>First-time Setup: Establish Database Connection</h1>
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
-            <p>Database Server Host: <input type="text" name="Server" required /></p>
-            <p>Database Username: <input type="text" name="DBuser" required /></p>
-            <p>Database Password: <input type="password" name="DBpass" required /></p>
-            <p>Connect to Database Name: <input type="text" name="Database" required /></p>
+        <!--Title Bar-->
+		<div class="w3-top w3-card w3-white" style="height:10%">
+			<div class="w3-bar w3-padding">
+				<a class="w3-bar-item"><h1>Project Planner</h1></a>
+			</div>
+		</div>
+        <div class="w3-container" style="margin-top:10%">
+			<div class="w3-container w3-display-middle" style="width:75%">
+                <h1>First-time Setup: Establish Database Connection</h1>
+				<div class="w3-border w3-padding">
+                    <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
+                        <p>Database Server Host: <input type="text" name="Server" required /></p>
+                        <p>Database Username: <input type="text" name="DBuser" required /></p>
+                        <p>Database Password: <input type="password" name="DBpass" required /></p>
+                        <p>Connect to Database Name: <input type="text" name="Database" required /></p>
 
-            <button type="Submit" name="Submit">Submit</button>
-        </form>
+                        <button class="w3-button w3-green" type="Submit" name="Submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

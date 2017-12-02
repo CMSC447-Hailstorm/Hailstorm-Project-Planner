@@ -19,6 +19,7 @@
     $sql = "SELECT * FROM Tasks WHERE Task_ID = '$tid'";
 ?>
 
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset=utf-8 />

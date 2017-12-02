@@ -19,6 +19,7 @@
     $sql = "SELECT * FROM Phases WHERE Phase_ID = '$phid'";
 ?>
 
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset=utf-8 />
