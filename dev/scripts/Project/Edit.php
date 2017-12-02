@@ -55,7 +55,7 @@
 		////	echo $newDate;
 		
 		$projectStartDate = $date;
-        $projectDescription = mysqli_real_escape_string($conn, $_POST['Description']);
+        $projectDescription = mysqli_real_escape_string($conn, $_POST['Project_Description']);
 		
 		
 		if($Company_Name == ''){
@@ -100,10 +100,10 @@
 			</div>
 		</div>
 
-		<div class="w3-container" style="margin-top:10%">
-			<div class="w3-sidebar w3-bar-block w3-white w3-border-right" style="width:25%; height:80%">
-				<div class="w3-panel w3-padding">
-			
+		<div class="w3-container" style="margin-top:6%">
+		<a href="<?php echo '/Project/View.php?proj=' . $_GET['proj'] ?>"><button class="w3-button w3-red" name="cancel">Cancel</button></a>
+			<div class="w3-sidebar w3-bar-block w3-white w3-border" style="width:25%; height:auto; min-height:516px; max-height:80%; overflow-y:auto">
+				<div class="w3-panel">
 					<!--List of Projects, Phases, and Tasks displays here-->
 					<?php
 						$sql = "SELECT * FROM Projects WHERE Project_ID = '$proj'";
@@ -143,10 +143,11 @@
 							}
 						}
 					?>
-				</div>
+				
+			</div>
 			</div>
 		
-			<div class="w3-container" style="margin-left:25%">
+			<div class="w3-container" style="margin-left:25%; height:auto; min-height:516px; max-height:80%; overflow-y:auto">
 				<div class="w3-border w3-padding">
 					<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] 
 											. "?proj=" . $_GET['proj']); ?>" autocomplete="off">
@@ -201,7 +202,7 @@
 
 								echo "<label>Start Date:<label> <input class='w3-input w3-border' type='date' name='StartDate' value='" . $project['Project_StartDate'] . "' required />";
 								echo "<label>Total Budget:<label> <input class='w3-input w3-border' type='number' min='0' name='Budget' value='" . $project['Project_EstimatedBudget'] . "' required />";
-								echo "<p>Remaining Budget: " . $project['Project_RemainedBudget'] . "</p>";					
+								echo "<p>Remaining Budget: $" . $project['Project_RemainedBudget'] . "</p>";					
 								echo "<label>Description:<label> <textarea class='w3-input w3-border' rows='5' cols='50' maxlength='2000' placeholder='Type here' name='Project_Description' required>" . $project['Project_Description'] . "</textarea>";
 							}
 						?>
@@ -210,7 +211,6 @@
 						<button class="w3-button w3-green" type="submit" name="ProjectSubmit">Save</button>   
 					</form>
 				</div>
-				<a href="<?php echo '/Project/View.php?proj=' . $_GET['proj'] ?>"><button class="w3-button w3-red" name="cancel">Cancel</button></a>
 			</div>
 		</div>
 	</body>

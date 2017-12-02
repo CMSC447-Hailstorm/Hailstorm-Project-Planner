@@ -53,10 +53,10 @@
 			</div>
 		</div>
 
-		<div class="w3-container" style="margin-top:10%">
-			<div class="w3-sidebar w3-bar-block w3-white w3-border-right" style="width:25%; height:80%">
-				<div class="w3-panel w3-padding">
-				
+		<div class="w3-container" style="margin-top:6%">
+			<a href="/home.php"><button class="w3-button w3-green">Return to Home</button></a>
+			<div class="w3-sidebar w3-bar-block w3-white w3-border" style="width:25%; height:auto; min-height:516px; max-height:80%; overflow-y:auto">
+				<div class="w3-panel">
 					<!--List of Projects, Phases, and Tasks displays here-->
 					<?php
 						if ($count == 1)
@@ -96,7 +96,7 @@
 				</div>
 			</div>
 			
-			<div class="w3-container" style="margin-left:25%">
+			<div class="w3-container" style="margin-left:25%; height:auto; min-height:516px; max-height:80%; overflow-y:auto">
 				<div class="w3-border w3-padding">
 					<?php
 						if ($count == 1)
@@ -122,8 +122,8 @@
 							echo "<h4>Project Status: " . $project['Project_Status'] . "</h4>";
 							echo "<h4>Start Date: " . $project['Project_StartDate'] . "</h4>";
 							echo "<h4>Estimated Hours to complete: " . $project['Project_TotalHours'] . "</h4>";
-							echo "<h4>Total Budget: " . $project['Project_EstimatedBudget'] . "</h4>";
-							echo "<h4>Remaining Budget: " . $project['Project_RemainedBudget'] . "</h4>";					
+							echo "<h4>Total Budget: $" . $project['Project_EstimatedBudget'] . "</h4>";
+							echo "<h4>Remaining Budget: $" . $project['Project_RemainedBudget'] . "</h4>";					
 							echo "<h4>Description: " . $project['Project_Description'] . "</h4>";
 						}
 					?>
@@ -136,7 +136,6 @@
 						}
 					?>
 				</div>
-				<a href="/home.php"><button class="w3-button w3-green">Return to Home</button></a>
 			</div>
 		</div>
 	</body>

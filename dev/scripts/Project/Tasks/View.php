@@ -74,7 +74,7 @@
 								}
 
 								echo "<p>Estimated Hours to complete: " . $task['Task_EstimatedHours'] . "</p>";
-								echo "<p>Estimated Cost: " . $task['Task_EstimatedCost'] . "</p>";
+								echo "<p>Estimated Cost: $" . $task['Task_EstimatedCost'] . "</p>";
 								echo "<p>Task Description: " . $task['Task_Description'] . "</p>";
 							}
 						}
