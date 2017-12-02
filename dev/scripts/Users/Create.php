@@ -44,21 +44,35 @@
         <link href ="/style.css" rel="stylesheet">
     </head>
     <body>
-        <div class="User_Details">
+        <!--Title Bar-->
+		<div class="w3-top w3-card w3-white" style="height:10%">
+			<div class="w3-bar w3-padding">
+				<a class="w3-bar-item" href="/home.php"><h1>Project Planner</h1></a>
+				<div class="w3-right">
+                    <a class="w3-bar-item" href="/Users/View.php">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetFirstName() . " " . $_SESSION['CURRENT_USER']->GetLastName() . " (" . $_SESSION['CURRENT_USER']->GetUsername() . ")";?></a>
+				    <a href="/logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
+				</div>
+			</div>
+		</div>
+
+        <div class="w3-container" style="margin-top:10%">
+			<div class="w3-container w3-display-middle" style="width:60%">
+            <a href="/Users/View.php<?php echo (isset($_GET['ret']) ? "?uid=" . $_GET['ret'] : ""); ?>"><button class="w3-button w3-red" type="cancel" name="cancel">Cancel</button></a>
+            <div class="w3-border w3-padding">
             <h2>Create User Account</h2>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] . (isset($_GET['ret']) ? "?ret=" . $_GET['ret'] : "")); ?>" autocomplete="off">
                 <p>User: <input type='text' name='Firstname' required />   <input type='text' name='Lastname' required /></p>
                 <p>Username: <input type='text' name='Username' required /></p>
-                <p>Role: <?php 
+                <?php 
                     if(Session::UserLoggedIn())
                     {
-                        echo "If this account is for a manager, please grant manager functions to this account after it has been created.";
+                        echo "<p>If this account is for a manager, please grant manager functions to this account after it has been created.</p>";
                     }
                     else
                     {
-                        echo "If you are a manager, please request to receive manager functions once your account is created.";
+                        echo "<p>If you are a manager, please request to receive manager functions once your account is created.</p>";
                     }
-                ?></p></br>
+                ?></br>
                     
                 <p>Password: <input type='password' name='Password' placeholder='Input password...' required /></p></br>
 
@@ -67,9 +81,10 @@
                 <p>Email Address: <input type='email' name='Email' required /></p>
                 <p>Phone Number: <input type='tel' maxlength="10" name='Phone' required /></p>
 
-                <button type="submit" name="UserSubmit">Save</button>
-                <button type="cancel" name="cancel">Cancel</button>
+                <button class="w3-button w3-green" type="submit" name="UserSubmit">Save</button>
             </form>
+            </div>
+            </div>
         </div>
     </body>
 </html>
