@@ -72,7 +72,8 @@
 					<input class="w3-input w3-border" type="text" name="Name" required></br>
 					
 					<label>Description:</label>
-					<input class="w3-input w3-border" type="text" name="Description" required></br>
+					<textarea class="w3-input w3-border" rows="5" cols="50" maxlength="2000" placeholder="Type here" name="Description" required></textarea>
+							</br>
 
 					Users can be assigned by editing this phase once it has been created.</p>
 					

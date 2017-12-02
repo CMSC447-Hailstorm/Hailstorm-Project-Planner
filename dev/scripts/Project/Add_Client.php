@@ -94,7 +94,7 @@
 					<input class="w3-input w3-border" type="text"  placeholder="Email" name="Client_Email" required></br>
 								
 					<label>Phone: </label>
-					<input class="w3-input w3-border" type="number" maxlength="10" placeholder="Phone Number" name="Client_Phone" required></br>
+					<input class="w3-input w3-border" type="tel" maxlength="10" placeholder="Phone Number" name="Client_Phone" required></br>
 				
 					<label>Specialized Industry/Field: </label>
 					<input class="w3-input w3-border" type="text"  placeholder="Industry" name="Client_Industry" required></br>

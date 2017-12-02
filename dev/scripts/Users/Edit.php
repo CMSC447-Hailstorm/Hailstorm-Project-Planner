@@ -185,7 +185,7 @@
                             echo "<p>Date of Birth: <input type='date' name='Birthdate' value='" . $user['User_Birthdate'] . "' required /></p>";
                             echo "<p>Address: <input type='text' name='Street' value='" . $user['User_Street'] . "' required />, <input type='text' name='City' value='" . $user['User_City'] . "' required />, <input type='text' maxlength='2' name='State' value='" . $user['User_State'] . "' required /> <input type='number' maxlength='5' name='Zipcode' value='" . $user['User_Zipcode'] . "' required /></p>";
                             echo "<p>Email Address: <input type='email' name='Email' value='" . $user['User_Email'] . "' required /></p>";
-                            echo "<p>Phone Number: <input type='number' maxlength='10' name='Phone' value='" . $user['User_Phone'] . "' required /></p>";
+                            echo "<p>Phone Number: <input type='tel' maxlength='10' name='Phone' value='" . $user['User_Phone'] . "' required /></p>";
                         }
                         else
                         {

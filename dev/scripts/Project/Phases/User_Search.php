@@ -31,13 +31,14 @@
     }
 
     $ret = Array();
-    $sql = "SELECT * FROM Users WHERE User_Name = '$search' OR User_Firstname = '$firstName' OR User_Firstname = '$search' OR User_LastName = '$lastName' OR User_Lastname = '$search'";
+    $sql = "SELECT * FROM Users";
 
     if($result = mysqli_query($conn, $sql))
     {
         while ($user = mysqli_fetch_array($result))
         {
-            if ($user["User_ID"] != 0)
+            $searchText = strtolower($user['User_Firstname'] . " " . $user['User_Lastname'] . " (" . $user['User_Name'] . ")");
+            if ($user["User_ID"] != 0 && strpos($searchText,$search) !== FALSE)
             {
                 array_push($ret, $user['User_Firstname'] . " " . $user['User_Lastname'] . " (" . $user['User_Name'] . ")");
                 array_push($ret, $user['User_ID']);

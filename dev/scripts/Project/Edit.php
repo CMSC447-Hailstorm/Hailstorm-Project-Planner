@@ -114,8 +114,8 @@
 							$project = mysqli_fetch_array($result);
 							if ($count == 1)
 							{
-								echo "<h3>" . $project['Project_Name'] . "</h3>";
-								echo "<ul id='project_list'>";
+								echo "<h3 class='w3-border-bottom'>" . $project['Project_Name'] . "</h3>";
+								echo "<ul class='w3-ul' id='project_list'>";
 								$phaseSql = "SELECT * FROM Phases WHERE Project_ID_FK = '$proj'";
 								if($result = mysqli_query($conn, $phaseSql))
 								{
@@ -127,7 +127,7 @@
 										. " AND Project_ID_FK = '$proj'";
 										if ($taskResult = mysqli_query($conn, $taskSql))
 										{
-											echo "<ul id='tasks_phase_" . $phase['Phase_ID'] . "'>";
+											echo "<ul class='w3-ul' id='tasks_phase_" . $phase['Phase_ID'] . "'>";
 											while($task = mysqli_fetch_array($taskResult))
 											{
 												echo "<li>" . $task['Task_Name'] . "</li>";
@@ -199,13 +199,14 @@
 								}
 								echo "</select></p>";
 
-								echo "<label>Start Date:<label> <input class='w3-input w3-border' type='date' name='StartDate' value='" . $project['Project_StartDate'] . "' required /></p>";
-								echo "<label>Total Budget:<label> <input class='w3-input w3-border' type='number' min='0' name='Budget' value='" . $project['Project_EstimatedBudget'] . "' required /></p>";
-								echo "<label>Remaining Budget:<label>" . $project['Project_RemainedBudget'] . "<p>";					
-								echo "<label>Description:<label> <input class='w3-input w3-border' type='text' name='Description' value='" . $project['Project_Description'] . "' required /></p>";
+								echo "<label>Start Date:<label> <input class='w3-input w3-border' type='date' name='StartDate' value='" . $project['Project_StartDate'] . "' required />";
+								echo "<label>Total Budget:<label> <input class='w3-input w3-border' type='number' min='0' name='Budget' value='" . $project['Project_EstimatedBudget'] . "' required />";
+								echo "<p>Remaining Budget: " . $project['Project_RemainedBudget'] . "</p>";					
+								echo "<label>Description:<label> <textarea class='w3-input w3-border' rows='5' cols='50' maxlength='2000' placeholder='Type here' name='Project_Description' required>" . $project['Project_Description'] . "</textarea>";
 							}
 						?>
 						
+						</br>
 						<button class="w3-button w3-green" type="submit" name="ProjectSubmit">Save</button>   
 					</form>
 				</div>

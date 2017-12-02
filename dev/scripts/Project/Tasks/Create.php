@@ -79,7 +79,8 @@
 						<input class="w3-input w3-border" type="number" min="0" name="Budget" required></br>
 					
 						<label>Description:</label>
-						<input class="w3-input w3-border" type="text" name="Description" required></br>
+						<textarea class="w3-input w3-border" rows="5" cols="50" maxlength="2000" placeholder="Type here" name="Description" required></textarea>
+							</br>
 					
 						<button class="w3-button w3-green" type="submit" name="TaskSubmit">Save</button>
 				

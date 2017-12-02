@@ -77,9 +77,9 @@
 							if ($count == 1)
 							{
 								echo "<label>Task Name:</label> <input class='w3-input w3-border' type='text' name='Name' value='" . $task['Task_Name'] . "' required /></p>";
-								echo "<label>Estimated Hours:</label> <input class='w3-input w3-border' type='number' min='0' name='Hours' value='" . $task['Task_EstimatedHours'] . "' required /></p>";
-								echo "<label>Estimated Cost:</label> <input class='w3-input w3-border' type='number' min='0' name='Cost' value='" . $task['Task_EstimatedCost'] . "' required /></p>";						
-								echo "<label>Task Description:</label> <input class='w3-input w3-border' type='text' name='Description' value='" . $task['Task_Description'] . "' required/></p>";
+								echo "<label>Estimated Hours:</label> <input class='w3-input w3-border' type='number' min='0' name='Hours' value='" . $task['Task_EstimatedHours'] . "' required />";
+								echo "<label>Estimated Cost:</label> <input class='w3-input w3-border' type='number' min='0' name='Cost' value='" . $task['Task_EstimatedCost'] . "' required />";						
+								echo "<label>Description:<label> <textarea class='w3-input w3-border' rows='5' cols='50' maxlength='2000' placeholder='Type here' name='Description' required>" . $task['Task_Description'] . "</textarea>";
 							}
 						?>
 						
