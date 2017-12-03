@@ -50,14 +50,14 @@
 			</div>
 			<div>
 			<?php
-				echo "<table class='w3-table-all'>";
-				echo "<tr>
+				echo "<table class='w3-table-all w3-hoverable'>";
+				echo "<thead><tr class='w3-light-grey'>
 						<th>Project ID</th>
 						<th>Project Name</th>
 						<th>Total Hours</th>
 						<th>Estimated Budget</th>
 						<th>Remaining Budget</th>
-					</tr>";
+					</tr></thead>";
 					
 				$sql = "SELECT * FROM Projects";
 				if($Result = mysqli_query($conn, $sql))

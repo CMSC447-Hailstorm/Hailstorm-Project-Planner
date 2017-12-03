@@ -62,23 +62,23 @@
 						if ($count == 1)
 						{
 							echo "<h3 class='w3-border-bottom'>" . $project['Project_Name'] . "</h3>";
-							echo "<ul class='w3-ul' id='project_list'>";
+							echo "<ul id='project_list'>";
 							$phaseSql = "SELECT * FROM Phases WHERE Project_ID_FK = '$proj'";
 							if($result = mysqli_query($conn, $phaseSql))
 							{
 								$phaseCount = mysqli_num_rows($result);
 								while ($phase = mysqli_fetch_array($result))
 								{
-									echo "<li><a href='/Project/Phases/View.php?prid=" . $project['Project_ID'] . "&phid=" . $phase['Phase_ID'] . "'><button class='w3-button w3-blue'>" . $phase['Phase_Name'] . "</button></a>";
+									echo "<li class='w3-padding'><a href='/Project/Phases/View.php?prid=" . $project['Project_ID'] . "&phid=" . $phase['Phase_ID'] . "'><button class='w3-button w3-blue'>" . $phase['Phase_Name'] . "</button></a>";
 									$taskSql = "SELECT * FROM Tasks WHERE Phase_ID_FK = " . $phase['Phase_ID'] . " AND Project_ID_FK = '$proj'";
 									if ($taskResult = mysqli_query($conn, $taskSql))
 									{
-										echo "<ul class='w3-ul' id='tasks_phase_" . $phase['Phase_ID'] . "'>";
+										echo "<ul id='tasks_phase_" . $phase['Phase_ID'] . "'>";
 										while($task = mysqli_fetch_array($taskResult))
 										{
-											echo "<li><a href='/Project/Tasks/View.php?prid=" . $project['Project_ID'] . "&tid=" . $task['Task_ID'] . "'><button class='w3-button w3-light-blue'>" . $task['Task_Name'] . "</button></a></li>";
+											echo "<li class='w3-padding'><a href='/Project/Tasks/View.php?prid=" . $project['Project_ID'] . "&tid=" . $task['Task_ID'] . "'><button class='w3-button w3-light-blue'>" . $task['Task_Name'] . "</button></a></li>";
 										}
-										echo "<li><a href='/Project/Tasks/Create.php?prid=" . $project['Project_ID'] 
+										echo "<li class='w3-padding'><a href='/Project/Tasks/Create.php?prid=" . $project['Project_ID'] 
 												. "&phid=" . $phase['Phase_ID'] . "'><button class='w3-button w3-green'>Create Task</button></a></li>";
 										echo "</ul>";
 									}
