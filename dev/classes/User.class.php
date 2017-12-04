@@ -19,7 +19,7 @@
                 {
                     die('Unable to connect.  Error: ' . mysqli_error($conn));
                 }
-                //$sql = "SELECT * FROM Users WHERE User_ID ='$userid' AND User_Password ='$password' ";
+                $userid = mysqli_real_escape_string($conn, $userid);
 				$sql = "SELECT * FROM Users WHERE User_Name = '$userid' ";
                 $Result = mysqli_query($conn, $sql);
 				
