@@ -9,8 +9,8 @@
 	}
 	if(isset($_POST['submit']) && !empty($_POST)) 
 	{
-		$User_ID = $_POST['User_ID'];
-		$User_Password = $_POST['User_Password'];
+		$User_ID = mysqli_real_escape_string($conn, $_POST['User_ID']);
+		$User_Password = mysqli_real_escape_string($conn, $_POST['User_Password']);
 	
 		$_SESSION['CURRENT_USER'] = new User();
 		
