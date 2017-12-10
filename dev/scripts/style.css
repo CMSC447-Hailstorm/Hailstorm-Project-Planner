@@ -1,3 +1,18 @@
+/**
+ * Project Planner
+ * Style.css
+ * Contains W3.CSS styles for entire application
+ * 
+ * Team Hailstorm
+ * ===============
+ * Hemang Bhatt (hb6@umbc.edu)
+ * Aidan Gray (graidan1@umbc.edu)
+ * Cameron Hensel (chensel1@umbc.edu)
+ * Jacob Lutz (jlutz1@umbc.edu)
+ * Phuoc Nguyen (ej77536@umbc.edu)
+ * Nirav Pancholi (nirav3@umbc.edu)
+ * 
+ */
 .project_link:hover {
 	cursor: pointer;
 }
