@@ -15,7 +15,7 @@
      * Nirav Pancholi (nirav3@umbc.edu)
      * 
      */
-    require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/Session.class.php");
+    require_once(realpath(dirname(__FILE__)) . "/Session.class.php");
 
     class User
     {
@@ -123,7 +123,6 @@
         public static function Logout()
         {
             Session::CloseSession();
-            header('Location: /login.php');
         }
     }
 ?>

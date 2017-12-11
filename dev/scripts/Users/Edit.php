@@ -14,14 +14,14 @@
      * Nirav Pancholi (nirav3@umbc.edu)
      * 
      */
-    require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/Session.class.php");
-	require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/User.class.php");
+    require_once(realpath(dirname(__FILE__)) . "/../../classes/Session.class.php");
+	require_once(realpath(dirname(__FILE__)) . "/../../classes/User.class.php");
     Session::Start();
     
     // This page should be inaccessible if a user is not logged in
 	if (!Session::UserLoggedIn())
 	{
-		header("Location: /login.php");
+		header("Location: ../login.php");
     }
     
     // Attempt DB connection
@@ -116,7 +116,7 @@
 <html>
     <head>
         <meta charset=utf-8 />
-        <link href ="/style.css" rel="stylesheet">
+        <link href ="../style.css" rel="stylesheet">
         <?php
             if (isset($_GET['uid']) && !empty($_GET) && $_SESSION['CURRENT_USER']->GetUserRole() == 1)
             {
@@ -145,7 +145,7 @@
                                     }
                                 }
                             }
-                            handler.open('GET', 'Change_Role.php?uid=" . $_GET['uid'] . "&com=1', false);
+                            handler.open('GET', './Change_Role.php?uid=" . $_GET['uid'] . "&com=1', false);
                             handler.send();
                         }
                     }
@@ -173,7 +173,7 @@
                                     }
                                 }
                             }
-                            handler.open('GET', 'Change_Role.php?uid=" . $_GET['uid'] . "&com=0', false);
+                            handler.open('GET', './Change_Role.php?uid=" . $_GET['uid'] . "&com=0', false);
                             handler.send();
                         }
                     }
@@ -184,17 +184,17 @@
     <body>
 		<div class="w3-top w3-card w3-white" style="height:10%">
 			<div class="w3-bar w3-padding">
-				<a class="w3-bar-item" href="/home.php"><h1>Project Planner</h1></a>
+				<a class="w3-bar-item" href="../home.php"><h1>Project Planner</h1></a>
 				<div class="w3-right">
-                    <a class="w3-bar-item" href="/Users/View.php">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetFirstName() . " " . $_SESSION['CURRENT_USER']->GetLastName() . " (" . $_SESSION['CURRENT_USER']->GetUsername() . ")";?></a>
-					<a href="/logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
+                    <a class="w3-bar-item" href="./View.php">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetFirstName() . " " . $_SESSION['CURRENT_USER']->GetLastName() . " (" . $_SESSION['CURRENT_USER']->GetUsername() . ")";?></a>
+					<a href="../logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
 				</div>
 			</div>
 		</div>
 
         <div class="w3-container" style="margin-top:10%">
 			<div class="w3-container w3-display-middle" style="width:60%">
-                <a href="/Users/View.php<?php echo (isset($_GET['uid']) ? "?uid=" . $_GET['uid'] : ""); ?>"><button class="w3-button w3-red" type="cancel" name="cancel">Cancel</button></a>
+                <a href="./View.php<?php echo (isset($_GET['uid']) ? "?uid=" . $_GET['uid'] : ""); ?>"><button class="w3-button w3-red" type="cancel" name="cancel">Cancel</button></a>
                 <div class="w3-border w3-padding">
                     <h2>Edit User Account</h2>
                     <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] . (isset($_GET['uid']) ? "?uid=" . $_GET['uid'] : "")); ?>" autocomplete="off">

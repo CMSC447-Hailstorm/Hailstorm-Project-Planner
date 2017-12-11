@@ -24,7 +24,7 @@
             session_start();
 
             // Get DB credentials from config file
-            $config = fopen(dirname($_SERVER['DOCUMENT_ROOT']) . "/scripts/dbconfig.ini", "r");
+            $config = fopen(realpath(dirname(__FILE__)) . "/../scripts/dbconfig.ini", "r");
             $_SESSION['SERVER'] = trim(explode(" ", fgets($config))[2]);
             $_SESSION['DBUSER'] = trim(explode(" ", fgets($config))[2]);
             $_SESSION['DBPASS'] = trim(explode(" ", fgets($config))[2]);

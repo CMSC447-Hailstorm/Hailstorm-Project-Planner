@@ -14,14 +14,14 @@
      * Nirav Pancholi (nirav3@umbc.edu)
      * 
      */
-	require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/Session.class.php");
-	require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/User.class.php");
+	require_once(realpath(dirname(__FILE__)) . "/../../classes/Session.class.php");
+	require_once(realpath(dirname(__FILE__)) . "/../../classes/User.class.php");
 	Session::Start();
 
 	// This page should be inaccessible if a user is not logged in
 	if(!Session::UserLoggedIn())
 	{
-		header("Location: /login.php");
+		header("Location: ../login.php");
 	}
 
 	// Do not proceed if no project is specified
@@ -54,7 +54,7 @@
 <html>
 	<head>
 		<meta charset=utf-8 />
-		<link href ="/style.css" rel="stylesheet">
+		<link href ="../style.css" rel="stylesheet">
 		<script type="text/JavaScript">
 			// ConfirmDelete()
 			// Prevents accidental project deletion
@@ -66,7 +66,7 @@
 							+ "Are you absolutely sure?"))
 				{
 					// Pass project ID and delkey to Delete script
-					window.location.href="/Project/Delete.php?p=" + pid + "&d=" 
+					window.location.href="./Delete.php?p=" + pid + "&d=" 
 											+ "<?php echo password_hash($_GET['proj'] . "delete" 
 																		. $_GET['proj'], PASSWORD_BCRYPT); ?>";
 				}
@@ -78,13 +78,13 @@
 			<div class="w3-bar w3-padding">
 				<a class="w3-bar-item" href="/home.php"><h1>Project Planner</h1></a>
 				<div class="w3-right">
-					<a class="w3-bar-item" href="/Users/View.php">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetFirstName() . " " . $_SESSION['CURRENT_USER']->GetLastName() . " (" . $_SESSION['CURRENT_USER']->GetUsername() . ")";?></a>
-					<a href="/logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
+					<a class="w3-bar-item" href="../Users/View.php">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetFirstName() . " " . $_SESSION['CURRENT_USER']->GetLastName() . " (" . $_SESSION['CURRENT_USER']->GetUsername() . ")";?></a>
+					<a href="../logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
 				</div>
 			</div>
 		</div>
 		<div class="w3-container" style="margin-top:6%">
-			<a href="/home.php"><button class="w3-button w3-green">Return to Home</button></a>
+			<a href="../home.php"><button class="w3-button w3-green">Return to Home</button></a>
 			<div class="w3-sidebar w3-bar-block w3-white w3-border" style="width:25%; height:auto; min-height:516px; max-height:80%; overflow-y:auto">
 				<div class="w3-panel">
 					<?php
@@ -105,7 +105,7 @@
 								while ($phase = mysqli_fetch_array($result))
 								{
 									// Display phase as a button that displays phase details
-									echo "<li class='w3-padding'><a href='/Project/Phases/View.php?prid=" 
+									echo "<li class='w3-padding'><a href='./Phases/View.php?prid=" 
 											. $project['Project_ID'] . "&phid=" . $phase['Phase_ID'] 
 											. "'><button class='w3-button w3-blue'>" . $phase['Phase_Name'] 
 											. "</button></a>";
@@ -119,7 +119,7 @@
 										while($task = mysqli_fetch_array($taskResult))
 										{
 											// Display task as a button that displays task details
-											echo "<li class='w3-padding'><a href='/Project/Tasks/View.php?prid=" 
+											echo "<li class='w3-padding'><a href='./Tasks/View.php?prid=" 
 													. $project['Project_ID'] . "&tid=" . $task['Task_ID'] 
 													. "'><button class='w3-button w3-light-blue'>" 
 													. $task['Task_Name'] . "</button></a></li>";
@@ -135,7 +135,7 @@
 										if(mysqli_query($conn, $assignSQL) != FALSE 
 											|| $_SESSION['CURRENT_USER']->GetUserID() == 1)
 										{
-											echo "<li class='w3-padding'><a href='/Project/Tasks/Create.php?prid=" 
+											echo "<li class='w3-padding'><a href='./Tasks/Create.php?prid=" 
 													. $project['Project_ID'] . "&phid=" . $phase['Phase_ID'] 
 													. "'><button class='w3-button w3-green'>Create Task</button></a></li>";
 										}
@@ -148,7 +148,7 @@
 							// If a manager is logged in, display the "Create Phase" button
 							if($_SESSION['CURRENT_USER']->GetUserRole() == 1)
 							{
-								echo "<li><a href='/Project/Phases/Create.php?prid=" . $project['Project_ID'] 
+								echo "<li><a href='./Phases/Create.php?prid=" . $project['Project_ID'] 
 										. "'><button class='w3-button w3-green'>Create Phase</button></a></li>";
 								echo "</ul>";
 							}
@@ -201,7 +201,7 @@
 						// If a manager is logged in, display Edit and Delete buttons
 						if($_SESSION['CURRENT_USER']->GetUserRole() == 1)
 						{
-							echo "<a href='/Project/Edit.php?proj=" . $project['Project_ID'] 
+							echo "<a href='./Edit.php?proj=" . $project['Project_ID'] 
 									. "'><button class='w3-button w3-green'>Edit Project</button></a>";
 							echo "<button class='w3-margin w3-button w3-red' onclick='ConfirmDelete(" 
 									. $project['Project_ID'] . ")'>Delete Project</button>";

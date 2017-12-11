@@ -14,14 +14,14 @@
      * Nirav Pancholi (nirav3@umbc.edu)
      * 
      */
-	require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/Session.class.php");
-	require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/User.class.php");
+	require_once(realpath(dirname(__FILE__)) . "/../classes/Session.class.php");
+	require_once(realpath(dirname(__FILE__)) . "/../classes/User.class.php");
 	Session::Start();
 
 	// This page should be inaccessible if a user is logged in
 	if(Session::UserLoggedIn())
 	{
-		header("Location: /home.php");
+		header("Location: ./home.php");
 	}
 
 	// Proceed with login once the input fields are filled
@@ -35,7 +35,7 @@
 		if ($_SESSION['CURRENT_USER']->Login($User_ID, $User_Password))
 		{
 			// If successful, proceed to home screen
-			header("Location: /home.php");
+			header("Location: ./home.php");
 		}
 		else
 		{
@@ -49,7 +49,7 @@
 <html>
 	<head>
 		<meta charset=utf-8 />
-		<link href ="style.css" rel="stylesheet">
+		<link href ="./style.css" rel="stylesheet">
 	</head>
 	<body>
 		<div class="w3-top w3-card">
@@ -69,7 +69,7 @@
 				
 					</br>
 					<button class="w3-button w3-green" type="submit" name="submit">Login</button>
-					<a href="/Users/Create.php"><button class="w3-button w3-green" type="button">Create New User</button></a>
+					<a href="./Users/Create.php"><button class="w3-button w3-green" type="button">Create New User</button></a>
 				</div>
 			</form>
 		</div>

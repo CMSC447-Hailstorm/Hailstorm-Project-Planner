@@ -14,14 +14,14 @@
      * Nirav Pancholi (nirav3@umbc.edu)
      * 
      */
-	require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/Session.class.php");
-	require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/User.class.php");
+	require_once(realpath(dirname(__FILE__)) . "/../../classes/Session.class.php");
+	require_once(realpath(dirname(__FILE__)) . "/../../classes/User.class.php");
 	Session::Start();
 
 	// This page should be inaccessible if a user is not logged in
 	if (!Session::UserLoggedIn())
 	{
-		header("Location: /login.php");
+		header("Location: ../login.php");
 	}
 
 	// Do not proceed if no project ID is specified
@@ -111,7 +111,7 @@
 <html>
 	<head>
 		<meta charset=utf-8 />
-		<link href ="/style.css" rel="stylesheet">
+		<link href ="../style.css" rel="stylesheet">
 		<script type="text/JavaScript">
 			// AddClient()
 			// Redirects to Add_Client.php
@@ -119,7 +119,7 @@
 			{
 				if (confirm("Your changes to the project will not be saved.  Continue?"))
 				{
-					window.location.href="/Project/Add_Client.php?ret=<?php echo $_GET['proj']; ?>";
+					window.location.href="./Add_Client.php?ret=<?php echo $_GET['proj']; ?>";
 				}
 			}
 		</script>
@@ -127,15 +127,15 @@
 	<body>
 		<div class="w3-top w3-card w3-white" style="height:10%">
 			<div class="w3-bar w3-padding">
-				<a class="w3-bar-item" href="/home.php"><h1>Project Planner</h1></a>
+				<a class="w3-bar-item" href="../home.php"><h1>Project Planner</h1></a>
 				<div class="w3-right">
-					<a class="w3-bar-item" href="/Users/View.php">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetFirstName() . " " . $_SESSION['CURRENT_USER']->GetLastName() . " (" . $_SESSION['CURRENT_USER']->GetUsername() . ")";?></a>
-					<a href="/logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
+					<a class="w3-bar-item" href="../Users/View.php">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetFirstName() . " " . $_SESSION['CURRENT_USER']->GetLastName() . " (" . $_SESSION['CURRENT_USER']->GetUsername() . ")";?></a>
+					<a href="../logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
 				</div>
 			</div>
 		</div>
 		<div class="w3-container" style="margin-top:6%">
-			<a href="<?php echo '/Project/View.php?proj=' . $_GET['proj'] ?>"><button class="w3-button w3-red" name="cancel">Cancel</button></a>
+			<a href="<?php echo './View.php?proj=' . $_GET['proj'] ?>"><button class="w3-button w3-red" name="cancel">Cancel</button></a>
 			<div class="w3-sidebar w3-bar-block w3-white w3-border" style="width:25%; height:auto; min-height:516px; max-height:80%; overflow-y:auto">
 				<div class="w3-panel">
 					<?php
@@ -159,7 +159,7 @@
 								if ($result = mysqli_query($conn, $phaseSql))
 								{
 									$phaseCount = mysqli_num_rows($result);
-									while ($phase = mysqli_fetch_array($result))
+									while ($phaseCount >= 1 && $phase = mysqli_fetch_array($result))
 									{
 										// Display phase as a non-interactive list element
 										echo "<li class='w3-padding'><button class='w3-button w3-button-special "
@@ -184,7 +184,6 @@
 										echo "</li>";
 									}
 								}
-								echo "<li></li>";
 								echo "</ul>";
 							}
 						}

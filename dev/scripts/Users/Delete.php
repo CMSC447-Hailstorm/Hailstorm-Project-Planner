@@ -14,14 +14,14 @@
      * Nirav Pancholi (nirav3@umbc.edu)
      * 
      */
-    require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/Session.class.php");
-    require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/User.class.php");
+    require_once(realpath(dirname(__FILE__)) . "/../../classes/Session.class.php");
+	require_once(realpath(dirname(__FILE__)) . "/../../classes/User.class.php");
     Session::Start();
 
     // This page should be inaccessible if a user is not logged in
     if (!Session::UserLoggedIn())
     {
-        header("Location: /login.php");
+        header("Location: ../login.php");
     }
     
     // Do not proceed if no phase, project, and delkey are specified

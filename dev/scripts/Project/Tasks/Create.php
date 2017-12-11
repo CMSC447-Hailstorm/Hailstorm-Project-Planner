@@ -14,14 +14,14 @@
      * Nirav Pancholi (nirav3@umbc.edu)
      * 
      */
-	require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/Session.class.php");
-	require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/User.class.php");
+	require_once(realpath(dirname(__FILE__)) . "/../../../classes/Session.class.php");
+	require_once(realpath(dirname(__FILE__)) . "/../../../classes/User.class.php");
 	Session::Start();
 
 	// This page should be inaccessible if a user is not logged in
 	if (!Session::UserLoggedIn())
 	{
-		header("Location: /login.php");
+		header("Location: ../../login.php");
 	}
 
 	// Do not proceed if no project or phase is specified
@@ -74,15 +74,15 @@
 <html>
 	<head>
 		<meta charset=utf-8 />
-		<link href ="/style.css" rel="stylesheet">
+		<link href ="../../style.css" rel="stylesheet">
 	</head>
 	<body>
 		<div class="w3-top w3-card w3-white" style="height:10%">
 			<div class="w3-bar w3-padding">
-				<a class="w3-bar-item" href="/home.php"><h1>Project Planner</h1></a>
+				<a class="w3-bar-item" href="../../home.php"><h1>Project Planner</h1></a>
 				<div class="w3-right">
-					<a class="w3-bar-item" href="/Users/View.php">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetFirstName() . " " . $_SESSION['CURRENT_USER']->GetLastName() . " (" . $_SESSION['CURRENT_USER']->GetUsername() . ")";?></a>
-					<a href="/logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
+					<a class="w3-bar-item" href="../../Users/View.php">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetFirstName() . " " . $_SESSION['CURRENT_USER']->GetLastName() . " (" . $_SESSION['CURRENT_USER']->GetUsername() . ")";?></a>
+					<a href="../../logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
 				</div>
 			</div>
 		</div>

@@ -14,14 +14,14 @@
      * Nirav Pancholi (nirav3@umbc.edu)
      * 
      */
-    require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/Session.class.php");
-	require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/User.class.php");
+    require_once(realpath(dirname(__FILE__)) . "/../../classes/Session.class.php");
+	require_once(realpath(dirname(__FILE__)) . "/../../classes/User.class.php");
     Session::Start();
     
     // This page should be inaccessible if a user is not logged in
 	if (!Session::UserLoggedIn())
 	{
-		header("Location: /login.php");
+		header("Location: ../login.php");
     }
     
     // Attempt DB connection
@@ -54,7 +54,7 @@
 <html>
     <head>
         <meta charset=utf-8 />
-        <link href ="/style.css" rel="stylesheet">
+        <link href ="../style.css" rel="stylesheet">
         <script type="text/JavaScript">
             // ConfirmDelete()
 			// Prevents accidental user deletion
@@ -79,7 +79,7 @@
                                 }
                                 else
                                 {
-                                    echo "window.location.href='/Users/Delete.php?uid=" . $user['User_ID'] 
+                                    echo "window.location.href='./Delete.php?uid=" . $user['User_ID'] 
                                             . "&d=" . password_hash($user['User_ID'] . "delete" 
                                             . $user['User_ID'], PASSWORD_BCRYPT) . "';";
                                 }
@@ -93,16 +93,16 @@
     <body>
 		<div class="w3-top w3-card w3-white" style="height:10%">
 			<div class="w3-bar w3-padding">
-				<a class="w3-bar-item" href="/home.php"><h1>Project Planner</h1></a>
+				<a class="w3-bar-item" href="../home.php"><h1>Project Planner</h1></a>
 				<div class="w3-right">
-                    <a class="w3-bar-item" href="/Users/View.php">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetFirstName() . " " . $_SESSION['CURRENT_USER']->GetLastName() . " (" . $_SESSION['CURRENT_USER']->GetUsername() . ")";?></a>
-					<a href="/logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
+                    <a class="w3-bar-item" href="./View.php">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetFirstName() . " " . $_SESSION['CURRENT_USER']->GetLastName() . " (" . $_SESSION['CURRENT_USER']->GetUsername() . ")";?></a>
+					<a href="../logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
 				</div>
 			</div>
 		</div>
         <div class="w3-container" style="top:80%">
 			<div class="w3-container w3-display-topmiddle" style="width:50%;top:12%">
-                <a href="/home.php"><button class="w3-button w3-green">Return to Home</button></a>
+                <a href="../home.php"><button class="w3-button w3-green">Return to Home</button></a>
                 <div class="w3-border w3-padding">
                     <?php
                         /**
@@ -132,7 +132,7 @@
                         if ($_SESSION['CURRENT_USER']->GetUserRole() == 1 
                             || $user['User_ID'] == $_SESSION['CURRENT_USER']->GetUserID())
                         {
-                            echo "<a href='/Users/Edit.php" . (isset($_GET['uid']) ? "?uid=" 
+                            echo "<a href='./Edit.php" . (isset($_GET['uid']) ? "?uid=" 
                                     . $_GET['uid'] : "") . "'><button class='w3-button w3-green'>Edit User Account"
                                     . "</button></a> ";
                         }
@@ -167,7 +167,7 @@
                             {
                                 if ($user['User_ID'] != 0)
                                 {
-                                    echo "<li style='cursor:pointer' onclick='window.location.href=\"/Users/View.php?uid=" 
+                                    echo "<li style='cursor:pointer' onclick='window.location.href=\"./View.php?uid=" 
                                             . $user['User_ID'] . "\";'>" . $user['User_Firstname'] . " " 
                                             . $user['User_Lastname'] . " (" . $user['User_Name'] . ")</a></li>";
                                 }
@@ -176,7 +176,7 @@
                         echo "</ul></nav>";
 
                         // Display Create User button
-                        echo "<a href='/Users/Create.php" . (isset($_GET['uid']) ? "?ret=" . $_GET['uid'] : "") 
+                        echo "<a href='./Create.php" . (isset($_GET['uid']) ? "?ret=" . $_GET['uid'] : "") 
                                 . "'><button class='w3-button w3-green'>Create New User</button></a>";
                     }
                     mysqli_close($conn);

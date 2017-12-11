@@ -15,7 +15,7 @@
      * Nirav Pancholi (nirav3@umbc.edu)
      * 
      */
-    $config = fopen("dbconfig.ini", "r");
+    $config = fopen("./scripts/dbconfig.ini", "r");
     $server = trim(explode(" ", fgets($config))[2]);
     $dbuser = trim(explode(" ", fgets($config))[2]);
     $dbpass = trim(explode(" ", fgets($config))[2]);
@@ -27,7 +27,7 @@
     if(!$conn)
     {
         // If failed, go to First-time Setup
-        header("Location: ./FTS/FTS1.php");
+        header("Location: scripts/FTS/FTS1.php");
     }
     else
     {
@@ -38,12 +38,12 @@
             if(mysqli_num_rows($result) >= 1)
             {
                 // If a user exists, go to login
-                header("Location: /login.php");
+                header("Location: scripts/login.php");
             }
             else
             {
                 // If failed, go to First-time setup, step 2
-                header("Location: ./FTS/FTS2.php");
+                header("Location: scripts/FTS/FTS2.php");
             }
         } 
     }

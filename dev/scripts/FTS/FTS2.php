@@ -14,28 +14,21 @@
      * Nirav Pancholi (nirav3@umbc.edu)
      * 
      */
-    require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/Session.class.php");
+    require_once(realpath(dirname(__FILE__)) . "/../../classes/Session.class.php");
     Session::Start();
 
     // This page should be inaccessible if a user already exists
 	if (Session::UserLoggedIn())
 	{
-		header("Location: /home.php");
+		header("Location: ../home.php");
     }
     
     // Set up the manager account once the input fields are filled
     if (isset($_POST['Submit']) && !empty($_POST))
     {
-        // get DB credentials from dbconfig.ini
-        $config = fopen(dirname($_SERVER['DOCUMENT_ROOT']) . "/scripts/dbconfig.ini", "r");
-        $server = trim(explode(" ", fgets($config))[2]);
-        $dbuser = trim(explode(" ", fgets($config))[2]);
-        $dbpass = trim(explode(" ", fgets($config))[2]);
-        $database = trim(explode(" ", fgets($config))[2]);
-        fclose($config);
-
         // Attempt DB connection
-        $conn = mysqli_connect($server, $dbuser, $dbpass, $database);
+        $conn = mysqli_connect($_SESSION["SERVER"], $_SESSION["DBUSER"], $_SESSION["DBPASS"], 
+                                $_SESSION["DATABASE"]);
         if (!$conn)
         {
             // Output error details
@@ -72,7 +65,7 @@
 <html>
     <head>
         <meta charset=utf-8 />
-        <link href ="/style.css" rel="stylesheet">
+        <link href ="../style.css" rel="stylesheet">
     </head>
     <body>
 		<div class="w3-top w3-card w3-white" style="height:10%">

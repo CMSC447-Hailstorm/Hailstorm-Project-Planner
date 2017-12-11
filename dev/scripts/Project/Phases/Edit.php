@@ -14,14 +14,14 @@
      * Nirav Pancholi (nirav3@umbc.edu)
      * 
      */
-	require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/Session.class.php");
-	require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/User.class.php");
+	require_once(realpath(dirname(__FILE__)) . "/../../../classes/Session.class.php");
+	require_once(realpath(dirname(__FILE__)) . "/../../../classes/User.class.php");
 	Session::Start();
 
 	// This page should be inaccessible if a user is not logged in
 	if (!Session::UserLoggedIn())
 	{
-		header("Location: /login.php");
+		header("Location: ../../login.php");
 	}
 
 	// Do not proceed if no IDs are specified
@@ -63,7 +63,7 @@
 <html>
 	<head>
 		<meta charset=utf-8 />
-		<link href ="/style.css" rel="stylesheet">
+		<link href ="../../style.css" rel="stylesheet">
 		<script type="text/JavaScript">
 			// GetSearchResults()
 			// Requests search results from User_Search.php and inserts results list
@@ -104,7 +104,7 @@
                     }
 
 					// Send request to User_Search.php
-                    handler.open("GET", "User_Search.php?u=" + searchText, false);
+                    handler.open("GET", "./User_Search.php?u=" + searchText, false);
                     handler.send();
                 }
 			}
@@ -147,13 +147,13 @@
 					// Send request to Edit_User_Assignment.php
 					if (com == 1)
 					{
-                    	handler.open("GET", "Edit_User_Assignment.php?uid=" + uid 
+                    	handler.open("GET", "./Edit_User_Assignment.php?uid=" + uid 
 										+ "&phid=<?php echo $_GET['phid']; ?>&prid=<?php echo $_GET['prid']; ?>"
 										+ "&com=1", false);
 					}
 					else
 					{
-						handler.open("GET", "Edit_User_Assignment.php?uid=" + uid 
+						handler.open("GET", "./Edit_User_Assignment.php?uid=" + uid 
 										+ "&phid=<?php echo $_GET['phid']; ?>&prid=<?php echo $_GET['prid']; ?>"
 										+ "&com=0", false);
 					}
@@ -165,16 +165,16 @@
 	<body>
 		<div class="w3-top w3-card w3-white" style="height:10%">
 			<div class="w3-bar w3-padding">
-				<a class="w3-bar-item" href="/home.php"><h1>Project Planner</h1></a>
+				<a class="w3-bar-item" href="../../home.php"><h1>Project Planner</h1></a>
 				<div class="w3-right">
-					<a class="w3-bar-item" href="/Users/View.php">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetFirstName() . " " . $_SESSION['CURRENT_USER']->GetLastName() . " (" . $_SESSION['CURRENT_USER']->GetUsername() . ")";?></a>
-					<a href="/logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
+					<a class="w3-bar-item" href="../../Users/View.php">Logged in as <?php echo $_SESSION['CURRENT_USER']->GetFirstName() . " " . $_SESSION['CURRENT_USER']->GetLastName() . " (" . $_SESSION['CURRENT_USER']->GetUsername() . ")";?></a>
+					<a href="../../logout.php"><button class="w3-bar-item w3-button w3-red">Sign Out</button></a>
 				</div>
 			</div>
 		</div>
 		<div class="w3-container" style="margin-top:10%">
 			<div class="w3-container w3-display-middle" style="width:50%">
-				<a href="View.php?prid=<?php echo $_GET['prid'] . '&phid=' . $_GET['phid'] ?>"><button class="w3-button w3-red" type="cancel" name="cancel">Cancel</button></a>
+				<a href="./View.php?prid=<?php echo $_GET['prid'] . '&phid=' . $_GET['phid'] ?>"><button class="w3-button w3-red" type="cancel" name="cancel">Cancel</button></a>
 				<div class="w3-border w3-padding">
 					<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] . "?prid=" . $_GET['prid'] . "&phid=" . $_GET['phid']); ?>" autocomplete="off">
 						<?php

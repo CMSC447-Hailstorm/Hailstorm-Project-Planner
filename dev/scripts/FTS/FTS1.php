@@ -14,13 +14,13 @@
      * Nirav Pancholi (nirav3@umbc.edu)
      * 
      */
-    require_once(dirname($_SERVER['DOCUMENT_ROOT']) . "/classes/Session.class.php");
+    require_once(realpath(dirname(__FILE__)) . "/../../classes/Session.class.php");
     Session::Start();
 
     // This page should be inaccessible if a user already exists
 	if (Session::UserLoggedIn())
 	{
-		header("Location: /home.php");
+		header("Location: ../home.php");
     }
     
     // Set up the database once the input fields are filled
@@ -54,7 +54,7 @@
                                                         && strpos($privs[0], "USE") != FALSE)
                 {    
                     // If successful, save DB credentials in dbconfig.ini
-                    $config = fopen(dirname($_SERVER['DOCUMENT_ROOT']) . "/scripts/dbconfig.ini", "w");
+                    $config = fopen("../dbconfig.ini", "w");
                     fwrite($config, "\"SERVER\" = " . $server . PHP_EOL);
                     fwrite($config, "\"DBUSER\" = " . $dbuser . PHP_EOL);
                     fwrite($config, "\"DBPASS\" = " . $dbpass . PHP_EOL);
@@ -275,7 +275,7 @@
 <html>
     <head>
         <meta charset=utf-8 />
-        <link href="/style.css" rel="stylesheet">
+        <link href="../style.css" rel="stylesheet">
     </head>
     <body>
 		<div class="w3-top w3-card w3-white" style="height:10%">
