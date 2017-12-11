@@ -50,8 +50,7 @@
                                                         && strpos($privs[0], "INSERT") != FALSE 
                                                         && strpos($privs[0], "DELETE") != FALSE 
                                                         && strpos($privs[0], "CREATE") != FALSE 
-                                                        && strpos($privs[0], "ALTER") != FALSE) 
-                                                        && strpos($privs[0], "USE") != FALSE)
+                                                        && strpos($privs[0], "ALTER") != FALSE))
                 {    
                     // If successful, save DB credentials in dbconfig.ini
                     $config = fopen("../dbconfig.ini", "w");
