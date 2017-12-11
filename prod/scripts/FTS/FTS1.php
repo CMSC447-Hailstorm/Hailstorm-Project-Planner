@@ -17,6 +17,28 @@
     require_once(realpath(dirname(__FILE__)) . "/../../classes/Session.class.php");
     Session::Start();
 
+    // Custom error handling of SQL warnings
+    set_error_handler(function($errno, $errstr, $errfile, $errline)
+    {
+        if ($errno === E_WARNING)
+        {
+            // Clear $_POST
+            $_POST = array();
+            
+            // Display error message and reload
+            echo "<script type='text/JavaScript'>
+                    alert('Could not establish a connection to this database.  Error details: " . $errstr . "');
+                    window.location.href = './FTS1.php';
+                    </script>";
+            return true;
+        }
+        else
+        {
+            // fallback to default php error handler
+            return false;
+        }
+    });
+
     // This page should be inaccessible if a user already exists
 	if (Session::UserLoggedIn())
 	{
@@ -36,7 +58,7 @@
         $conn = mysqli_connect($server, $dbuser, $dbpass);
         if (!$conn)
         {
-            echo "<script type='text/JavaScript'>alert('Could not establish a connection to this database.');";
+            die("Unable to connect.  Error: " . mysqli_error($conn));
         }
         else
         {
