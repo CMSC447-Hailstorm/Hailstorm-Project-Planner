@@ -63,7 +63,7 @@
                    
                     // Create database if not already existing
                     $database = mysqli_real_escape_string($conn, $database);
-				    $sql = "CREATE DATABASE $database";
+				    $sql = "CREATE DATABASE IF NOT EXISTS $database";
 				    mysqli_query($conn, $sql);
 					
 				    $sql = "USE $database";
